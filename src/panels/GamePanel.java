@@ -30,17 +30,17 @@ import util.Util;
 
 public class GamePanel extends JPanel {
 
-	// ÄíÅ° ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-	private ImageIcon cookieIc; // ±âº»¸ð¼Ç
-	private ImageIcon jumpIc; // Á¡ÇÁ¸ð¼Ç
-	private ImageIcon doubleJumpIc; // ´õºíÁ¡ÇÁ¸ð¼Ç
-	private ImageIcon fallIc; // ³«ÇÏ¸ð¼Ç(´õºí Á¡ÇÁ ÈÄ)
-	private ImageIcon slideIc; // ½½¶óÀÌµå ¸ð¼Ç
-	private ImageIcon hitIc; // ºÎµóÈ÷´Â ¸ð¼Ç
+	// ï¿½ï¿½Å° ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
+	private ImageIcon cookieIc; // ï¿½âº»ï¿½ï¿½ï¿½
+	private ImageIcon jumpIc; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private ImageIcon doubleJumpIc; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private ImageIcon fallIc; // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
+	private ImageIcon slideIc; // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½
+	private ImageIcon hitIc; // ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 
-	// ¹è°æ ÀÌ¹ÌÁö
-	private ImageIcon backIc; // Á¦ÀÏ µÞ ¹è°æ
-	private ImageIcon secondBackIc; // 2¹øÂ° ¹è°æ
+	// ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private ImageIcon backIc; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½
+	private ImageIcon secondBackIc; // 2ï¿½ï¿½Â° ï¿½ï¿½ï¿½
 
 	private ImageIcon backIc2;
 	private ImageIcon secondBackIc2;
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel {
 	private ImageIcon backIc4;
 	private ImageIcon secondBackIc4;
 
-	// Á©¸® ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
 	private ImageIcon jelly1Ic;
 	private ImageIcon jelly2Ic;
 	private ImageIcon jelly3Ic;
@@ -59,20 +59,20 @@ public class GamePanel extends JPanel {
 
 	private ImageIcon jellyEffectIc;
 
-	// ¹ßÆÇ ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-	private ImageIcon field1Ic; // ¹ßÆÇ
-	private ImageIcon field2Ic; // °øÁß¹ßÆÇ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
+	private ImageIcon field1Ic; // ï¿½ï¿½ï¿½ï¿½
+	private ImageIcon field2Ic; // ï¿½ï¿½ï¿½ß¹ï¿½ï¿½ï¿½
 
-	// Àå¾Ö¹° ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-	private ImageIcon tacle10Ic; // 1Ä­ Àå¾Ö¹°
-	private ImageIcon tacle20Ic; // 2Ä­ Àå¾Ö¹°
-	private ImageIcon tacle30Ic; // 3Ä­ Àå¾Ö¹°
-	private ImageIcon tacle40Ic; // 4Ä­ Àå¾Ö¹°
+	// ï¿½ï¿½Ö¹ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
+	private ImageIcon tacle10Ic; // 1Ä­ ï¿½ï¿½Ö¹ï¿½
+	private ImageIcon tacle20Ic; // 2Ä­ ï¿½ï¿½Ö¹ï¿½
+	private ImageIcon tacle30Ic; // 3Ä­ ï¿½ï¿½Ö¹ï¿½
+	private ImageIcon tacle40Ic; // 4Ä­ ï¿½ï¿½Ö¹ï¿½
 
-	// Ã¼·Â °ÔÀÌÁö
+	// Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private ImageIcon lifeBar;
 
-	private ImageIcon redBg; // ÇÇ°Ý½Ã ºÓÀº È­¸é
+	private ImageIcon redBg; // ï¿½Ç°Ý½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½
 
 	private ImageIcon jumpButtonIconUp;
 	private ImageIcon jumpButtonIconDown;
@@ -83,78 +83,78 @@ public class GamePanel extends JPanel {
 	Image jumpBtn;
 	Image slideBtn;
 
-	// ¸®½ºÆ® »ý¼º
-	private List<Jelly> jellyList; // Á©¸® ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+	private List<Jelly> jellyList; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-	private List<Field> fieldList; // ¹ßÆÇ ¸®½ºÆ®
+	private List<Field> fieldList; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-	private List<Tacle> tacleList; // Àå¾Ö¹° ¸®½ºÆ®
+	private List<Tacle> tacleList; // ï¿½ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
 	private List<Integer> mapLengthList;
 
 	private int mapLength = 0;
 
-	private int runPage = 0; // ÇÑ È­¸é ÀÌµ¿ÇÒ¶§¸¶´Ù Ã¼·ÂÀ» ±ð±â À§ÇÑ º¯¼ö
+	private int runPage = 0; // ï¿½ï¿½ È­ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	private int runStage = 1; // ½ºÅ×ÀÌÁö¸¦ È®ÀÎÇÏ´Â º¯¼öÀÌ´Ù. (¹Ì±¸Çö)
+	private int runStage = 1; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½. (ï¿½Ì±ï¿½ï¿½ï¿½)
 
-	private int resultScore = 0; // °á°úÁ¡¼ö¸¦ ¼öÁýÇÏ´Â º¯¼ö
+	private int resultScore = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	private int gameSpeed = 5; // °ÔÀÓ ¼Óµµ
+	private int gameSpeed = 5; // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
 
-	private int nowField = 2000; // ¹ßÆÇÀÇ ³ôÀÌ¸¦ ÀúÀå.
+	private int nowField = 2000; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½.
 
-	private JButton escButton; // esc ¹öÆ° (Å×½ºÆ® Áß)
+	private JButton escButton; // esc ï¿½ï¿½Æ° (ï¿½×½ï¿½Æ® ï¿½ï¿½)
 
 	private boolean fadeOn = false;
 
-	private boolean escKeyOn = false; // ÀÏ½ÃÁ¤Áö¸¦ À§ÇÑ escÅ° È®ÀÎ
+	private boolean escKeyOn = false; // ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ escÅ° È®ï¿½ï¿½
 
-	private boolean downKeyOn = false; // ´Ù¿îÅ° ´­·¶´ÂÁö ¿©ºÎ
+	private boolean downKeyOn = false; // ï¿½Ù¿ï¿½Å° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	private boolean redScreen = false; // ÇÇ°Ý½Ã ¹ÝÂ¦ ºÓÀº È­¸é ¿©ºÎ
+	private boolean redScreen = false; // ï¿½Ç°Ý½ï¿½ ï¿½ï¿½Â¦ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-	int face; // ÄíÅ°ÀÇ Á¤¸é
-	int foot; // ÄíÅ°ÀÇ ¹ß
+	int face; // ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	int foot; // ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½
 
-	// ÀÌ¹ÌÁö ÆÄÀÏ·Î µÈ ¸ÊÀ» °¡Á®¿Â´Ù.
-	private int[] sizeArr; // ÀÌ¹ÌÁöÀÇ ³ÐÀÌ¿Í ³ôÀÌ¸¦ °¡Á®¿À´Â 1Â÷¿ø ¹è¿­
-	private int[][] colorArr; // ÀÌ¹ÌÁöÀÇ x y ÁÂÇ¥ÀÇ ÇÈ¼¿ »ö°ªÀ» ÀúÀåÇÏ´Â 2Â÷¿ø¹è¿­
+	// ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
+	private int[] sizeArr; // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­
+	private int[][] colorArr; // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ x y ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½È¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ 2ï¿½ï¿½ï¿½ï¿½ï¿½è¿­
 
-	private Image buffImage; // ´õºí¹öÆÛ ÀÌ¹ÌÁö
-	private Graphics buffg; // ´õºí¹öÆÛ g
+	private Image buffImage; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+	private Graphics buffg; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ g
 
-	private AlphaComposite alphaComposite; // Åõ¸íµµ °ü·Ã ¿ÀºêÁ§Æ®
+	private AlphaComposite alphaComposite; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
-	Cookie c1; // ÄíÅ° ¿ÀºêÁ§Æ®
+	Cookie c1; // ï¿½ï¿½Å° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
-	Back b11; // ¹è°æ1-1 ¿ÀºêÁ§Æ®
-	Back b12; // ¹è°æ1-2 ¿ÀºêÁ§Æ®
+	Back b11; // ï¿½ï¿½ï¿½1-1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+	Back b12; // ï¿½ï¿½ï¿½1-2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
-	Back b21; // ¹è°æ2-1 ¿ÀºêÁ§Æ®
-	Back b22; // ¹è°æ2-2 ¿ÀºêÁ§Æ®
+	Back b21; // ï¿½ï¿½ï¿½2-1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+	Back b22; // ï¿½ï¿½ï¿½2-2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
-	Color backFade; // ¹è°æÀÌ ¹Ù²ð ¶§ ÆäÀÌµå ¾Æ¿ô ÆäÀÌµå ÀÎ ÇÏ±â À§ÇÑ ÄÃ·¯º¯¼ö
+	Color backFade; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ï¿½ï¿½
 
-	// ¸Ê ¿ÀºêÁ§Æ®ÀÇ ÀÌ¹ÌÁöµé
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½
 	MapObjectImg mo1;
 	MapObjectImg mo2;
 	MapObjectImg mo3;
 	MapObjectImg mo4;
 
-	// ¿ÜºÎ
+	// ï¿½Üºï¿½
 	JFrame superFrame;
 	CardLayout cl;
 	Main main;
 
-	// °ÔÀÓÆÐ³Î »ý¼ºÀÚ (»óÀ§ ÇÁ·¹ÀÓ°ú Ä«µå·¹ÀÌ¾Æ¿ô, ±×¸®°í MainÀÎ½ºÅÏ½º¸¦ ¹Þ´Â´Ù)
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ Ä«ï¿½å·¹ï¿½Ì¾Æ¿ï¿½, ï¿½×¸ï¿½ï¿½ï¿½ Mainï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½)
 	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
 
 		this.superFrame = superFrame;
 		this.cl = cl;
 		this.main = (Main) o;
 
-		// ÀÏ½ÃÁ¤Áö ¹öÆ°
+		// ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°
 		escButton = new JButton("back");
 		escButton.setBounds(350, 200, 100, 30);
 		escButton.addMouseListener(new MouseAdapter() {
@@ -167,69 +167,69 @@ public class GamePanel extends JPanel {
 
 	}
 
-	// °ÔÀÓÀ» ¼¼ÆÃÇÑ´Ù
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	public void gameSet(CookieImg ci) {
 
 		setFocusable(true);
 
-		initCookieImg(ci); // ÄíÅ°ÀÌ¹ÌÁö¸¦ ¼¼ÆÃ
+		initCookieImg(ci); // ï¿½ï¿½Å°ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-		initObject(); // °ÔÀÓ ³» ÁöÇüÁö¹° ÀÎ½ºÅÏ½º »ý¼º
+		initObject(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-		initListener(); // Å°¸®½º³Ê Ãß°¡
+		initListener(); // Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
-		runRepaint(); // ¸®ÆäÀÎÆ® ¹«ÇÑ¹Ýº¹ ½ÇÇà
+		runRepaint(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Ñ¹Ýºï¿½ ï¿½ï¿½ï¿½ï¿½
 	}
 
-	// °ÔÀÓÀ» ½ÃÀÛÇÑ´Ù
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 	public void gameStart() {
 
-		mapMove(); // ¹è°æ Á©¸® ¹ßÆÇ Àå¾Ö¹° ÀÛµ¿
+		mapMove(); // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ ï¿½Ûµï¿½
 
-		fall(); // ³«ÇÏ ½º·¹µå ¹ßµ¿
+		fall(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßµï¿½
 
 	}
 
-	// È­¸éÀ» ±×¸°´Ù
+	// È­ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 	@Override
 	protected void paintComponent(Graphics g) {
 
-		// ´õºí¹öÆÛ´Â ±×¸²À» ¹Ì¸®±×·Á³õ°í È­¸é¿¡ Ãâ·ÂÇÑ´Ù.
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û´ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½×·ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 
-		// ´õºí¹öÆÛ °ü·Ã
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (buffg == null) {
 			buffImage = createImage(this.getWidth(), this.getHeight());
 			if (buffImage == null) {
-				System.out.println("´õºí ¹öÆÛ¸µ¿ë ¿ÀÇÁ ½ºÅ©¸° »ý¼º ½ÇÆÐ");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			} else {
 				buffg = buffImage.getGraphics();
 			}
 		}
 
-		// Åõ¸íµµ °ü·Ã
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Graphics2D g2 = (Graphics2D) buffg;
 
-		super.paintComponent(buffg); // ÀÌÀü È­¸éÀ» Áö¿î´Ù.
+		super.paintComponent(buffg); // ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 
-		// ¹è°æÀÌ¹ÌÁö¸¦ ±×¸°´Ù
+		// ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		buffg.drawImage(b11.getImage(), b11.getX(), 0, b11.getWidth(), b11.getHeight() * 5 / 4, null);
 		buffg.drawImage(b12.getImage(), b12.getX(), 0, b12.getWidth(), b12.getHeight() * 5 / 4, null);
 		buffg.drawImage(b21.getImage(), b21.getX(), 0, b21.getWidth(), b21.getHeight() * 5 / 4, null);
 		buffg.drawImage(b22.getImage(), b22.getX(), 0, b22.getWidth(), b22.getHeight() * 5 / 4, null);
 
-		// ½ºÅ×ÀÌÁö ³Ñ¾î°¥½Ã ÆäÀÌµå¾Æ¿ô ÀÎ È¿°ú
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¥ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½Æ¿ï¿½ ï¿½ï¿½ È¿ï¿½ï¿½
 		if (fadeOn) {
-			buffg.setColor(backFade); // Åõ¸íÇÏ°Ô ÇÏ´Â¹æ¹ý 1
+			buffg.setColor(backFade); // ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ï´Â¹ï¿½ï¿½ 1
 			buffg.fillRect(0, 0, this.getWidth(), this.getHeight());
 		}
 
-		// ¹ßÆÇÀ» ±×¸°´Ù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		for (int i = 0; i < fieldList.size(); i++) {
 
 			Field tempFoot = fieldList.get(i);
 
-			// »ç¾çÀ» ´ú Àâ¾Æ¸Ô°Ô ÇÏ±âÀ§ÇÑ Á¶Ä¡
-			if (tempFoot.getX() > -90 && tempFoot.getX() < 810) { // x°ªÀÌ -90~810ÀÎ °´Ã¼µé¸¸ ±×¸°´Ù.
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Æ¸Ô°ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
+			if (tempFoot.getX() > -90 && tempFoot.getX() < 810) { // xï¿½ï¿½ï¿½ï¿½ -90~810ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½é¸¸ ï¿½×¸ï¿½ï¿½ï¿½.
 
 				buffg.drawImage(tempFoot.getImage(), tempFoot.getX(), tempFoot.getY(), tempFoot.getWidth(),
 						tempFoot.getHeight(), null);
@@ -237,7 +237,7 @@ public class GamePanel extends JPanel {
 
 		}
 
-		// Á©¸®¸¦ ±×¸°´Ù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		for (int i = 0; i < jellyList.size(); i++) {
 
 			Jelly tempJelly = jellyList.get(i);
@@ -246,18 +246,18 @@ public class GamePanel extends JPanel {
 
 				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
 						(float) tempJelly.getAlpha() / 255);
-				g2.setComposite(alphaComposite); // Åõ¸íÇÏ°Ô ÇÏ´Â¹æ¹ý 2
+				g2.setComposite(alphaComposite); // ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ï´Â¹ï¿½ï¿½ 2
 
 				buffg.drawImage(tempJelly.getImage(), tempJelly.getX(), tempJelly.getY(), tempJelly.getWidth(),
 						tempJelly.getHeight(), null);
 
-				// alpha°ªÀ» µÇµ¹¸°´Ù
+				// alphaï¿½ï¿½ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½
 				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 255 / 255);
 				g2.setComposite(alphaComposite);
 			}
 		}
 
-		// Àå¾Ö¹°À» ±×¸°´Ù
+		// ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		for (int i = 0; i < tacleList.size(); i++) {
 
 			Tacle tempTacle = tacleList.get(i);
@@ -269,27 +269,27 @@ public class GamePanel extends JPanel {
 			}
 		}
 
-		if (c1.isInvincible()) { // ¹«Àû»óÅÂÀÏ °æ¿ì
-			// ÄíÅ°ÀÇ alpha°ªÀ» ¹Þ¾Æ¿Â´Ù
+		if (c1.isInvincible()) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+			// ï¿½ï¿½Å°ï¿½ï¿½ alphaï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â´ï¿½
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) c1.getAlpha() / 255);
 			g2.setComposite(alphaComposite);
 
-			// ÄíÅ°¸¦ ±×¸°´Ù
+			// ï¿½ï¿½Å°ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 			buffg.drawImage(c1.getImage(), c1.getX() - 110, c1.getY() - 170,
 					cookieIc.getImage().getWidth(null) * 8 / 10, cookieIc.getImage().getHeight(null) * 8 / 10, null);
 
-			// alpha°ªÀ» µÇµ¹¸°´Ù
+			// alphaï¿½ï¿½ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 255 / 255);
 			g2.setComposite(alphaComposite);
 
-		} else { // ¹«Àû»óÅÂ°¡ ¾Æ´Ò °æ¿ì
+		} else { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½
 
-			// ÄíÅ°¸¦ ±×¸°´Ù
+			// ï¿½ï¿½Å°ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 			buffg.drawImage(c1.getImage(), c1.getX() - 110, c1.getY() - 170,
 					cookieIc.getImage().getWidth(null) * 8 / 10, cookieIc.getImage().getHeight(null) * 8 / 10, null);
 		}
 
-		// ÇÇ°Ý½Ã ºÓÀº È­¸é
+		// ï¿½Ç°Ý½ï¿½ ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½
 		if (redScreen) {
 
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 125 / 255);
@@ -305,22 +305,22 @@ public class GamePanel extends JPanel {
 //		buffg.setColor(Color.WHITE);
 //		buffg.drawString(Integer.toString(resultScore), 700, 85);
 
-		// Á¡¼ö¸¦ ±×¸°´Ù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		Util.drawFancyString(g2, Integer.toString(resultScore), 600, 58, 30, Color.WHITE);
 
-		// Ã¼·Â°ÔÀÌÁö¸¦ ±×¸°´Ù
+		// Ã¼ï¿½Â°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		buffg.drawImage(lifeBar.getImage(), 20, 30, null);
 		buffg.setColor(Color.BLACK);
 		buffg.fillRect(84 + (int) (470 * ((double) c1.getHealth() / 1000)), 65,
 				1 + 470 - (int) (470 * ((double) c1.getHealth() / 1000)), 21);
 
-		// ¹öÆ°À» ±×¸°´Ù
+		// ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½
 		buffg.drawImage(jumpBtn, 0, 360, 132, 100, null);
 		buffg.drawImage(slideBtn, 650, 360, 132, 100, null);
 
-		if (escKeyOn) { // escÅ°¸¦ ´©¸¦°æ¿ì È­¸éÀ» Èå¸®°Ô ¸¸µç´Ù
+		if (escKeyOn) { // escÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ ï¿½å¸®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 
-			// alpha°ªÀ» ¹ÝÅõ¸íÇÏ°Ô ¸¸µç´Ù
+			// alphaï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 100 / 255);
 			g2.setComposite(alphaComposite);
 
@@ -328,17 +328,17 @@ public class GamePanel extends JPanel {
 
 			buffg.fillRect(0, 0, 850, 550);
 
-			// alpha°ªÀ» µÇµ¹¸°´Ù
+			// alphaï¿½ï¿½ï¿½ï¿½ ï¿½Çµï¿½ï¿½ï¿½ï¿½ï¿½
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 255 / 255);
 			g2.setComposite(alphaComposite);
 		}
 
-		// ¹öÆÛÀÌ¹ÌÁö¸¦ È­¸é¿¡ Ãâ·ÂÇÑ´Ù
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 		g.drawImage(buffImage, 0, 0, this);
 
 	}
 
-	// ¸Ê ¿ÀºêÁ§Æ® ÀÌ¹ÌÁöµéÀ» ÀúÀå
+	// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private void makeMo() {
 
 		mo1 = new MapObjectImg(new ImageIcon("img/Objectimg/map1img/bg1.png"),
@@ -377,21 +377,21 @@ public class GamePanel extends JPanel {
 
 	}
 
-	// ¸ÞÀÎ¿¡¼­ ¹ÞÀº ÄíÅ° ÀÌ¹ÌÁö ¾ÆÀÌÄÜµéÀ» ÀÎ½ºÅÏ½ºÈ­
+	// ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å° ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½È­
 	private void initCookieImg(CookieImg ci) {
-		// ÄíÅ° ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-		cookieIc = ci.getCookieIc(); // ±âº»¸ð¼Ç
-		jumpIc = ci.getJumpIc(); // Á¡ÇÁ¸ð¼Ç
-		doubleJumpIc = ci.getDoubleJumpIc(); // ´õºíÁ¡ÇÁ¸ð¼Ç
-		fallIc = ci.getFallIc(); // ³«ÇÏ¸ð¼Ç(´õºí Á¡ÇÁ ÈÄ)
-		slideIc = ci.getSlideIc(); // ½½¶óÀÌµå ¸ð¼Ç
-		hitIc = ci.getHitIc(); // ºÎµóÈ÷´Â ¸ð¼Ç
+		// ï¿½ï¿½Å° ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
+		cookieIc = ci.getCookieIc(); // ï¿½âº»ï¿½ï¿½ï¿½
+		jumpIc = ci.getJumpIc(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		doubleJumpIc = ci.getDoubleJumpIc(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		fallIc = ci.getFallIc(); // ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½)
+		slideIc = ci.getSlideIc(); // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½
+		hitIc = ci.getHitIc(); // ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	}
 
-	// Á©¸® ¹ßÆÇ Àå¾Ö¹° µîÀ» ÀÎ½ºÅÏ½ºÈ­
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½È­
 	private void initImageIcon(MapObjectImg mo) {
 
-		// Á©¸® ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
 		jelly1Ic = mo.getJelly1Ic();
 		jelly2Ic = mo.getJelly2Ic();
 		jelly3Ic = mo.getJelly3Ic();
@@ -399,18 +399,18 @@ public class GamePanel extends JPanel {
 
 		jellyEffectIc = mo.getJellyEffectIc();
 
-		// ¹ßÆÇ ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-		field1Ic = mo.getField1Ic(); // ¹ßÆÇ
-		field2Ic = mo.getField2Ic(); // °øÁß¹ßÆÇ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
+		field1Ic = mo.getField1Ic(); // ï¿½ï¿½ï¿½ï¿½
+		field2Ic = mo.getField2Ic(); // ï¿½ï¿½ï¿½ß¹ï¿½ï¿½ï¿½
 
-		// Àå¾Ö¹° ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-		tacle10Ic = mo.getTacle10Ic(); // 1Ä­ Àå¾Ö¹°
-		tacle20Ic = mo.getTacle20Ic(); // 2Ä­ Àå¾Ö¹°
-		tacle30Ic = mo.getTacle30Ic(); // 3Ä­ Àå¾Ö¹°
-		tacle40Ic = mo.getTacle40Ic(); // 4Ä­ Àå¾Ö¹°
+		// ï¿½ï¿½Ö¹ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Üµï¿½
+		tacle10Ic = mo.getTacle10Ic(); // 1Ä­ ï¿½ï¿½Ö¹ï¿½
+		tacle20Ic = mo.getTacle20Ic(); // 2Ä­ ï¿½ï¿½Ö¹ï¿½
+		tacle30Ic = mo.getTacle30Ic(); // 3Ä­ ï¿½ï¿½Ö¹ï¿½
+		tacle40Ic = mo.getTacle40Ic(); // 4Ä­ ï¿½ï¿½Ö¹ï¿½
 	}
 
-	// ¸ÊÀÇ ±¸Á¶¸¦ ±×¸²ÆÇ ÀÌ¹ÌÁö¸¦ ¹Þ¾Æ¼­ ¼¼ÆÃ
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 	private void initMap(int num, int mapLength) {
 
 		String tempMap = null;
@@ -426,64 +426,64 @@ public class GamePanel extends JPanel {
 			tempMap = "img/map/map4.png";
 		}
 
-		// ¸Ê Á¤º¸ ºÒ·¯¿À±â
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 		try {
-			sizeArr = Util.getSize(tempMap); // ¸Ê »çÀÌÁî¸¦ ¹è¿­¿¡ ÀúÀå
-			colorArr = Util.getPic(tempMap); // ¸Ê ÇÈ¼¿°ªÀ» ¹è¿­¿¡ ÀúÀå
+			sizeArr = Util.getSize(tempMap); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½î¸¦ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			colorArr = Util.getPic(tempMap); // ï¿½ï¿½ ï¿½È¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 
 		tempMapLength = sizeArr[0];
-		int maxX = sizeArr[0]; // ¸ÊÀÇ ³ÐÀÌ
-		int maxY = sizeArr[1]; // ¸ÊÀÇ ³ôÀÌ
+		int maxX = sizeArr[0]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		int maxY = sizeArr[1]; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-		for (int i = 0; i < maxX; i += 1) { // Á©¸®´Â 1Ä­À» Â÷ÁöÇÏ±â ¶§¹®¿¡ 1,1»çÀÌÁî·Î ¹Ýº¹¹®À» µ¹¸°´Ù.
+		for (int i = 0; i < maxX; i += 1) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1,1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 			for (int j = 0; j < maxY; j += 1) {
-				if (colorArr[i][j] == 16776960) { // »ö°ªÀÌ 16776960ÀÏ °æ¿ì ±âº»Á©¸® »ý¼º
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 30À¸·Î ÇÑ´Ù.
+				if (colorArr[i][j] == 16776960) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 16776960ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 30ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					jellyList.add(new Jelly(jelly1Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 1234));
 
-				} else if (colorArr[i][j] == 13158400) { // »ö°ªÀÌ 13158400ÀÏ °æ¿ì ³ë¶õÁ©¸® »ý¼º
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 30À¸·Î ÇÑ´Ù.
+				} else if (colorArr[i][j] == 13158400) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 13158400ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 30ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					jellyList.add(new Jelly(jelly2Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 2345));
 
-				} else if (colorArr[i][j] == 9868800) { // »ö°ªÀÌ 9868800ÀÏ °æ¿ì ³ë¶õÁ©¸® »ý¼º
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 30À¸·Î ÇÑ´Ù.
+				} else if (colorArr[i][j] == 9868800) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 9868800ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 30ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					jellyList.add(new Jelly(jelly3Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 3456));
 
-				} else if (colorArr[i][j] == 16737280) { // »ö°ªÀÌ 16737280ÀÏ °æ¿ì ÇÇ ¹°¾à »ý¼º
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 30À¸·Î ÇÑ´Ù.
+				} else if (colorArr[i][j] == 16737280) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 16737280ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 30ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					jellyList.add(new Jelly(jellyHPIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 4567));
 				}
 			}
 		}
 
-		for (int i = 0; i < maxX; i += 2) { // ¹ßÆÇÀº 4Ä­À» Â÷ÁöÇÏ´Â °ø°£ÀÌ±â ¶§¹®¿¡ 2,2»çÀÌÁî·Î ¹Ýº¹¹®À» µ¹¸°´Ù.
+		for (int i = 0; i < maxX; i += 2) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4Ä­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2,2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 			for (int j = 0; j < maxY; j += 2) {
-				if (colorArr[i][j] == 0) { // »ö°ªÀÌ 0 ÀÏ°æ¿ì (°ËÀº»ö)
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 80À¸·Î ÇÑ´Ù.
+				if (colorArr[i][j] == 0) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0 ï¿½Ï°ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 80ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					fieldList.add(new Field(field1Ic.getImage(), i * 40 + mapLength * 40, j * 40, 80, 80));
 
-				} else if (colorArr[i][j] == 6579300) { // »ö°ªÀÌ 6579300 ÀÏ°æ¿ì (È¸»ö)
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 80À¸·Î ÇÑ´Ù.
+				} else if (colorArr[i][j] == 6579300) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 6579300 ï¿½Ï°ï¿½ï¿½ (È¸ï¿½ï¿½)
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 80ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					fieldList.add(new Field(field2Ic.getImage(), i * 40 + mapLength * 40, j * 40, 80, 80));
 				}
 			}
 		}
 
-		for (int i = 0; i < maxX; i += 2) { // Àå¾Ö¹°Àº 4Ä­ ÀÌ»óÀ» Â÷ÁöÇÑ´Ù. ÃßÈÄ ¼öÁ¤
+		for (int i = 0; i < maxX; i += 2) { // ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ 4Ä­ ï¿½Ì»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½. ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			for (int j = 0; j < maxY; j += 2) {
-				if (colorArr[i][j] == 16711680) { // »ö°ªÀÌ 16711680ÀÏ °æ¿ì (»¡°£»ö) 1Ä­
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 80À¸·Î ÇÑ´Ù.
+				if (colorArr[i][j] == 16711680) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 16711680ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½) 1Ä­
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 80ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					tacleList.add(new Tacle(tacle10Ic.getImage(), i * 40 + mapLength * 40, j * 40, 80, 80, 0));
 
-				} else if (colorArr[i][j] == 16711830) { // »ö°ªÀÌ 16711830ÀÏ °æ¿ì (ºÐÈ«) 2Ä­
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 160À¸·Î ÇÑ´Ù.
+				} else if (colorArr[i][j] == 16711830) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 16711830ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½È«) 2Ä­
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 160ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					tacleList.add(new Tacle(tacle20Ic.getImage(), i * 40 + mapLength * 40, j * 40, 80, 160, 0));
 
-				} else if (colorArr[i][j] == 16711935) { // »ö°ªÀÌ 16711830ÀÏ °æ¿ì (ÇÖÇÎÅ©) 3Ä­
-					// ÁÂÇ¥¿¡ 40À» °öÇÏ°í, ³ÐÀÌ¿Í ³ôÀÌ´Â 240À¸·Î ÇÑ´Ù.
+				} else if (colorArr[i][j] == 16711935) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 16711830ï¿½ï¿½ ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½Å©) 3Ä­
+					// ï¿½ï¿½Ç¥ï¿½ï¿½ 40ï¿½ï¿½ ï¿½ï¿½ï¿½Ï°ï¿½, ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ 240ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 					tacleList.add(new Tacle(tacle30Ic.getImage(), i * 40 + mapLength * 40, j * 40, 80, 240, 0));
 				}
 			}
@@ -492,35 +492,35 @@ public class GamePanel extends JPanel {
 		this.mapLength = this.mapLength + tempMapLength;
 	}
 
-	// makeMo, initImageIcon, imitMap ¸Þ¼­µå¸¦ ÀÌ¿ëÇØ¼­ °´Ã¼ »ý¼º
+	// makeMo, initImageIcon, imitMap ï¿½Þ¼ï¿½ï¿½å¸¦ ï¿½Ì¿ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 	private void initObject() {
 
-		// »ý¸í°ÔÀÌÁö ÀÌ¹ÌÁö¾ÆÀÌÄÜ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		lifeBar = new ImageIcon("img/Objectimg/lifebar/lifeBar1.png");
 
-		// ÇÇ°Ý ºÓÀº ÀÌ¹ÌÁö
+		// ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
 		redBg = new ImageIcon("img/Objectimg/lifebar/redBg.png");
 
-		// Á¡ÇÁ¹öÆ°
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ°
 		jumpButtonIconUp = new ImageIcon("img/Objectimg/lifebar/jumpno.png");
 		jumpButtonIconDown = new ImageIcon("img/Objectimg/lifebar/jumpdim.png");
 
-		// ½½¶óÀÌµå ¹öÆ°
+		// ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½Æ°
 		slideIconUp = new ImageIcon("img/Objectimg/lifebar/slideno.png");
 		slideIconDown = new ImageIcon("img/Objectimg/lifebar/slidedim.png");
 
 		jumpBtn = jumpButtonIconUp.getImage();
 		slideBtn = slideIconUp.getImage();
 
-		jellyList = new ArrayList<>(); // Á©¸® ¸®½ºÆ®
+		jellyList = new ArrayList<>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-		fieldList = new ArrayList<>(); // ¹ßÆÇ ¸®½ºÆ®
+		fieldList = new ArrayList<>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-		tacleList = new ArrayList<>(); // Àå¾Ö¹° ¸®½ºÆ®
+		tacleList = new ArrayList<>(); // ï¿½ï¿½Ö¹ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 
-		mapLengthList = new ArrayList<>(); // ´ÙÀ½ ¸ÊÀÇ ½ÃÀÛÁöÁ¡À» È®ÀÎÇÏ±âÀ§ÇÑ ¹è¿­
+		mapLengthList = new ArrayList<>(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­
 
-		// ¸Ê ÀÎ½ºÅÏ½ºµéÀ» »ý¼º
+		// ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 		makeMo();
 
@@ -539,7 +539,7 @@ public class GamePanel extends JPanel {
 		initImageIcon(mo4);
 		initMap(4, mapLength);
 
-		// ¹è°æÀÌ¹ÌÁö ¾ÆÀÌÄÜ
+		// ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		backIc = mo1.getBackIc();
 		secondBackIc = mo1.getSecondBackIc();
 
@@ -552,46 +552,46 @@ public class GamePanel extends JPanel {
 		backIc4 = mo4.getBackIc();
 		secondBackIc4 = mo4.getSecondBackIc();
 
-		// ÄíÅ° ÀÎ½ºÅÏ½º »ý¼º / ±âº» ÀÚ·á´Â Å¬·¡½º¾È¿¡ ³»Àå µÇ¾î ÀÖ±â ¶§¹®¿¡ ÀÌ¹ÌÁö¸¸ ³Ö¾ú´Ù.
+		// ï¿½ï¿½Å° ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½ / ï¿½âº» ï¿½Ú·ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½.
 		c1 = new Cookie(cookieIc.getImage());
 
-		// ÄíÅ°ÀÇ Á¤¸é À§Ä¡ / ÄíÅ°ÀÇ x°ª°ú ³ôÀÌ¸¦ ´õÇÑ °ª
+		// ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ / ï¿½ï¿½Å°ï¿½ï¿½ xï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		face = c1.getX() + c1.getWidth();
 
-		// ÄíÅ°ÀÇ ¹ß¹Ø À§Ä¡ / ÄíÅ°ÀÇ y°ª°ú ³ôÀÌ¸¦ ´õÇÑ °ª
+		// ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ß¹ï¿½ ï¿½ï¿½Ä¡ / ï¿½ï¿½Å°ï¿½ï¿½ yï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		foot = c1.getY() + c1.getHeight();
 
-		// ¹è°æ1-1 ÀÎ½ºÅÏ½º »ý¼º
+		// ï¿½ï¿½ï¿½1-1 ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		b11 = new Back(backIc.getImage(), 0, 0, backIc.getImage().getWidth(null), backIc.getImage().getHeight(null));
 
-		// ¹è°æ1-2 ÀÎ½ºÅÏ½º »ý¼º
-		b12 = new Back(backIc.getImage(), backIc.getImage().getWidth(null), 0, // y °ª (Á¶Á¤ ÇÊ¿ä)
+		// ï¿½ï¿½ï¿½1-2 ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		b12 = new Back(backIc.getImage(), backIc.getImage().getWidth(null), 0, // y ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½)
 				backIc.getImage().getWidth(null), backIc.getImage().getHeight(null));
 
-		// ¹è°æ2-1 ÀÎ½ºÅÏ½º »ý¼º
+		// ï¿½ï¿½ï¿½2-1 ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		b21 = new Back(secondBackIc.getImage(), 0, 0, secondBackIc.getImage().getWidth(null),
 				secondBackIc.getImage().getHeight(null));
 
-		// ¹è°æ2-2 ÀÎ½ºÅÏ½º »ý¼º
-		b22 = new Back(secondBackIc.getImage(), secondBackIc.getImage().getWidth(null), 0, // y °ª (Á¶Á¤ ÇÊ¿ä)
+		// ï¿½ï¿½ï¿½2-2 ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		b22 = new Back(secondBackIc.getImage(), secondBackIc.getImage().getWidth(null), 0, // y ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½)
 				secondBackIc.getImage().getWidth(null), secondBackIc.getImage().getHeight(null));
 
 		backFade = new Color(0, 0, 0, 0);
 
 	}
 
-	// ¸®½º³Ê Ãß°¡ ¸Þ¼­µå
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private void initListener() {
-		addKeyListener(new KeyAdapter() { // Å° ¸®½º³Ê Ãß°¡
+		addKeyListener(new KeyAdapter() { // Å° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½
 
 			@Override
 			public void keyPressed(KeyEvent e) {
 
-				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // escÅ°¸¦ ´­·¶À» ¶§
+				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // escÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 					if (!escKeyOn) {
 						escKeyOn = true;
 						add(escButton);
-						repaint(); // È­¸éÀ» ¾îµÓ°Ô ÇÏ±âÀ§ÇÑ ¸®ÆäÀÎÆ®
+						repaint(); // È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ó°ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 					} else {
 						remove(escButton);
 						escKeyOn = false;
@@ -599,21 +599,21 @@ public class GamePanel extends JPanel {
 				}
 
 				if (!escKeyOn) {
-					if (e.getKeyCode() == KeyEvent.VK_SPACE) {// ½ºÆäÀÌ½º Å°¸¦ ´©¸£°í ´õºíÁ¡ÇÁ°¡ 2°¡ ¾Æ´Ò¶§
+					if (e.getKeyCode() == KeyEvent.VK_SPACE) {// ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ ï¿½Æ´Ò¶ï¿½
 						jumpBtn = jumpButtonIconDown.getImage();
 						if (c1.getCountJump() < 2) {
-							jump(); // Á¡ÇÁ ¸Þ¼­µå °¡µ¿
+							jump(); // ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 						}
 					}
-					if (e.getKeyCode() == KeyEvent.VK_DOWN) { // ´Ù¿îÅ°¸¦ ´­·¶À» ¶§
+					if (e.getKeyCode() == KeyEvent.VK_DOWN) { // ï¿½Ù¿ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 						slideBtn = slideIconDown.getImage();
-						downKeyOn = true; // downKeyOn º¯¼ö¸¦ true·Î
+						downKeyOn = true; // downKeyOn ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ trueï¿½ï¿½
 
-						if (c1.getImage() != slideIc.getImage() // ÄíÅ°ÀÌ¹ÌÁö°¡ ½½¶óÀÌµå ÀÌ¹ÌÁö°¡ ¾Æ´Ï°í
-								&& !c1.isJump() // Á¡ÇÁ ÁßÀÌ ¾Æ´Ï¸ç
-								&& !c1.isFall()) { // ³«ÇÏ Áßµµ ¾Æ´Ò ¶§
+						if (c1.getImage() != slideIc.getImage() // ï¿½ï¿½Å°ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï°ï¿½
+								&& !c1.isJump() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
+								&& !c1.isFall()) { // ï¿½ï¿½ï¿½ï¿½ ï¿½ßµï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½
 
-							c1.setImage(slideIc.getImage()); // ÀÌ¹ÌÁö¸¦ ½½¶óÀÌµåÀÌ¹ÌÁö·Î º¯°æ
+							c1.setImage(slideIc.getImage()); // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 						}
 					}
@@ -623,15 +623,15 @@ public class GamePanel extends JPanel {
 			@Override
 			public void keyReleased(KeyEvent e) {
 
-				if (e.getKeyCode() == KeyEvent.VK_DOWN) { // ´Ù¿îÅ°¸¦ ¶ÃÀ» ¶§
+				if (e.getKeyCode() == KeyEvent.VK_DOWN) { // ï¿½Ù¿ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 					slideBtn = slideIconUp.getImage();
-					downKeyOn = false; // downKeyOn º¯¼ö¸¦ false·Î
+					downKeyOn = false; // downKeyOn ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ falseï¿½ï¿½
 
-					if (c1.getImage() != cookieIc.getImage() // ÄíÅ°ÀÌ¹ÌÁö°¡ ±âº»ÀÌ¹ÌÁö°¡ ¾Æ´Ï°í
-							&& !c1.isJump() // Á¡ÇÁ ÁßÀÌ ¾Æ´Ï¸ç
-							&& !c1.isFall()) { // ³«ÇÏ Áßµµ ¾Æ´Ò ¶§
+					if (c1.getImage() != cookieIc.getImage() // ï¿½ï¿½Å°ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï°ï¿½
+							&& !c1.isJump() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
+							&& !c1.isFall()) { // ï¿½ï¿½ï¿½ï¿½ ï¿½ßµï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½
 
-						c1.setImage(cookieIc.getImage()); // ÀÌ¹ÌÁö¸¦ ±âº»ÀÌ¹ÌÁö·Î º¯°æ
+						c1.setImage(cookieIc.getImage()); // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					}
 				}
 
@@ -642,9 +642,9 @@ public class GamePanel extends JPanel {
 		});
 	}
 
-	// ¸®ÆäÀÎÆ® Àü¿ë ¾²·¹µå Ãß°¡ ¸Þ¼­µå
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private void runRepaint() {
-		// ¸®ÆäÀÎÆ® Àü¿ë ¾²·¹µå
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		new Thread(new Runnable() {
 
 			@Override
@@ -652,7 +652,7 @@ public class GamePanel extends JPanel {
 				while (true) {
 					repaint();
 
-					if (escKeyOn) { // esc Å°¸¦ ´©¸¦°æ¿ì ¸®ÆäÀÎÆ®¸¦ ¸ØÃá´Ù
+					if (escKeyOn) { // esc Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 						while (escKeyOn) {
 							try {
 								Thread.sleep(10);
@@ -672,7 +672,7 @@ public class GamePanel extends JPanel {
 		}).start();
 	}
 
-	// È­¸éÀ» ¿òÁ÷ÀÌ°í Á©¸®¸¦ ¸Ô°Å³ª, Àå¾Ö¹°¿¡ ºÎµóÈ÷´Â µîÀÇ ÀÌº¥Æ®¸¦ ¹ß»ý½ÃÅ°´Â ¸Þ¼­µå
+	// È­ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô°Å³ï¿½, ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private void mapMove() {
 		new Thread(new Runnable() {
 
@@ -680,14 +680,14 @@ public class GamePanel extends JPanel {
 			public void run() {
 				while (true) {
 
-					if (runPage > 800) { // 800ÇÈ¼¿ ÀÌµ¿ ¸¶´Ù Ã¼·ÂÀÌ 10¾¿ °¨¼ÒÇÑ´Ù (ÃßÈÄ ¸Ê±æÀÌ¿¡ ¬Ãß¾î °¨¼Ò·® Á¶Àý)
+					if (runPage > 800) { // 800ï¿½È¼ï¿½ ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ 10ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ß¾ï¿½ ï¿½ï¿½ï¿½Ò·ï¿½ ï¿½ï¿½ï¿½ï¿½)
 						c1.setHealth(c1.getHealth() - 10);
 						runPage = 0;
 					}
 
-					runPage += gameSpeed; // È­¸éÀÌ ÀÌµ¿ÇÏ¸é runPage¿¡ ÀÌµ¿ÇÑ ¸¸Å­ ÀúÀåµÈ´Ù.
+					runPage += gameSpeed; // È­ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½Ï¸ï¿½ runPageï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½È´ï¿½.
 
-					foot = c1.getY() + c1.getHeight(); // Ä³¸¯ÅÍ ¹ß À§Ä¡ Àç½ºÄµ
+					foot = c1.getY() + c1.getHeight(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
 					if (foot > 1999 || c1.getHealth() < 1) {
 						main.getEndPanel().setResultScore(resultScore);
 						cl.show(superFrame.getContentPane(), "end");
@@ -696,8 +696,8 @@ public class GamePanel extends JPanel {
 						escKeyOn = true;
 					}
 
-					// ¹è°æ ÀÌ¹ÌÁö º¯°æ
-					if (fadeOn == false) { // ÆäÀÌµå¾Æ¿ôÀÎ »óÅÂ°¡ ¾Æ´Ò¶§
+					// ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					if (fadeOn == false) { // ï¿½ï¿½ï¿½Ìµï¿½Æ¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ò¶ï¿½
 						if (mapLength > mapLengthList.get(2) * 40 + 800 && b11.getImage() != backIc4.getImage()) {
 							fadeOn = true;
 
@@ -791,65 +791,65 @@ public class GamePanel extends JPanel {
 						}
 					}
 
-					// ¹è°æÀÌ¹ÌÁö º¯°æÀ» À§ÇÑ ¸ÊÀÌµ¿ ±æÀÌ ÃøÁ¤
+					// ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 					mapLength += gameSpeed;
 
-					if (b11.getX() < -(b11.getWidth() - 1)) { // ¹è°æ1-1 ÀÌ -(¹è°æ³ÐÀÌ)º¸´Ù ÀÛÀ¸¸é, Áï È­¸é¹ÛÀ¸·Î ¸ðµÎ³ª°¡¸é ¹è°æ 1-2µÚ¿¡ ºÙÀ½
+					if (b11.getX() < -(b11.getWidth() - 1)) { // ï¿½ï¿½ï¿½1-1 ï¿½ï¿½ -(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1-2ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 						b11.setX(b11.getWidth());
 					}
-					if (b12.getX() < -(b12.getWidth() - 1)) { // ¹è°æ1-2 °¡ -(¹è°æ³ÐÀÌ)º¸´Ù ÀÛÀ¸¸é, Áï È­¸é¹ÛÀ¸·Î ¸ðµÎ³ª°¡¸é ¹è°æ 1-1µÚ¿¡ ºÙÀ½
+					if (b12.getX() < -(b12.getWidth() - 1)) { // ï¿½ï¿½ï¿½1-2 ï¿½ï¿½ -(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1-1ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 						b12.setX(b12.getWidth());
 					}
 
-					if (b21.getX() < -(b21.getWidth() - 1)) { // ¹è°æ1-1 ÀÌ -(¹è°æ³ÐÀÌ)º¸´Ù ÀÛÀ¸¸é, Áï È­¸é¹ÛÀ¸·Î ¸ðµÎ³ª°¡¸é ¹è°æ 1-2µÚ¿¡ ºÙÀ½
+					if (b21.getX() < -(b21.getWidth() - 1)) { // ï¿½ï¿½ï¿½1-1 ï¿½ï¿½ -(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1-2ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 						b21.setX(b21.getWidth());
 					}
-					if (b22.getX() < -(b22.getWidth() - 1)) { // ¹è°æ1-2 °¡ -(¹è°æ³ÐÀÌ)º¸´Ù ÀÛÀ¸¸é, Áï È­¸é¹ÛÀ¸·Î ¸ðµÎ³ª°¡¸é ¹è°æ 1-1µÚ¿¡ ºÙÀ½
+					if (b22.getX() < -(b22.getWidth() - 1)) { // ï¿½ï¿½ï¿½1-2 ï¿½ï¿½ -(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î³ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 1-1ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
 						b22.setX(b22.getWidth());
 					}
 
-					// ¹è°æÀÇ xÁÂÇ¥¸¦ -1 ÇØÁØ´Ù (¿ÞÂÊÀ¸·Î Èå¸£´Â È¿°ú)
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½Ç¥ï¿½ï¿½ -1 ï¿½ï¿½ï¿½Ø´ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½å¸£ï¿½ï¿½ È¿ï¿½ï¿½)
 					b11.setX(b11.getX() - gameSpeed / 3);
 					b12.setX(b12.getX() - gameSpeed / 3);
 
 					b21.setX(b21.getX() - gameSpeed * 2 / 3);
 					b22.setX(b22.getX() - gameSpeed * 2 / 3);
 
-					// ¹ßÆÇÀ§Ä¡¸¦ -3 ¾¿ ÇØÁØ´Ù. (¿ÞÂÊÀ¸·Î Èå¸£´Â È¿°ú)
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ -3 ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½. (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½å¸£ï¿½ï¿½ È¿ï¿½ï¿½)
 					for (int i = 0; i < fieldList.size(); i++) {
 
-						Field tempField = fieldList.get(i); // ÀÓ½Ã º¯¼ö¿¡ ¸®½ºÆ® ¾È¿¡ ÀÖ´Â °³º° ¹ßÆÇÀ» ºÒ·¯¿ÀÀÚ
+						Field tempField = fieldList.get(i); // ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 
-						if (tempField.getX() < -90) { // ¹ßÆÇÀÇ xÁÂÇ¥°¡ -90 ¹Ì¸¸ÀÌ¸é ÇØ´ç ¹ßÆÇÀ» Á¦°ÅÇÑ´Ù.(ÃÖÀûÈ­)
+						if (tempField.getX() < -90) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½Ç¥ï¿½ï¿½ -90 ï¿½Ì¸ï¿½ï¿½Ì¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.(ï¿½ï¿½ï¿½ï¿½È­)
 
 							fieldList.remove(tempField);
 
 						} else {
 
-							tempField.setX(tempField.getX() - gameSpeed); // À§ Á¶°Ç¿¡ ÇØ´çÀÌ ¾ÈµÇ¸é xÁÂÇ¥¸¦ ÁÙÀÌÀÚ
+							tempField.setX(tempField.getX() - gameSpeed); // ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Ø´ï¿½ï¿½ï¿½ ï¿½ÈµÇ¸ï¿½ xï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 						}
 					}
 
-					// Á©¸®À§Ä¡¸¦ -4 ¾¿ ÇØÁØ´Ù.
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ -4 ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 					for (int i = 0; i < jellyList.size(); i++) {
 
-						Jelly tempJelly = jellyList.get(i); // ÀÓ½Ã º¯¼ö¿¡ ¸®½ºÆ® ¾È¿¡ ÀÖ´Â °³º° Á©¸®¸¦ ºÒ·¯¿ÀÀÚ
+						Jelly tempJelly = jellyList.get(i); // ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 
-						if (tempJelly.getX() < -90) { // Á©¸®ÀÇ x ÁÂÇ¥°¡ -90 ¹Ì¸¸ÀÌ¸é ÇØ´ç Á©¸®¸¦ Á¦°ÅÇÑ´Ù.(ÃÖÀûÈ­)
+						if (tempJelly.getX() < -90) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ x ï¿½ï¿½Ç¥ï¿½ï¿½ -90 ï¿½Ì¸ï¿½ï¿½Ì¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.(ï¿½ï¿½ï¿½ï¿½È­)
 
 							fieldList.remove(tempJelly);
 
 						} else {
 
-							tempJelly.setX(tempJelly.getX() - gameSpeed); // À§ Á¶°Ç¿¡ ÇØ´çÀÌ ¾ÈµÇ¸é xÁÂÇ¥¸¦ ÁÙÀÌÀÚ
+							tempJelly.setX(tempJelly.getX() - gameSpeed); // ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Ø´ï¿½ï¿½ï¿½ ï¿½ÈµÇ¸ï¿½ xï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 							if (tempJelly.getImage() == jellyEffectIc.getImage() && tempJelly.getAlpha() > 4) {
 								tempJelly.setAlpha(tempJelly.getAlpha() - 5);
 							}
 
-							foot = c1.getY() + c1.getHeight(); // Ä³¸¯ÅÍ ¹ß À§Ä¡ Àç½ºÄµ
+							foot = c1.getY() + c1.getHeight(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
 
-							if ( // Ä³¸¯ÅÍÀÇ ¹üÀ§ ¾È¿¡ Á©¸®°¡ ÀÖÀ¸¸é ¾ÆÀÌÅÛÀ» ¸Ô´Â´Ù.
+							if ( // Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Â´ï¿½.
 							c1.getImage() != slideIc.getImage()
 									&& tempJelly.getX() + tempJelly.getWidth() * 20 / 100 >= c1.getX()
 									&& tempJelly.getX() + tempJelly.getWidth() * 80 / 100 <= face
@@ -864,10 +864,10 @@ public class GamePanel extends JPanel {
 										c1.setHealth(c1.getHealth() + 100);
 									}
 								}
-								tempJelly.setImage(jellyEffectIc.getImage()); // Á©¸®ÀÇ ÀÌ¹ÌÁö¸¦ ÀÌÆåÆ®·Î ¹Ù²Û´Ù
-								resultScore = resultScore + tempJelly.getScore(); // ÃÑÁ¡¼ö¿¡ Á©¸® Á¡¼ö¸¦ ´õÇÑ´Ù
+								tempJelly.setImage(jellyEffectIc.getImage()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù²Û´ï¿½
+								resultScore = resultScore + tempJelly.getScore(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½
 
-							} else if ( // ½½¶óÀÌµù ÇÏ´Â Ä³¸¯ÅÍÀÇ ¹üÀ§ ¾È¿¡ Á©¸®°¡ ÀÖÀ¸¸é ¾ÆÀÌÅÛÀ» ¸Ô´Â´Ù.
+							} else if ( // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ï´ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Â´ï¿½.
 							c1.getImage() == slideIc.getImage()
 									&& tempJelly.getX() + tempJelly.getWidth() * 20 / 100 >= c1.getX()
 									&& tempJelly.getX() + tempJelly.getWidth() * 80 / 100 <= face
@@ -883,48 +883,48 @@ public class GamePanel extends JPanel {
 										c1.setHealth(c1.getHealth() + 100);
 									}
 								}
-								tempJelly.setImage(jellyEffectIc.getImage()); // Á©¸®ÀÇ ÀÌ¹ÌÁö¸¦ ÀÌÆåÆ®·Î ¹Ù²Û´Ù
-								resultScore = resultScore + tempJelly.getScore(); // ÃÑÁ¡¼ö¿¡ Á©¸® Á¡¼ö¸¦ ´õÇÑ´Ù
+								tempJelly.setImage(jellyEffectIc.getImage()); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ù²Û´ï¿½
+								resultScore = resultScore + tempJelly.getScore(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½
 
 							}
 						}
 					}
 
-					// Àå¾Ö¹°À§Ä¡¸¦ - 4 ¾¿ ÇØÁØ´Ù.
+					// ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ - 4 ï¿½ï¿½ ï¿½ï¿½ï¿½Ø´ï¿½.
 					for (int i = 0; i < tacleList.size(); i++) {
 
-						Tacle tempTacle = tacleList.get(i); // ÀÓ½Ã º¯¼ö¿¡ ¸®½ºÆ® ¾È¿¡ ÀÖ´Â °³º° Àå¾Ö¹°À» ºÒ·¯¿ÀÀÚ
+						Tacle tempTacle = tacleList.get(i); // ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½È¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
 
 						if (tempTacle.getX() < -90) {
 
-							fieldList.remove(tempTacle); // Àå¾Ö¹°ÀÇ x ÁÂÇ¥°¡ -90 ¹Ì¸¸ÀÌ¸é ÇØ´ç Á©¸®¸¦ Á¦°ÅÇÑ´Ù.(ÃÖÀûÈ­)
+							fieldList.remove(tempTacle); // ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ x ï¿½ï¿½Ç¥ï¿½ï¿½ -90 ï¿½Ì¸ï¿½ï¿½Ì¸ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.(ï¿½ï¿½ï¿½ï¿½È­)
 
 						} else {
 
-							tempTacle.setX(tempTacle.getX() - gameSpeed); // À§ Á¶°Ç¿¡ ÇØ´çÀÌ ¾ÈµÇ¸é xÁÂÇ¥¸¦ ÁÙÀÌÀÚ
+							tempTacle.setX(tempTacle.getX() - gameSpeed); // ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½Ø´ï¿½ï¿½ï¿½ ï¿½ÈµÇ¸ï¿½ xï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-							face = c1.getX() + c1.getWidth(); // Ä³¸¯ÅÍ Á¤¸é À§Ä¡ Àç½ºÄµ
-							foot = c1.getY() + c1.getHeight(); // Ä³¸¯ÅÍ ¹ß À§Ä¡ Àç½ºÄµ
+							face = c1.getX() + c1.getWidth(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
+							foot = c1.getY() + c1.getHeight(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
 
-							if ( // ¹«Àû»óÅÂ°¡ ¾Æ´Ï°í ½½¶óÀÌµå ÁßÀÌ ¾Æ´Ï¸ç Ä³¸¯ÅÍÀÇ ¹üÀ§ ¾È¿¡ Àå¾Ö¹°ÀÌ ÀÖÀ¸¸é ºÎµóÈù´Ù
+							if ( // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½
 							!c1.isInvincible() && c1.getImage() != slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 >= c1.getY()
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 <= foot) {
 
-								hit(); // ÇÇ°Ý + ¹«Àû ¾²·¹µå ¸Þ¼­µå
+								hit(); // ï¿½Ç°ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
-							} else if ( // ½½¶óÀÌµù ¾Æ´Ò½Ã °øÁßÀå¾Ö¹°
+							} else if ( // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Æ´Ò½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½
 							!c1.isInvincible() && c1.getImage() != slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() <= c1.getY()
 									&& tempTacle.getY() + tempTacle.getHeight() * 95 / 100 > c1.getY()) {
 
-								hit(); // ÇÇ°Ý + ¹«Àû ¾²·¹µå ¸Þ¼­µå
+								hit(); // ï¿½Ç°ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
-							} else if ( // ¹«Àû»óÅÂ°¡ ¾Æ´Ï°í ½½¶óÀÌµå ÁßÀÌ¸ç Ä³¸¯ÅÍÀÇ ¹üÀ§ ¾È¿¡ Àå¾Ö¹°ÀÌ ÀÖÀ¸¸é ºÎµóÈù´Ù
+							} else if ( // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½È¿ï¿½ ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½
 							!c1.isInvincible() && c1.getImage() == slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
@@ -932,43 +932,43 @@ public class GamePanel extends JPanel {
 											+ c1.getHeight() * 2 / 3
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 <= foot) {
 
-								hit(); // ÇÇ°Ý + ¹«Àû ¾²·¹µå ¸Þ¼­µå
+								hit(); // ï¿½Ç°ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
-							} else if ( // ½½¶óÀÌµù½Ã °øÁßÀå¾Ö¹°
+							} else if ( // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½
 							!c1.isInvincible() && c1.getImage() == slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() < c1.getY() && tempTacle.getY()
 											+ tempTacle.getHeight() * 95 / 100 > c1.getY() + c1.getHeight() * 2 / 3) {
 
-								hit(); // ÇÇ°Ý + ¹«Àû ¾²·¹µå ¸Þ¼­µå
+								hit(); // ï¿½Ç°ï¿½ + ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 							}
 						}
 					}
 
-					// ÄíÅ°°¡ ¹âÀ» ¹ßÆÇÀ» °è»êÇÏ´Â ÄÚµå
-					int tempField; // ¹ßÆÇÀ§Ä¡¸¦ °è¼Ó ½ºÄµÇÏ´Â Áö¿ªº¯¼ö
-					int tempNowField; // Ä³¸¯ÅÍ¿Í ¹ßÆÇÀÇ ³ôÀÌ¿¡ µû¶ó ÀúÀåµÇ´Â Áö¿ªº¯¼ö, °á°ú¸¦ nowField¿¡ ÀúÀåÇÑ´Ù
+					// ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½
+					int tempField; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Äµï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					int tempNowField; // Ä³ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ nowFieldï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 
-					// ÄíÅ°°¡ ¹«Àû»óÅÂ¶ó¸é ³«»ç ÇÏÁö ¾Ê±â ¶§¹®¿¡ 400À¸·Î ¼¼ÆÃ / ¹«ÀûÀÌ ¾Æ´Ï¶ó¸é 2000(³«»çÁöÁ¡);
+					// ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 400ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ 2000(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½);
 					if (c1.isInvincible()) {
 						tempNowField = 400;
 					} else {
 						tempNowField = 2000;
 					}
 
-					for (int i = 0; i < fieldList.size(); i++) { // ¹ßÆÇÀÇ °³¼ö¸¸Å­ ¹Ýº¹
+					for (int i = 0; i < fieldList.size(); i++) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å­ ï¿½Ýºï¿½
 
-						int tempX = fieldList.get(i).getX(); // ¹ßÆÇÀÇ x°ª
+						int tempX = fieldList.get(i).getX(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ xï¿½ï¿½
 
-						if (tempX > c1.getX() - 60 && tempX <= face) { // ¹ßÆÇÀÌ Ä³¸¯ ¹üÀ§ ¾ÈÀÌ¶ó¸é
+						if (tempX > c1.getX() - 60 && tempX <= face) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
 
-							tempField = fieldList.get(i).getY(); // ¹ßÆÇÀÇ y°ªÀ» tempField¿¡ ÀúÀåÇÑ´Ù
+							tempField = fieldList.get(i).getY(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ yï¿½ï¿½ï¿½ï¿½ tempFieldï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 
-							foot = c1.getY() + c1.getHeight(); // Ä³¸¯ÅÍ ¹ß À§Ä¡ Àç½ºÄµ
+							foot = c1.getY() + c1.getHeight(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
 
-							// ¹ßÆÇÀ§Ä¡°¡ tempNowFieldº¸´Ù ³ô°í, ¹ß¹Ù´Ú º¸´Ù ¾Æ·¡ ÀÖ´Ù¸é
-							// Áï, Ä³¸¯ÅÍ ¹ß ¾Æ·¡¿¡ Á¦ÀÏ ³ôÀÌ ÀÖ´Â ¹ßÆÇÀÌ¶ó¸é tempNowField¿¡ ÀúÀåÇÑ´Ù.
+							// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ tempNowFieldï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ß¹Ù´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ ï¿½Ö´Ù¸ï¿½
+							// ï¿½ï¿½, Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ tempNowFieldï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 							if (tempField < tempNowField && tempField >= foot) {
 
 								tempNowField = tempField;
@@ -977,9 +977,9 @@ public class GamePanel extends JPanel {
 						}
 					}
 
-					nowField = tempNowField; // °á°ú¸¦ nowField¿¡ ¾÷µ¥ÀÌÆ® ÇÑ´Ù.
+					nowField = tempNowField; // ï¿½ï¿½ï¿½ï¿½ï¿½ nowFieldï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ñ´ï¿½.
 
-					if (escKeyOn) { // escÅ°¸¦ ´©¸£¸é °ÔÀÓÀÌ ¸ØÃá´Ù
+					if (escKeyOn) { // escÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 						while (escKeyOn) {
 							try {
 								Thread.sleep(10);
@@ -1000,52 +1000,52 @@ public class GamePanel extends JPanel {
 		}).start();
 	}
 
-	// ºÎµóÇûÀ» ¶§ ÀÏ¾î³ª´Â »óÅÂ¸¦ ´ã´çÇÏ´Â ¸Þ¼­µå
+	// ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï¾î³ªï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private void hit() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				c1.setInvincible(true); // ÄíÅ°¸¦ ¹«Àû»óÅÂ·Î ÀüÈ¯
+				c1.setInvincible(true); // ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯
 
-				System.out.println("ÇÇ°Ý¹«Àû½ÃÀÛ");
+				System.out.println("ï¿½Ç°Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
-				redScreen = true; // ÇÇ°Ý ºÓÀº ÀÌÆåÆ® ½ÃÀÛ
+				redScreen = true; // ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-				c1.setHealth(c1.getHealth() - 100); // ÄíÅ°ÀÇ Ã¼·ÂÀ» 100 ±ð´Â´Ù
+				c1.setHealth(c1.getHealth() - 100); // ï¿½ï¿½Å°ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ 100 ï¿½ï¿½Â´ï¿½
 
-				c1.setImage(hitIc.getImage()); // ÄíÅ°¸¦ ºÎµóÈù ¸ð¼ÇÀ¸·Î º¯°æ
+				c1.setImage(hitIc.getImage()); // ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-				c1.setAlpha(80); // ÄíÅ°ÀÇ Åõ¸íµµ¸¦ 80À¸·Î º¯°æ
+				c1.setAlpha(80); // ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 80ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-				try { // 0.5ÃÊ ´ë±â
+				try { // 0.5ï¿½ï¿½ ï¿½ï¿½ï¿½
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				redScreen = false; // ÇÇ°Ý ºÓÀº ÀÌÆåÆ® Á¾·á
+				redScreen = false; // ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
 
-				try { // 0.5ÃÊ ´ë±â
+				try { // 0.5ï¿½ï¿½ ï¿½ï¿½ï¿½
 					Thread.sleep(250);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 
-				if (c1.getImage() == hitIc.getImage()) { // 0.5ÃÊ µ¿¾È ÀÌ¹ÌÁö°¡ ¹Ù²îÁö ¾Ê¾Ò´Ù¸é ±âº»ÀÌ¹ÌÁö·Î º¯°æ
+				if (c1.getImage() == hitIc.getImage()) { // 0.5ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½Ê¾Ò´Ù¸ï¿½ ï¿½âº»ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 					c1.setImage(cookieIc.getImage());
 
 				}
 
-				for (int j = 0; j < 11; j++) { // 2.5ÃÊ°£ Ä³¸¯ÅÍ°¡ ±ôºýÀÎ´Ù. (ÇÇ°ÝÈÄ ¹«Àû »óÅÂ¸¦ ÀÎ½Ä)
+				for (int j = 0; j < 11; j++) { // 2.5ï¿½Ê°ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½. (ï¿½Ç°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½Î½ï¿½)
 
-					if (c1.getAlpha() == 80) { // ÀÌ¹ÌÁöÀÇ ¾ËÆÄ°ªÀÌ 80ÀÌ¸é 160À¸·Î
+					if (c1.getAlpha() == 80) { // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä°ï¿½ï¿½ï¿½ 80ï¿½Ì¸ï¿½ 160ï¿½ï¿½ï¿½ï¿½
 
 						c1.setAlpha(160);
 
-					} else { // ¾Æ´Ï¸é 80À¸·Î
+					} else { // ï¿½Æ´Ï¸ï¿½ 80ï¿½ï¿½ï¿½ï¿½
 
 						c1.setAlpha(80);
 
@@ -1057,15 +1057,15 @@ public class GamePanel extends JPanel {
 					}
 				}
 
-				c1.setAlpha(255); // ÄíÅ°ÀÇ Åõ¸íµµ¸¦ Á¤»óÀ¸·Î º¯°æ
+				c1.setAlpha(255); // ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 				c1.setInvincible(false);
-				System.out.println("ÇÇ°Ý¹«ÀûÁ¾·á");
+				System.out.println("ï¿½Ç°Ý¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			}
 		}).start();
 	}
 
-	// ³«ÇÏ ¸Þ¼­µå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private void fall() {
 		new Thread(new Runnable() {
 
@@ -1073,40 +1073,40 @@ public class GamePanel extends JPanel {
 			public void run() {
 				while (true) {
 
-					foot = c1.getY() + c1.getHeight(); // Ä³¸¯ÅÍ ¹ß À§Ä¡ Àç½ºÄµ
+					foot = c1.getY() + c1.getHeight(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
 
-					// ¹ß¹Ù´ÚÀÌ ¹ßÆÇº¸´Ù À§¿¡ ÀÖÀ¸¸é ÀÛµ¿
-					if (!escKeyOn // ÀÏ½ÃÁßÁö°¡ ¹ßµ¿ ¾ÈµÆÀ» ¶§
-							&& foot < nowField // °øÁß¿¡ ÀÖÀ¸¸ç
-							&& !c1.isJump() // Á¡ÇÁ ÁßÀÌ ¾Æ´Ï¸ç
-							&& !c1.isFall()) { // ¶³¾îÁö´Â ÁßÀÌ ¾Æ´Ò ¶§
+					// ï¿½ß¹Ù´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ûµï¿½
+					if (!escKeyOn // ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ßµï¿½ ï¿½Èµï¿½ï¿½ï¿½ ï¿½ï¿½
+							&& foot < nowField // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							&& !c1.isJump() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸ï¿½
+							&& !c1.isFall()) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½
 
-						c1.setFall(true); // ¶³¾îÁö´Â ÁßÀ¸·Î ÀüÈ¯
-						System.out.println("³«ÇÏ");
+						c1.setFall(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
+						System.out.println("ï¿½ï¿½ï¿½ï¿½");
 
-						if (c1.getCountJump() == 2) { // ´õºíÁ¡ÇÁ°¡ ³¡³µÀ» °æ¿ì ³«ÇÏ ÀÌ¹ÌÁö·Î º¯°æ
+						if (c1.getCountJump() == 2) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 							c1.setImage(fallIc.getImage());
 						}
 
-						long t1 = Util.getTime(); // ÇöÀç½Ã°£À» °¡Á®¿Â´Ù
+						long t1 = Util.getTime(); // ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
 						long t2;
-						int set = 1; // Ã³À½ ³«ÇÏ·® (0~10) ±îÁö Å×½ºÆ®ÇØº¸ÀÚ
+						int set = 1; // Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ (0~10) ï¿½ï¿½ï¿½ï¿½ ï¿½×½ï¿½Æ®ï¿½Øºï¿½ï¿½ï¿½
 
-						while (foot < nowField) { // ¹ßÀÌ ¹ßÆÇ¿¡ ´ê±â Àü±îÁö ¹Ýº¹
+						while (foot < nowField) { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½
 
-							t2 = Util.getTime() - t1; // Áö±Ý ½Ã°£¿¡¼­ t1À» »«´Ù
+							t2 = Util.getTime() - t1; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ t1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-							int fallY = set + (int) ((t2) / 40); // ³«ÇÏ·®À» ´Ã¸°´Ù.
+							int fallY = set + (int) ((t2) / 40); // ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½.
 
-							foot = c1.getY() + c1.getHeight(); // Ä³¸¯ÅÍ ¹ß À§Ä¡ Àç½ºÄµ
+							foot = c1.getY() + c1.getHeight(); // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ç½ºÄµ
 
-							if (foot + fallY >= nowField) { // ¹ß¹Ù´Ú+³«ÇÏ·® À§Ä¡°¡ ¹ßÆÇº¸´Ù ³·´Ù¸é ³«ÇÏ·®À» Á¶Á¤ÇÑ´Ù.
+							if (foot + fallY >= nowField) { // ï¿½ß¹Ù´ï¿½+ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½Çºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 								fallY = nowField - foot;
 							}
 
-							c1.setY(c1.getY() + fallY); // YÁÂÇ¥¿¡ ³«ÇÏ·®À» ´õÇÑ´Ù
+							c1.setY(c1.getY() + fallY); // Yï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½
 
-							if (c1.isJump()) { // ¶³¾îÁö´Ù°¡ Á¡ÇÁ¸¦ ÇÏ¸é ³«ÇÏÁßÁö
+							if (c1.isJump()) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 								break;
 							}
 
@@ -1133,22 +1133,22 @@ public class GamePanel extends JPanel {
 						}
 						c1.setFall(false);
 
-						if (downKeyOn // ´Ù¿îÅ°¸¦ ´©¸¥»óÅÂ°í
-								&& !c1.isJump() // Á¡ÇÁ »óÅÂ°¡ ¾Æ´Ï°í
-								&& !c1.isFall() // ³«ÇÏ »óÅÂ°¡ ¾Æ´Ï°í
-								&& c1.getImage() != slideIc.getImage()) { // ÄíÅ° ÀÌ¹ÌÁö°¡ ½½¶óÀÌµå ÀÌ¹ÌÁö°¡ ¾Æ´Ò °æ¿ì
+						if (downKeyOn // ï¿½Ù¿ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½
+								&& !c1.isJump() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½
+								&& !c1.isFall() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½
+								&& c1.getImage() != slideIc.getImage()) { // ï¿½ï¿½Å° ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½
 
-							c1.setImage(slideIc.getImage()); // ÄíÅ° ÀÌ¹ÌÁö¸¦ ½½¶óÀÌµå·Î º¯°æ
+							c1.setImage(slideIc.getImage()); // ï¿½ï¿½Å° ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-						} else if (!downKeyOn // ´Ù¿îÅ°¸¦ ´©¸¥»óÅÂ°¡ ¾Æ´Ï°í
-								&& !c1.isJump() // Á¡ÇÁ »óÅÂ°¡ ¾Æ´Ï°í
-								&& !c1.isFall() // ³«ÇÏ »óÅÂ°¡ ¾Æ´Ï°í
-								&& c1.getImage() != cookieIc.getImage()) { // ÄíÅ° ÀÌ¹ÌÁö°¡ ±âº» ÀÌ¹ÌÁö°¡ ¾Æ´Ò °æ¿ì
+						} else if (!downKeyOn // ï¿½Ù¿ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½
+								&& !c1.isJump() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½
+								&& !c1.isFall() // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°ï¿½ ï¿½Æ´Ï°ï¿½
+								&& c1.getImage() != cookieIc.getImage()) { // ï¿½ï¿½Å° ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ï¿½
 
 							c1.setImage(cookieIc.getImage());
 						}
 
-						if (!c1.isJump()) { // ¹ßÀÌ ¶¥¿¡ ´ê°í Á¡ÇÁ ÁßÀÌ ¾Æ´Ò ¶§ ´õºíÁ¡ÇÁ Ä«¿îÆ®¸¦ 0À¸·Î º¯°æ
+						if (!c1.isJump()) { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ®ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 							c1.setCountJump(0);
 						}
 					}
@@ -1162,45 +1162,45 @@ public class GamePanel extends JPanel {
 		}).start();
 	}
 
-	// Á¡ÇÁ ¸Þ¼­µå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 	private void jump() {
 		new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 
-				c1.setCountJump(c1.getCountJump() + 1); // Á¡ÇÁ È½¼ö Áõ°¡
+				c1.setCountJump(c1.getCountJump() + 1); // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-				int nowJump = c1.getCountJump(); // ÀÌ¹øÁ¡ÇÁ°¡ Á¡ÇÁÀÎÁö ´õºíÁ¡ÇÁÀÎÁö ÀúÀå
+				int nowJump = c1.getCountJump(); // ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-				c1.setJump(true); // Á¡ÇÁÁßÀ¸·Î º¯°æ
+				c1.setJump(true); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-				if (c1.getCountJump() == 1) { // Á¡ÇÁ È½¼ö°¡ 1ÀÌ¶ó¸é
+				if (c1.getCountJump() == 1) { // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ï¿½ï¿½ 1ï¿½Ì¶ï¿½ï¿½
 
-					System.out.println("Á¡ÇÁ");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½");
 					c1.setImage(jumpIc.getImage());
 
-				} else if (c1.getCountJump() == 2) { // Á¡ÇÁ È½¼ö°¡ 2¶ó¸é
+				} else if (c1.getCountJump() == 2) { // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ï¿½ï¿½ 2ï¿½ï¿½ï¿½
 
-					System.out.println("´õºíÁ¡ÇÁ");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 					c1.setImage(doubleJumpIc.getImage());
 
 				}
 
-				long t1 = Util.getTime(); // ÇöÀç½Ã°£À» °¡Á®¿Â´Ù
+				long t1 = Util.getTime(); // ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½
 				long t2;
-				int set = 8; // Á¡ÇÁ °è¼ö ¼³Á¤(0~20) µîÀ¸·Î ¹Ù²ãº¸ÀÚ
-				int jumpY = 1; // 1ÀÌ»óÀ¸·Î¸¸ ¼³Á¤ÇÏ¸é µÈ´Ù.(while¹® Á¶°Ç ¶§¹®)
+				int set = 8; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(0~20) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ãº¸ï¿½ï¿½
+				int jumpY = 1; // 1ï¿½Ì»ï¿½ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½È´ï¿½.(whileï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
-				while (jumpY >= 0) { // »ó½Â ³ôÀÌ°¡ 0ÀÏ¶§±îÁö ¹Ýº¹
+				while (jumpY >= 0) { // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ 0ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ýºï¿½
 
-					t2 = Util.getTime() - t1; // Áö±Ý ½Ã°£¿¡¼­ t1À» »«´Ù
+					t2 = Util.getTime() - t1; // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ t1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-					jumpY = set - (int) ((t2) / 40); // jumpY ¸¦ ¼¼ÆÃÇÑ´Ù.
+					jumpY = set - (int) ((t2) / 40); // jumpY ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 
-					c1.setY(c1.getY() - jumpY); // Y°ªÀ» º¯°æÇÑ´Ù.
+					c1.setY(c1.getY() - jumpY); // Yï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 
-					if (nowJump != c1.getCountJump()) { // Á¡ÇÁ°¡ ÇÑ¹ø ´õµÇ¸é Ã¹¹øÂ° Á¡ÇÁ´Â ¸ØÃá´Ù.
+					if (nowJump != c1.getCountJump()) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ ï¿½ï¿½ï¿½Ç¸ï¿½ Ã¹ï¿½ï¿½Â° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½.
 						break;
 					}
 
@@ -1225,8 +1225,8 @@ public class GamePanel extends JPanel {
 					}
 				}
 
-				if (nowJump == c1.getCountJump()) { // Á¡ÇÁ°¡ ÁøÂ¥ ³¡³µÀ» ¶§¸¦ È®ÀÎ
-					c1.setJump(false); // Á¡ÇÁ»óÅÂ¸¦ false·Î º¯°æ
+				if (nowJump == c1.getCountJump()) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+					c1.setJump(false); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½ falseï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				}
 
 			}
