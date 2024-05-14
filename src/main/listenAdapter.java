@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-// main¿¡ ¸®½º³Ê¸¦ ³Ö±âÀ§ÇÑ ¾î´ğÅÍ
+// mainì— ë¦¬ìŠ¤ë„ˆë¥¼ ë„£ê¸°ìœ„í•œ ì–´ëŒ‘í„°
 public abstract class listenAdapter implements KeyListener, MouseListener, ActionListener{
 
 	@Override

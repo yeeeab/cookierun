@@ -11,15 +11,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Tacle {
 	
-	private Image image; // Àå¾Ö¹° ÀÌ¹ÌÁö
+	private Image image; // ì¥ì• ë¬¼ ì´ë¯¸ì§€
 	
-	// Àå¾Ö¹°ÀÇ ÁÂÇ¥¿Í ³ĞÀÌ ³ôÀÌ
+	// ì¥ì• ë¬¼ì˜ ì¢Œí‘œì™€ ë„“ì´ ë†’ì´
 	private int x;
 	private int y;
 	private int width;
 	private int height;
 	
-	// Àå¾Ö¹° »óÅÂ
+	// ì¥ì• ë¬¼ ìƒíƒœ
 	private int state;
 }
-

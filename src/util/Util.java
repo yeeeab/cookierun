@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 
 public class Util {
 
-	// ÀÌ¹ÌÁöÀÇ »çÀÌÁî °¡Á®¿À±â
+	// ì´ë¯¸ì§€ì˜ ì‚¬ì´ì¦ˆ ê°€ì ¸ì˜¤ê¸°
 	public static int[] getSize(String src) throws Exception {
 		File imgf = new File(src);
 		BufferedImage img = ImageIO.read(imgf);
@@ -29,7 +29,7 @@ public class Util {
 		return tempSize;
 	}
 	
-	// ÀÌ¹ÌÁöÀÇ ÇÈ¼¿°ª °¡Á®¿À±â
+	// ì´ë¯¸ì§€ì˜ í”½ì…€ê°’ ê°€ì ¸ì˜¤ê¸°
 	public static int[][] getPic(String src) throws Exception{
 		File imgf = new File(src);
 		BufferedImage img = ImageIO.read(imgf);
@@ -45,12 +45,12 @@ public class Util {
 		return picture;
 	}
 	
-	// ÇöÀç½Ã°£ Å¸ÀÓ½ºÅÆÇÁ·Î °¡Á®¿À±â
+	// í˜„ì¬ì‹œê°„ íƒ€ì„ìŠ¤íƒ¬í”„ë¡œ ê°€ì ¸ì˜¤ê¸°
 	public static long getTime() {
 		return Timestamp.valueOf(LocalDateTime.now()).getTime();
 	}
 	
-	// ±ÛÀÚ¿¡ Å×µÎ¸® ³Ö±â
+	// ê¸€ìì— í…Œë‘ë¦¬ ë„£ê¸°
 	public static void drawFancyString(Graphics2D g, String str, int x, int y, float size, Color internalColor) {
 		  if(str.length()==0)return;
 		  AffineTransform orig = g.getTransform();
@@ -72,8 +72,8 @@ public class Util {
 		  g.setTransform(orig);
 		}
 	
-	// substringÀ¸·Î ¹ßÆÇ Á¤º¸ °Ë»ö
-	// ¹è¿­·Î ÀåÆÇ ¹× Á©¸® ¹èÄ¡ ÇÒ ¶§ »ç¿ë (ÇöÀç ¹Ì»ç¿ë)
+	// substringìœ¼ë¡œ ë°œíŒ ì •ë³´ ê²€ìƒ‰
+	// ë°°ì—´ë¡œ ì¥íŒ ë° ì ¤ë¦¬ ë°°ì¹˜ í•  ë•Œ ì‚¬ìš© (í˜„ì¬ ë¯¸ì‚¬ìš©)
 //	public static int getGround(String ground, int index) {
 //		return Integer.parseInt(ground.substring(index, index + 1));
 //	}

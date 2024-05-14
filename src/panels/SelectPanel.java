@@ -17,41 +17,41 @@ import ingame.CookieImg;
 public class SelectPanel extends JPanel {
 
 	
-	// ¼±ÅÃÇÒ Ä³¸¯ÅÍ ÀÌ¹ÌÁö ¾ÆÀÌÄÜ
+	// ì„ íƒí•  ìºë¦­í„° ì´ë¯¸ì§€ ì•„ì´ì½˜
 	private ImageIcon ch01 = new ImageIcon("img/select/selectCh1.png");
 	private ImageIcon ch02 = new ImageIcon("img/select/selectCh2.png");
 	private ImageIcon ch03 = new ImageIcon("img/select/selectCh3.png");
 	private ImageIcon ch04 = new ImageIcon("img/select/selectCh4.png");
 
-	// ¼±ÅÃµÈ Ä³¸¯ÅÍ ÀÌ¹ÌÁö ¾ÆÀÌÄÜ
+	// ì„ íƒëœ ìºë¦­í„° ì´ë¯¸ì§€ ì•„ì´ì½˜
 	private ImageIcon ch011 = new ImageIcon("img/select/selectedCh1.png");
 	private ImageIcon ch022 = new ImageIcon("img/select/selectedCh2.png");
 	private ImageIcon ch033 = new ImageIcon("img/select/selectedCh3.png");
 	private ImageIcon ch044 = new ImageIcon("img/select/selectedCh4.png");
 
-	// ½ÃÀÛ ¹öÆ° ÀÌ¹ÌÁö¾ÆÀÌÄÜ
+	// ì‹œì‘ ë²„íŠ¼ ì´ë¯¸ì§€ì•„ì´ì½˜
 	private ImageIcon start = new ImageIcon("img/select/GameStartBtn.png");
 	
-	// ÀÌ¹ÌÁö¸¦ ¼±ÅÃÇÒ ¹öÆ°
+	// ì´ë¯¸ì§€ë¥¼ ì„ íƒí•  ë²„íŠ¼
 	private JButton ch1;
 	private JButton ch2;
 	private JButton ch3;
 	private JButton ch4;
 
-	// ½ÃÀÛ ¹öÆ°
+	// ì‹œì‘ ë²„íŠ¼
 	private JButton StartBtn;
 	
-	// °ÔÀÓ¿¡¼­ »ç¿ëÇÒ ÄíÅ° ÀÌ¹ÌÁöµéÀ» ´ãÀ» ¿ÀºêÁ§Æ®
+	// ê²Œì„ì—ì„œ ì‚¬ìš©í•  ì¿ í‚¤ ì´ë¯¸ì§€ë“¤ì„ ë‹´ì„ ì˜¤ë¸Œì íŠ¸
 	private CookieImg ci;
 
-	// ÄíÅ° ÀÌ¹ÌÁö¸¦ ¸ŞÀÎ¿¡¼­ gamePanel·Î º¸³»±â À§ÇÑ °ÔÅÍ
+	// ì¿ í‚¤ ì´ë¯¸ì§€ë¥¼ ë©”ì¸ì—ì„œ gamePanelë¡œ ë³´ë‚´ê¸° ìœ„í•œ ê²Œí„°
 	public CookieImg getCi() {
 		return ci;
 	}
 
 	public SelectPanel(Object o) {
 
-		// ½ÃÀÛ ¹öÆ°
+		// ì‹œì‘ ë²„íŠ¼
 		StartBtn = new JButton(start);
 		StartBtn.setName("StartBtn");
 		StartBtn.addMouseListener((MouseListener) o);
@@ -61,7 +61,7 @@ public class SelectPanel extends JPanel {
 		StartBtn.setContentAreaFilled(false);
 		StartBtn.setFocusPainted(false);
 
-		// Ä³¸¯ÅÍ ch1
+		// ìºë¦­í„° ch1
 		ch1 = new JButton(ch01);
 		ch1.setName("ch1");
 		ch1.addMouseListener(new MouseAdapter() {
@@ -85,7 +85,7 @@ public class SelectPanel extends JPanel {
 		ch1.setContentAreaFilled(false);
 		ch1.setFocusPainted(false);
 
-		// Ä³¸¯ÅÍ ch2
+		// ìºë¦­í„° ch2
 		ch2 = new JButton(ch02);
 		ch2.setName("ch2");
 		ch2.addMouseListener(new MouseAdapter() {
@@ -109,7 +109,7 @@ public class SelectPanel extends JPanel {
 		ch2.setContentAreaFilled(false);
 		ch2.setFocusPainted(false);
 
-		// Ä³¸¯ÅÍ ch3
+		// ìºë¦­í„° ch3
 		ch3 = new JButton(ch03);
 		ch3.setName("ch3");
 		ch3.addMouseListener(new MouseAdapter() {
@@ -133,7 +133,7 @@ public class SelectPanel extends JPanel {
 		ch3.setContentAreaFilled(false);
 		ch3.setFocusPainted(false);
 
-		// Ä³¸¯ÅÍ ch4
+		// ìºë¦­í„° ch4
 		ch4 = new JButton(ch04);
 		ch4.setName("ch4");
 		ch4.addMouseListener(new MouseAdapter() {
@@ -157,7 +157,7 @@ public class SelectPanel extends JPanel {
 		ch4.setContentAreaFilled(false);
 		ch4.setFocusPainted(false);
 		
-		// ¹è°æ
+		// ë°°ê²½
 		JLabel selectBg = new JLabel("");
 		selectBg.setForeground(Color.ORANGE);
 		selectBg.setHorizontalAlignment(SwingConstants.CENTER);
@@ -165,7 +165,7 @@ public class SelectPanel extends JPanel {
 		selectBg.setBounds(0, 0, 784, 461);
 		add(selectBg);
 
-		// Ä³¸¯ÅÍ ¼±ÅÃ Å¸ÀÌÆ²
+		// ìºë¦­í„° ì„ íƒ íƒ€ì´í‹€
 		JLabel selectTxt = new JLabel("");
 		selectTxt.setHorizontalAlignment(SwingConstants.CENTER);
 		selectTxt.setIcon(new ImageIcon("img/select/selectTxt.png"));

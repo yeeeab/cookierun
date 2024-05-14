@@ -6,18 +6,20 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class IntroPanel extends JPanel {
 	
-	ImageIcon introIc = new ImageIcon("img/intro/intro.png"); // ÀÎÆ®·Î ÀÌ¹ÌÁö
-	
+	ImageIcon introIc = new ImageIcon("img/intro/intro.png"); // ì¸íŠ¸ë¡œ ì´ë¯¸ì§€
+	private ImageIcon start = new ImageIcon("img/select/GameStartBtn.png"); // ìƒì  ë²„íŠ¼(ìˆ˜ì • ì˜ˆì •)
+
 	@Override
 	protected void paintComponent(Graphics g) {
-		super.paintComponent(g); // È­¸éÀ» ºñ¿î´Ù
+		super.paintComponent(g); // í™”ë©´ì„ ë¹„ìš´ë‹¤
 		
-		// ÀÎÆ®·Î È­¸éÀ» ±×¸°´Ù
+		// ì¸íŠ¸ë¡œ í™”ë©´ì„ ê·¸ë¦°ë‹¤
 		g.drawImage(introIc.getImage(), -60, 0, /* this.getWidth(), this.getHeight(), */ null);
 
 	}

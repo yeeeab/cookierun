@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MapObjectImg {
 	
-	// ¹è°æ ÀÌ¹ÌÁö
-	private ImageIcon backIc; // Á¦ÀÏ µŞ ¹è°æ
-	private ImageIcon secondBackIc; // 2¹øÂ° ¹è°æ
+	// ë°°ê²½ ì´ë¯¸ì§€
+	private ImageIcon backIc; // ì œì¼ ë’· ë°°ê²½
+	private ImageIcon secondBackIc; // 2ë²ˆì§¸ ë°°ê²½
 
-	// Á©¸® ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
+	// ì ¤ë¦¬ ì´ë¯¸ì§€ ì•„ì´ì½˜ë“¤
 	private ImageIcon jelly1Ic;
 	private ImageIcon jelly2Ic;
 	private ImageIcon jelly3Ic;
@@ -23,14 +23,14 @@ public class MapObjectImg {
 
 	private ImageIcon jellyEffectIc;
 
-	// ¹ßÆÇ ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-	private ImageIcon field1Ic; // ¹ßÆÇ
-	private ImageIcon field2Ic; // °øÁß¹ßÆÇ
+	// ë°œíŒ ì´ë¯¸ì§€ ì•„ì´ì½˜ë“¤
+	private ImageIcon field1Ic; // ë°œíŒ
+	private ImageIcon field2Ic; // ê³µì¤‘ë°œíŒ
 
-	// Àå¾Ö¹° ÀÌ¹ÌÁö ¾ÆÀÌÄÜµé
-	private ImageIcon tacle10Ic; // 1Ä­ Àå¾Ö¹°
-	private ImageIcon tacle20Ic; // 2Ä­ Àå¾Ö¹°
-	private ImageIcon tacle30Ic; // 3Ä­ Àå¾Ö¹°
-	private ImageIcon tacle40Ic; // 4Ä­ Àå¾Ö¹°
+	// ì¥ì• ë¬¼ ì´ë¯¸ì§€ ì•„ì´ì½˜ë“¤
+	private ImageIcon tacle10Ic; // 1ì¹¸ ì¥ì• ë¬¼
+	private ImageIcon tacle20Ic; // 2ì¹¸ ì¥ì• ë¬¼
+	private ImageIcon tacle30Ic; // 3ì¹¸ ì¥ì• ë¬¼
+	private ImageIcon tacle40Ic; // 4ì¹¸ ì¥ì• ë¬¼
 	
 }

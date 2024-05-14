@@ -18,23 +18,23 @@ import main.listenAdapter;
 
 import java.awt.CardLayout;
 
-// windowBuilder ·Î ÇÁ·¹ÀÓ¸¸ Á¦ÀÛÇÏ°í ³ª¸ÓÁö´Â ÀÔ·Â
+// windowBuilder ë¡œ í”„ë ˆì„ë§Œ ì œì‘í•˜ê³  ë‚˜ë¨¸ì§€ëŠ” ì…ë ¥
 
 public class Main extends listenAdapter {
 
-	private JFrame frame; // Ã¢À» ¶ç¿ì±â À§ÇÑ ÇÁ·¹ÀÓ
+	private JFrame frame; // ì°½ì„ ë„ìš°ê¸° ìœ„í•œ í”„ë ˆì„
 
-	private IntroPanel introPanel; // ÀÎÆ®·Î
+	private IntroPanel introPanel; // ì¸íŠ¸ë¡œ
 
-	private SelectPanel selectPanel; // Ä³¸¯ÅÍ ¼±ÅÃ
+	private SelectPanel selectPanel; // ìºë¦­í„° ì„ íƒ
 
-	private GamePanel gamePanel; // °ÔÀÓÁøÇà
+	private GamePanel gamePanel; // ê²Œì„ì§„í–‰
 
-	private EndPanel endPanel; // °ÔÀÓ°á°ú
+	private EndPanel endPanel; // ê²Œì„ê²°ê³¼
 
-	private CardLayout cl; // Ä«µå ·¹ÀÌÀÌ¿ô ¿ÀºêÁ§Æ®
+	private CardLayout cl; // ì¹´ë“œ ë ˆì´ì´ì›ƒ ì˜¤ë¸Œì íŠ¸
 
-	private CookieImg ci; // ÄíÅ°ÀÌ¹ÌÁö
+	private CookieImg ci; // ì¿ í‚¤ì´ë¯¸ì§€
 
 	public GamePanel getGamePanel() {
 		return gamePanel;
@@ -71,26 +71,26 @@ public class Main extends listenAdapter {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500); // Ã¢ »çÀÌÁî (100,100ÁÂÇ¥´Â ¾Æ·¡ÀÇ frame.setLocationRelativeTo(null) ¶§¹®¿¡ ÀÇ¹Ì°¡ ¾ø¾îÁø´Ù)
-		frame.setLocationRelativeTo(null); // Ã¢À» È­¸é Áß¾Ó¿¡ ¹èÄ¡
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ¿¢½º¹öÆ°À» ´©¸£¸é Á¾·á
-		cl = new CardLayout(0, 0); // Ä«µå·¹ÀÌ¾Æ¿ô °´Ã¼ »ı¼º
-		frame.getContentPane().setLayout(cl); // ÇÁ·¹ÀÓÀ» Ä«µå·¹ÀÌ¾Æ¿ôÀ¸·Î º¯°æ
+		frame.setBounds(100, 100, 800, 500); // ì°½ ì‚¬ì´ì¦ˆ (100,100ì¢Œí‘œëŠ” ì•„ë˜ì˜ frame.setLocationRelativeTo(null) ë•Œë¬¸ì— ì˜ë¯¸ê°€ ì—†ì–´ì§„ë‹¤)
+		frame.setLocationRelativeTo(null); // ì°½ì„ í™”ë©´ ì¤‘ì•™ì— ë°°ì¹˜
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ì—‘ìŠ¤ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ì¢…ë£Œ
+		cl = new CardLayout(0, 0); // ì¹´ë“œë ˆì´ì•„ì›ƒ ê°ì²´ ìƒì„±
+		frame.getContentPane().setLayout(cl); // í”„ë ˆì„ì„ ì¹´ë“œë ˆì´ì•„ì›ƒìœ¼ë¡œ ë³€ê²½
 
 		introPanel = new IntroPanel();
-		introPanel.addMouseListener(this); // introÆĞ³ÎÀº ¿©±â¼­ ¹Ù·Î ³Ö´Â ¹æ½ÄÀ¸·Î ¸¶¿ì½º¸®½º³Ê¸¦ Ãß°¡ÇÔ.
+		introPanel.addMouseListener(this); // introíŒ¨ë„ì€ ì—¬ê¸°ì„œ ë°”ë¡œ ë„£ëŠ” ë°©ì‹ìœ¼ë¡œ ë§ˆìš°ìŠ¤ë¦¬ìŠ¤ë„ˆë¥¼ ì¶”ê°€í•¨.
 		
-		selectPanel = new SelectPanel(this); // MainÀÇ ¸®½º³Ê¸¦ ³Ö±âÀ§ÇÑ this
-		gamePanel = new GamePanel(frame, cl, this); // MainÀÇ ÇÁ·¹ÀÓ ¹× Ä«µå·¹ÀÌ¾Æ¿ôÀ» ÀÌ¿ëÇÏ°í ¸®½º³Ê¸¦ ³Ö±âÀ§ÇÑ this
-		endPanel = new EndPanel(this); // MainÀÇ ¸®½º³Ê¸¦ ³Ö±âÀ§ÇÑ this
+		selectPanel = new SelectPanel(this); // Mainì˜ ë¦¬ìŠ¤ë„ˆë¥¼ ë„£ê¸°ìœ„í•œ this
+		gamePanel = new GamePanel(frame, cl, this); // Mainì˜ í”„ë ˆì„ ë° ì¹´ë“œë ˆì´ì•„ì›ƒì„ ì´ìš©í•˜ê³  ë¦¬ìŠ¤ë„ˆë¥¼ ë„£ê¸°ìœ„í•œ this
+		endPanel = new EndPanel(this); // Mainì˜ ë¦¬ìŠ¤ë„ˆë¥¼ ë„£ê¸°ìœ„í•œ this
 
-		// ¸ğµç ÆĞ³ÎÀÇ ·¹ÀÌ¾Æ¿ôÀ» null·Î º¯È¯
+		// ëª¨ë“  íŒ¨ë„ì˜ ë ˆì´ì•„ì›ƒì„ nullë¡œ ë³€í™˜
 		introPanel.setLayout(null);
 		selectPanel.setLayout(null);
 		gamePanel.setLayout(null);
 		endPanel.setLayout(null);
 
-		// ÇÁ·¹ÀÓ¿¡ ÆĞ³ÎµéÀ» Ãß°¡ÇÑ´Ù.(Ä«µå ·¹ÀÌ¾Æ¿ôÀ» À§ÇÑ ÆĞ³Îµé)
+		// í”„ë ˆì„ì— íŒ¨ë„ë“¤ì„ ì¶”ê°€í•œë‹¤.(ì¹´ë“œ ë ˆì´ì•„ì›ƒì„ ìœ„í•œ íŒ¨ë„ë“¤)
 		frame.getContentPane().add(introPanel, "intro");
 		frame.getContentPane().add(selectPanel, "select");
 		frame.getContentPane().add(gamePanel, "game");
@@ -99,38 +99,38 @@ public class Main extends listenAdapter {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) { // mouseClicked·Î º¯°æ°¡´É
-		if (e.getComponent().toString().contains("IntroPanel")) { // IntroPanel¿¡¼­ ¸¶¿ì½º¸¦ ´­·¶´Ù¸é
+	public void mousePressed(MouseEvent e) { // mouseClickedë¡œ ë³€ê²½ê°€ëŠ¥
+		if (e.getComponent().toString().contains("IntroPanel")) { // IntroPanelì—ì„œ ë§ˆìš°ìŠ¤ë¥¼ ëˆŒë €ë‹¤ë©´
 			try {
 				Thread.sleep(300);
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
 			}
-			cl.show(frame.getContentPane(), "select"); // selectÆĞ³ÎÀ» Ä«µå·¹ÀÌ¾Æ¿ô ÃÖ»ó´ÜÀ¸·Î º¯°æ
-			selectPanel.requestFocus(); // ¸®½º³Ê¸¦ selectÆĞ³Î¿¡ °­Á¦·Î ÁÜ
+			cl.show(frame.getContentPane(), "select"); // selectíŒ¨ë„ì„ ì¹´ë“œë ˆì´ì•„ì›ƒ ìµœìƒë‹¨ìœ¼ë¡œ ë³€ê²½
+			selectPanel.requestFocus(); // ë¦¬ìŠ¤ë„ˆë¥¼ selectíŒ¨ë„ì— ê°•ì œë¡œ ì¤Œ
 			
-		} else if (e.getComponent().getName().equals("StartBtn")) { // StartBtnÀÌ¶ó´Â ÀÌ¸§À» °¡Áø ¹öÆ°À» ´­·¶´Ù¸é
+		} else if (e.getComponent().getName().equals("StartBtn")) { // StartBtnì´ë¼ëŠ” ì´ë¦„ì„ ê°€ì§„ ë²„íŠ¼ì„ ëˆŒë €ë‹¤ë©´
 			if (selectPanel.getCi() == null) {
-				JOptionPane.showMessageDialog(null, "Ä³¸¯ÅÍ¸¦ °ñ¶óÁÖ¼¼¿ä"); // Ä³¸¯ÅÍ¸¦ ¾È°ñ¶úÀ»°æ¿ì ÆË¾÷
+				JOptionPane.showMessageDialog(null, "ìºë¦­í„°ë¥¼ ê³¨ë¼ì£¼ì„¸ìš”"); // ìºë¦­í„°ë¥¼ ì•ˆê³¨ëì„ê²½ìš° íŒì—…
 			} else {
-				cl.show(frame.getContentPane(), "game"); // Ä³¸¯ÅÍ¸¦ °ñ¶ú´Ù¸é °ÔÀÓÆĞ³ÎÀ» Ä«µå·¹ÀÌ¾Æ¿ô ÃÖ»ó´ÜÀ¸·Î º¯°æ
-				gamePanel.gameSet(selectPanel.getCi()); // ÄíÅ°ÀÌ¹ÌÁö¸¦ ³Ñ°ÜÁÖ°í °ÔÀÓÆĞ³Î ¼¼ÆÃ
-				gamePanel.gameStart(); // °ÔÀÓ½ÃÀÛ
-				gamePanel.requestFocus(); // ¸®½º³Ê¸¦ gameÆĞ³Î¿¡ °­Á¦·Î ÁÜ
+				cl.show(frame.getContentPane(), "game"); // ìºë¦­í„°ë¥¼ ê³¨ëë‹¤ë©´ ê²Œì„íŒ¨ë„ì„ ì¹´ë“œë ˆì´ì•„ì›ƒ ìµœìƒë‹¨ìœ¼ë¡œ ë³€ê²½
+				gamePanel.gameSet(selectPanel.getCi()); // ì¿ í‚¤ì´ë¯¸ì§€ë¥¼ ë„˜ê²¨ì£¼ê³  ê²Œì„íŒ¨ë„ ì„¸íŒ…
+				gamePanel.gameStart(); // ê²Œì„ì‹œì‘
+				gamePanel.requestFocus(); // ë¦¬ìŠ¤ë„ˆë¥¼ gameíŒ¨ë„ì— ê°•ì œë¡œ ì¤Œ
 			}
 			
-		} else if (e.getComponent().getName().equals("endAccept")) { // endAccept ÀÌ¶ó´Â ÀÌ¸§À» °¡Áø ¹öÆ°À» ´­·¶´Ù¸é
-			frame.getContentPane().remove(gamePanel); // ¹æ±İ Çß´ø °ÔÀÓ ÆĞ³ÎÀ» ÇÁ·¹ÀÓ¿¡¼­ »èÁ¦
-			gamePanel = new GamePanel(frame, cl, this); // °ÔÀÓÆĞ³ÎÀ» »õ ÆĞ³Î·Î ±³Ã¼
+		} else if (e.getComponent().getName().equals("endAccept")) { // endAccept ì´ë¼ëŠ” ì´ë¦„ì„ ê°€ì§„ ë²„íŠ¼ì„ ëˆŒë €ë‹¤ë©´
+			frame.getContentPane().remove(gamePanel); // ë°©ê¸ˆ í–ˆë˜ ê²Œì„ íŒ¨ë„ì„ í”„ë ˆì„ì—ì„œ ì‚­ì œ
+			gamePanel = new GamePanel(frame, cl, this); // ê²Œì„íŒ¨ë„ì„ ìƒˆ íŒ¨ë„ë¡œ êµì²´
 			gamePanel.setLayout(null);
-			frame.getContentPane().add(gamePanel, "game"); // ÇÁ·¹ÀÓ¿¡ »õ °ÔÀÓÆĞ³Î Ãß°¡(Ä«µå·¹ÀÌ¾Æ¿ô ÇÏ´Ü)
+			frame.getContentPane().add(gamePanel, "game"); // í”„ë ˆì„ì— ìƒˆ ê²Œì„íŒ¨ë„ ì¶”ê°€(ì¹´ë“œë ˆì´ì•„ì›ƒ í•˜ë‹¨)
 			
-			frame.getContentPane().remove(selectPanel); // ¹æ±İ ¼±ÅÃÇß´ø selectÆĞ³ÎÀ» »èÁ¦
-			selectPanel = new SelectPanel(this); // select ÆĞ³ÎÀ» »õ ÆĞ³Î·Î ±³Ã¼
+			frame.getContentPane().remove(selectPanel); // ë°©ê¸ˆ ì„ íƒí–ˆë˜ selectíŒ¨ë„ì„ ì‚­ì œ
+			selectPanel = new SelectPanel(this); // select íŒ¨ë„ì„ ìƒˆ íŒ¨ë„ë¡œ êµì²´
 			selectPanel.setLayout(null);
-			frame.getContentPane().add(selectPanel, "select"); // ÇÁ·¹ÀÓ¿¡ »õ selectÆĞ³Î Ãß°¡(Ä«µå·¹ÀÌ¾Æ¿ô ÇÏ´Ü)
-			cl.show(frame.getContentPane(), "select"); // »õ selectÆĞ³ÎÀ» Ä«µå·¹ÀÌ¾Æ¿ô ÃÖ»ó´ÜÀ¸·Î ÀÌµ¿ (È­¸é¿¡ º¸ÀÓ)
-			selectPanel.requestFocus(); // ¸®½º³Ê¸¦ selectÆĞ³Î¿¡ °­Á¦·Î ÁÜ
+			frame.getContentPane().add(selectPanel, "select"); // í”„ë ˆì„ì— ìƒˆ selectíŒ¨ë„ ì¶”ê°€(ì¹´ë“œë ˆì´ì•„ì›ƒ í•˜ë‹¨)
+			cl.show(frame.getContentPane(), "select"); // ìƒˆ selectíŒ¨ë„ì„ ì¹´ë“œë ˆì´ì•„ì›ƒ ìµœìƒë‹¨ìœ¼ë¡œ ì´ë™ (í™”ë©´ì— ë³´ì„)
+			selectPanel.requestFocus(); // ë¦¬ìŠ¤ë„ˆë¥¼ selectíŒ¨ë„ì— ê°•ì œë¡œ ì¤Œ
 		}
 	}
 }

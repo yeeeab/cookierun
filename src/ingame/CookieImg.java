@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CookieImg {
-	private ImageIcon cookieIc; // ±âº»¸ğ¼Ç
-	private ImageIcon jumpIc; // Á¡ÇÁ¸ğ¼Ç
-	private ImageIcon doubleJumpIc; // ´õºíÁ¡ÇÁ¸ğ¼Ç
-	private ImageIcon fallIc; // ³«ÇÏ¸ğ¼Ç(´õºí Á¡ÇÁ ÈÄ)
-	private ImageIcon slideIc; // ½½¶óÀÌµå ¸ğ¼Ç
-	private ImageIcon hitIc; // ºÎµóÈ÷´Â ¸ğ¼Ç
+	private ImageIcon cookieIc; // ê¸°ë³¸ëª¨ì…˜
+	private ImageIcon jumpIc; // ì í”„ëª¨ì…˜
+	private ImageIcon doubleJumpIc; // ë”ë¸”ì í”„ëª¨ì…˜
+	private ImageIcon fallIc; // ë‚™í•˜ëª¨ì…˜(ë”ë¸” ì í”„ í›„)
+	private ImageIcon slideIc; // ìŠ¬ë¼ì´ë“œ ëª¨ì…˜
+	private ImageIcon hitIc; // ë¶€ë”›íˆëŠ” ëª¨ì…˜
 }
