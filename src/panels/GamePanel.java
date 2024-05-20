@@ -23,6 +23,7 @@ import ingame.Cookie;
 import ingame.CookieImg;
 import ingame.Field;
 import ingame.Jelly;
+import ingame.Posion;
 import ingame.MapObjectImg;
 import ingame.Tacle;
 import main.Main;
@@ -58,6 +59,11 @@ public class GamePanel extends JPanel {
 	private ImageIcon jellyHPIc;
 
 	private ImageIcon jellyEffectIc;
+
+	// 포션 이미지 아이콘들
+	private ImageIcon posion1Ic;
+	private ImageIcon posion2Ic;
+	private ImageIcon posion3Ic;
 
 	// 발판 이미지 아이콘들
 	private ImageIcon field1Ic; // 발판
@@ -511,6 +517,7 @@ public class GamePanel extends JPanel {
 
 		jumpBtn = jumpButtonIconUp.getImage();
 		slideBtn = slideIconUp.getImage();
+		
 
 		jellyList = new ArrayList<>(); // 젤리 리스트
 
@@ -680,7 +687,7 @@ public class GamePanel extends JPanel {
 			public void run() {
 				while (true) {
 
-					if (runPage > 800) { // 800픽셀 이동 마다 체력이 10씩 감소한다 (추후 맵길이에 �上 감소량 조절)
+					if (runPage > 800) { // 800픽셀 이동 마다 체력이 10씩 감소한다 (추후 맵길이에 �上 감소량 조절)
 						c1.setHealth(c1.getHealth() - 10);
 						runPage = 0;
 					}

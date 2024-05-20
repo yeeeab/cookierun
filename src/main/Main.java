@@ -14,6 +14,7 @@ import panels.EndPanel;
 import panels.GamePanel;
 import panels.IntroPanel;
 import panels.SelectPanel;
+import panels.StorePanel;
 import main.listenAdapter;
 
 import java.awt.CardLayout;
@@ -25,6 +26,8 @@ public class Main extends listenAdapter {
 	private JFrame frame; // 창을 띄우기 위한 프레임
 
 	private IntroPanel introPanel; // 인트로
+
+	private StorePanel storePanel; // 상점
 
 	private SelectPanel selectPanel; // 캐릭터 선택
 
@@ -80,18 +83,22 @@ public class Main extends listenAdapter {
 		introPanel = new IntroPanel();
 		introPanel.addMouseListener(this); // intro패널은 여기서 바로 넣는 방식으로 마우스리스너를 추가함.
 		
+		storePanel = new StorePanel(this); // 상점
+
 		selectPanel = new SelectPanel(this); // Main의 리스너를 넣기위한 this
 		gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
 		endPanel = new EndPanel(this); // Main의 리스너를 넣기위한 this
 
 		// 모든 패널의 레이아웃을 null로 변환
 		introPanel.setLayout(null);
+		storePanel.setLayout(null);
 		selectPanel.setLayout(null);
 		gamePanel.setLayout(null);
 		endPanel.setLayout(null);
 
 		// 프레임에 패널들을 추가한다.(카드 레이아웃을 위한 패널들)
 		frame.getContentPane().add(introPanel, "intro");
+		frame.getContentPane().add(storePanel, "store");
 		frame.getContentPane().add(selectPanel, "select");
 		frame.getContentPane().add(gamePanel, "game");
 		frame.getContentPane().add(endPanel, "end");
@@ -131,6 +138,9 @@ public class Main extends listenAdapter {
 			frame.getContentPane().add(selectPanel, "select"); // 프레임에 새 select패널 추가(카드레이아웃 하단)
 			cl.show(frame.getContentPane(), "select"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
 			selectPanel.requestFocus(); // 리스너를 select패널에 강제로 줌
+		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
+			cl.show(frame.getContentPane(), "store");
+			storePanel.requestFocus();
 		}
 	}
 }
