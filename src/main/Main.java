@@ -14,8 +14,10 @@ import panels.EndPanel;
 import panels.GamePanel;
 import panels.IntroPanel;
 import panels.SelectPanel;
+import panels.SpeedrunPanel;
 import panels.StorePanel;
 import main.listenAdapter;
+import potion.*;
 
 import java.awt.CardLayout;
 
@@ -33,7 +35,11 @@ public class Main extends listenAdapter {
 
 	private GamePanel gamePanel; // 게임진행
 
+	private SpeedrunPanel speedrunPanel;
+
 	private EndPanel endPanel; // 게임결과
+
+	private HealthPotion healthPotion;
 
 	private CardLayout cl; // 카드 레이이웃 오브젝트
 
@@ -47,10 +53,13 @@ public class Main extends listenAdapter {
 		this.gamePanel = gamePanel;
 	}
 
+	public SpeedrunPanel getSpeedrunPanel() {
+		return speedrunPanel;
+	}
+
 	public EndPanel getEndPanel() {
 		return endPanel;
 	}
-
 
 	/**
 	 * Launch the application.
@@ -82,12 +91,15 @@ public class Main extends listenAdapter {
 
 		introPanel = new IntroPanel();
 		introPanel.addMouseListener(this); // intro패널은 여기서 바로 넣는 방식으로 마우스리스너를 추가함.
-		
+
 		storePanel = new StorePanel(this); // 상점
 
 		selectPanel = new SelectPanel(this); // Main의 리스너를 넣기위한 this
 		gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
 		endPanel = new EndPanel(this); // Main의 리스너를 넣기위한 this
+		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
+
+		healthPotion = new HealthPotion();
 
 		// 모든 패널의 레이아웃을 null로 변환
 		introPanel.setLayout(null);
@@ -101,6 +113,7 @@ public class Main extends listenAdapter {
 		frame.getContentPane().add(storePanel, "store");
 		frame.getContentPane().add(selectPanel, "select");
 		frame.getContentPane().add(gamePanel, "game");
+		frame.getContentPane().add(speedrunPanel, "speedrun");
 		frame.getContentPane().add(endPanel, "end");
 
 	}
@@ -115,7 +128,7 @@ public class Main extends listenAdapter {
 			}
 			cl.show(frame.getContentPane(), "select"); // select패널을 카드레이아웃 최상단으로 변경
 			selectPanel.requestFocus(); // 리스너를 select패널에 강제로 줌
-			
+
 		} else if (e.getComponent().getName().equals("StartBtn")) { // StartBtn이라는 이름을 가진 버튼을 눌렀다면
 			if (selectPanel.getCi() == null) {
 				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
@@ -125,13 +138,22 @@ public class Main extends listenAdapter {
 				gamePanel.gameStart(); // 게임시작
 				gamePanel.requestFocus(); // 리스너를 game패널에 강제로 줌
 			}
-			
+
+		} else if (e.getComponent().getName().equals("SpeedrunBtn")) {
+			if (selectPanel.getCi() == null) {
+				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
+			} else {
+				cl.show(frame.getContentPane(), "speedrun"); // 게임패널을 카드레이아웃 최상단으로 변경
+				speedrunPanel.gameSet(selectPanel.getCi()); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				speedrunPanel.gameStart(); // 게임시작
+				speedrunPanel.requestFocus(); // 리스너를 game패널에 강제로 줌
+			}
 		} else if (e.getComponent().getName().equals("endAccept")) { // endAccept 이라는 이름을 가진 버튼을 눌렀다면
 			frame.getContentPane().remove(gamePanel); // 방금 했던 게임 패널을 프레임에서 삭제
 			gamePanel = new GamePanel(frame, cl, this); // 게임패널을 새 패널로 교체
 			gamePanel.setLayout(null);
 			frame.getContentPane().add(gamePanel, "game"); // 프레임에 새 게임패널 추가(카드레이아웃 하단)
-			
+
 			frame.getContentPane().remove(selectPanel); // 방금 선택했던 select패널을 삭제
 			selectPanel = new SelectPanel(this); // select 패널을 새 패널로 교체
 			selectPanel.setLayout(null);
@@ -141,6 +163,9 @@ public class Main extends listenAdapter {
 		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
 			cl.show(frame.getContentPane(), "store");
 			storePanel.requestFocus();
+		} else if (e.getComponent().getName().equals("HealthPotionBtn")) {
+			cl.show(frame.getContentPane(), "healthpotion");
+			healthPotion.use(); // 추가 기능 구현 필요
 		}
 	}
 }

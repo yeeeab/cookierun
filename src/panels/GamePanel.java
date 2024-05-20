@@ -23,13 +23,16 @@ import ingame.Cookie;
 import ingame.CookieImg;
 import ingame.Field;
 import ingame.Jelly;
-import ingame.Posion;
+import potion.*;
 import ingame.MapObjectImg;
 import ingame.Tacle;
 import main.Main;
 import util.Util;
 
 public class GamePanel extends JPanel {
+
+	/* 스피드런 모드 */
+	protected boolean showScore = true;
 
 	// 쿠키 이미지 아이콘들
 	private ImageIcon cookieIc; // 기본모션
@@ -128,7 +131,7 @@ public class GamePanel extends JPanel {
 	private int[][] colorArr; // 이미지의 x y 좌표의 픽셀 색값을 저장하는 2차원배열
 
 	private Image buffImage; // 더블버퍼 이미지
-	private Graphics buffg; // 더블버퍼 g
+	protected Graphics buffg; // 더블버퍼 g
 
 	private AlphaComposite alphaComposite; // 투명도 관련 오브젝트
 
@@ -307,12 +310,14 @@ public class GamePanel extends JPanel {
 			g2.setComposite(alphaComposite);
 		}
 
-//		buffg.setFont(new Font("Arial", Font.BOLD, 30));
-//		buffg.setColor(Color.WHITE);
-//		buffg.drawString(Integer.toString(resultScore), 700, 85);
+		// buffg.setFont(new Font("Arial", Font.BOLD, 30));
+		// buffg.setColor(Color.WHITE);
+		// buffg.drawString(Integer.toString(resultScore), 700, 85);
 
-		// 점수를 그린다
-		Util.drawFancyString(g2, Integer.toString(resultScore), 600, 58, 30, Color.WHITE);
+		// 점수를 그린다(수정됨)
+		if (showScore) {
+			Util.drawFancyString(g2, Integer.toString(resultScore), 600, 58, 30, Color.WHITE);
+		}
 
 		// 체력게이지를 그린다
 		buffg.drawImage(lifeBar.getImage(), 20, 30, null);
@@ -517,7 +522,6 @@ public class GamePanel extends JPanel {
 
 		jumpBtn = jumpButtonIconUp.getImage();
 		slideBtn = slideIconUp.getImage();
-		
 
 		jellyList = new ArrayList<>(); // 젤리 리스트
 

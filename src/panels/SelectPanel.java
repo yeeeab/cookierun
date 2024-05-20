@@ -16,7 +16,6 @@ import ingame.CookieImg;
 
 public class SelectPanel extends JPanel {
 
-	
 	// 선택할 캐릭터 이미지 아이콘
 	private ImageIcon ch01 = new ImageIcon("img/select/selectCh1.png");
 	private ImageIcon ch02 = new ImageIcon("img/select/selectCh2.png");
@@ -29,9 +28,15 @@ public class SelectPanel extends JPanel {
 	private ImageIcon ch033 = new ImageIcon("img/select/selectedCh3.png");
 	private ImageIcon ch044 = new ImageIcon("img/select/selectedCh4.png");
 
-	// 시작 버튼 이미지아이콘
+	// 시작 버튼 이미지 아이콘
 	private ImageIcon start = new ImageIcon("img/select/GameStartBtn.png");
-	
+
+	// 스피드런 모드 시작 버튼 이미지 아이콘 (임시 이미지)
+	private ImageIcon speedrunStart = new ImageIcon("img/select/SpeedrunBtn.png");
+
+	// hp 증가 포션 이미지 아이콘
+	private ImageIcon healthPotion = new ImageIcon("img/store/potion2.png");
+
 	// 이미지를 선택할 버튼
 	private JButton ch1;
 	private JButton ch2;
@@ -40,7 +45,13 @@ public class SelectPanel extends JPanel {
 
 	// 시작 버튼
 	private JButton StartBtn;
-	
+
+	// 스피드런 모드 시작 버튼
+	private JButton SpeedrunBtn;
+
+	// hp 증가 포션 버튼
+	private JButton HealthPotionBtn;
+
 	// 게임에서 사용할 쿠키 이미지들을 담을 오브젝트
 	private CookieImg ci;
 
@@ -55,11 +66,31 @@ public class SelectPanel extends JPanel {
 		StartBtn = new JButton(start);
 		StartBtn.setName("StartBtn");
 		StartBtn.addMouseListener((MouseListener) o);
-		StartBtn.setBounds(254, 334, 291, 81);
+		StartBtn.setBounds(254, 284, 291, 81);
 		add(StartBtn);
 		StartBtn.setBorderPainted(false);
 		StartBtn.setContentAreaFilled(false);
 		StartBtn.setFocusPainted(false);
+
+		// 스피드런 모드 시작 버튼
+		SpeedrunBtn = new JButton(speedrunStart);
+		SpeedrunBtn.setName("SpeedrunBtn");
+		SpeedrunBtn.addMouseListener((MouseListener) o);
+		SpeedrunBtn.setBounds(254, 364, 291, 81);
+		add(SpeedrunBtn);
+		SpeedrunBtn.setBorderPainted(false);
+		SpeedrunBtn.setContentAreaFilled(false);
+		SpeedrunBtn.setFocusPainted(false);
+
+		// hp 증가 포션 버튼
+		HealthPotionBtn = new JButton(healthPotion);
+		HealthPotionBtn.setName("HealthPotionBtn");
+		HealthPotionBtn.addMouseListener((MouseListener) o);
+		HealthPotionBtn.setBounds(104, 304, 100, 100); // 크기조정 필요
+		add(HealthPotionBtn);
+		HealthPotionBtn.setBorderPainted(false);
+		HealthPotionBtn.setContentAreaFilled(false);
+		HealthPotionBtn.setFocusPainted(false);
 
 		// 캐릭터 ch1
 		ch1 = new JButton(ch01);
@@ -79,7 +110,7 @@ public class SelectPanel extends JPanel {
 						new ImageIcon("img/cookieimg/cookie1/player_attack.png"));
 			}
 		});
-		ch1.setBounds(90, 102, 150, 200);
+		ch1.setBounds(90, 62, 150, 200);
 		add(ch1);
 		ch1.setBorderPainted(false);
 		ch1.setContentAreaFilled(false);
@@ -103,7 +134,7 @@ public class SelectPanel extends JPanel {
 						new ImageIcon("img/cookieimg/cookie2/hit.gif"));
 			}
 		});
-		ch2.setBounds(238, 102, 150, 200);
+		ch2.setBounds(238, 62, 150, 200);
 		add(ch2);
 		ch2.setBorderPainted(false);
 		ch2.setContentAreaFilled(false);
@@ -127,7 +158,7 @@ public class SelectPanel extends JPanel {
 						new ImageIcon("img/cookieimg/cookie3/hit.png"));
 			}
 		});
-		ch3.setBounds(386, 102, 150, 200);
+		ch3.setBounds(386, 62, 150, 200);
 		add(ch3);
 		ch3.setBorderPainted(false);
 		ch3.setContentAreaFilled(false);
@@ -151,12 +182,12 @@ public class SelectPanel extends JPanel {
 						new ImageIcon("img/cookieimg/cookie4/kch.gif"));
 			}
 		});
-		ch4.setBounds(534, 102, 150, 200);
+		ch4.setBounds(534, 62, 150, 200);
 		add(ch4);
 		ch4.setBorderPainted(false);
 		ch4.setContentAreaFilled(false);
 		ch4.setFocusPainted(false);
-		
+
 		// 배경
 		JLabel selectBg = new JLabel("");
 		selectBg.setForeground(Color.ORANGE);
@@ -169,7 +200,7 @@ public class SelectPanel extends JPanel {
 		JLabel selectTxt = new JLabel("");
 		selectTxt.setHorizontalAlignment(SwingConstants.CENTER);
 		selectTxt.setIcon(new ImageIcon("img/select/selectTxt.png"));
-		selectTxt.setBounds(174, 20, 397, 112);
+		selectTxt.setBounds(174, 15, 397, 112);
 		add(selectTxt);
 
 	}
