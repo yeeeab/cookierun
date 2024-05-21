@@ -48,7 +48,7 @@ public abstract class MiniGames extends JPanel {
         endGame();
     }
 
-    public static void startRandomGame(SpeedrunPanel parentPanel) {
+    public static MiniGames startRandomGame(SpeedrunPanel parentPanel) {
         Random random = new Random();
         int gameIndex = random.nextInt(1); // 현재는 1개의 미니게임만 있음
         MiniGames miniGame = null;
@@ -64,5 +64,7 @@ public abstract class MiniGames extends JPanel {
             parentPanel.add(miniGame);
             miniGame.setVisible(true);
         }
+
+        return miniGame;
     }
 }

@@ -107,7 +107,7 @@ public class GamePanel extends JPanel {
 
 	private int runStage = 1; // 스테이지를 확인하는 변수이다. (미구현)
 
-	private int resultScore = 0; // 결과점수를 수집하는 변수
+	protected int resultScore = 0; // 결과점수를 수집하는 변수
 
 	private int gameSpeed = 5; // 게임 속도
 
@@ -155,6 +155,10 @@ public class GamePanel extends JPanel {
 	JFrame superFrame;
 	CardLayout cl;
 	Main main;
+
+	public int getResultScore() {
+		return resultScore;
+	}
 
 	// 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
 	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
@@ -684,7 +688,8 @@ public class GamePanel extends JPanel {
 	}
 
 	// 화면을 움직이고 젤리를 먹거나, 장애물에 부딛히는 등의 이벤트를 발생시키는 메서드
-	private void mapMove() {
+	// private > protected 변경
+	protected void mapMove() {
 		new Thread(new Runnable() {
 
 			@Override
@@ -700,7 +705,14 @@ public class GamePanel extends JPanel {
 
 					foot = c1.getY() + c1.getHeight(); // 캐릭터 발 위치 재스캔
 					if (foot > 1999 || c1.getHealth() < 1) {
-						main.getEndPanel().setResultScore(resultScore);
+						if (!showScore) {
+							String currentTimerText = main.getSpeedrunPanel().getTime();
+							main.getEndPanel().setResultTime(currentTimerText);
+							main.getEndPanel().setSpeedrunGame(true);
+						} else {
+							main.getEndPanel().setResultScore(resultScore);
+							main.getEndPanel().setSpeedrunGame(false);
+						}
 						cl.show(superFrame.getContentPane(), "end");
 						main.setGamePanel(new GamePanel(superFrame, cl, main));
 						superFrame.requestFocus();
