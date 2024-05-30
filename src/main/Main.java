@@ -168,4 +168,18 @@ public class Main extends listenAdapter {
 			healthPotion.use(); // 추가 기능 구현 필요
 		}
 	}
+
+	public void switchToMiniGame(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame) {
+
+		// Switch to the minigame panel
+		cl.show(superFrame.getContentPane(), "minigame");
+	}
+
+	public void returnToSpeedrunPanel(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame, boolean success) {
+		// Handle minigame result
+		speedrunPanel.miniGameFinished(success);
+
+		// Switch back to the speedrun panel
+		cl.show(superFrame.getContentPane(), "speedrun");
+	}
 }

@@ -123,6 +123,8 @@ public class GamePanel extends JPanel {
 
 	private boolean redScreen = false; // 피격시 반짝 붉은 화면 여부
 
+	private boolean isHit = false; // 피격 여부
+
 	int face; // 쿠키의 정면
 	int foot; // 쿠키의 발
 
@@ -158,6 +160,22 @@ public class GamePanel extends JPanel {
 
 	public int getResultScore() {
 		return resultScore;
+	}
+
+	public boolean isEscKeyOn() {
+		return escKeyOn;
+	}
+
+	public void setEscKeyOn(boolean setKey) {
+		this.escKeyOn = setKey;
+	}
+
+	public boolean isHit() {
+		return isHit;
+	}
+
+	public void setHit(boolean setKey) {
+		this.isHit = setKey;
 	}
 
 	// 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
@@ -782,8 +800,9 @@ public class GamePanel extends JPanel {
 							}).start();
 
 						} else if (mapLength > mapLengthList.get(0) * 40 + 800
-								&& mapLength < mapLengthList.get(1) * 40 + 800
-								&& b11.getImage() != backIc2.getImage()) {
+								&& mapLength < mapLengthList.get(1) * 40 + 800 && b11.getImage() != backIc2.getImage())
+
+						{
 							fadeOn = true;
 
 							new Thread(new Runnable() {
@@ -1029,7 +1048,7 @@ public class GamePanel extends JPanel {
 
 			@Override
 			public void run() {
-
+				setHit(true);
 				c1.setInvincible(true); // 쿠키를 무적상태로 전환
 
 				System.out.println("피격무적시작");

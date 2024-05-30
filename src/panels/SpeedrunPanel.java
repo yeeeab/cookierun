@@ -11,12 +11,15 @@ import util.Util;
 public class SpeedrunPanel extends GamePanel {
     private Main main;
     private int elapsedTime = 0;
+    private int addTime = 0;
     private Timer timer;
     private JProgressBar gaugeBar;
     private boolean inMiniGame = false;
     private String currentTimerText = "00:00:00";
     private boolean isGameEnded = false; // 게임 종료 상태 변수 추가
+    private boolean isMiniGameFailed = false;
     private MiniGames currentMiniGame;
+    private JDialog miniGameDialog;
 
     public SpeedrunPanel(JFrame superFrame, CardLayout cl, Object o) {
         super(superFrame, cl, (Main) o);
@@ -25,10 +28,6 @@ public class SpeedrunPanel extends GamePanel {
 
         elapsedTime = 0;
         timer = new Timer();
-    }
-
-    public void addTime(int milliseconds) {
-        elapsedTime -= milliseconds; // 시간을 더해줌
     }
 
     public void gameStart() {
@@ -40,20 +39,35 @@ public class SpeedrunPanel extends GamePanel {
         return currentTimerText;
     }
 
+    public void setMiniGameFailed(boolean setKey) {
+        this.isMiniGameFailed = setKey;
+    }
+
     private void startSpeedrunTimer() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
             public void run() {
-                if (!inMiniGame && !isGameEnded) {
+                if (!inMiniGame && !isGameEnded && !isEscKeyOn()) {
                     elapsedTime += 10;
                     int minutes = (elapsedTime / 60000) % 60;
                     int seconds = (elapsedTime / 1000) % 60;
                     int milliseconds = (elapsedTime / 10) % 100;
                     currentTimerText = String.format("%02d:%02d:%02d", minutes, seconds, milliseconds);
-                    repaint(); // 타이머 업데이트를 위해 다시 그리기
+                    repaint();
 
                     resultScore = getResultScore();
+                }
+                if (isHit()) {
+                    elapsedTime += 3000;
+                    setHit(false);
+                }
+                if (isMiniGameFailed) {
+                    elapsedTime += 10000; // 미니게임 실패 시 타이머에 10초 추가
+                    isMiniGameFailed = false;
+                }
+                if (addTime != 0) {
+                    elapsedTime += addTime;
+                    addTime = 0;
                 }
             }
         }, 10, 10); // 10 밀리초마다 업데이트
@@ -61,9 +75,9 @@ public class SpeedrunPanel extends GamePanel {
 
     private void startMiniGame() {
         inMiniGame = true;
-        timer.cancel(); // 타이머 일시 정지
+        setEscKeyOn(true);
 
-        currentMiniGame = MiniGames.startRandomGame(this);
+        main.switchToMiniGame(this, cl, superFrame);
     }
 
     public void miniGameFinished(boolean success) {
@@ -75,13 +89,11 @@ public class SpeedrunPanel extends GamePanel {
             JOptionPane.showMessageDialog(this, "미니게임 성공!");
         } else {
             JOptionPane.showMessageDialog(this, "미니게임 실패! 10초 추가");
-            elapsedTime += 10000;
+            isMiniGameFailed = true;
         }
 
         inMiniGame = false;
         gaugeBar.setValue(0);
-
-        startSpeedrunTimer(); // 타이머 재시작
     }
 
     protected void paintComponent(Graphics g) {

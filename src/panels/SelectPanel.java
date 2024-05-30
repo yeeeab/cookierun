@@ -1,6 +1,7 @@
 package panels;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -35,7 +36,7 @@ public class SelectPanel extends JPanel {
 	private ImageIcon speedrunStart = new ImageIcon("img/select/SpeedrunBtn.png");
 
 	// hp 증가 포션 이미지 아이콘
-	private ImageIcon healthPotion = new ImageIcon("img/store/potion2.png");
+	private ImageIcon healthPotion;
 
 	// 이미지를 선택할 버튼
 	private JButton ch1;
@@ -83,6 +84,11 @@ public class SelectPanel extends JPanel {
 		SpeedrunBtn.setFocusPainted(false);
 
 		// hp 증가 포션 버튼
+		ImageIcon originalIcon3 = new ImageIcon("img/store/potion2.png");
+		Image originalImage3 = originalIcon3.getImage();
+		Image scaledImage3 = originalImage3.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		healthPotion = new ImageIcon(scaledImage3);
+
 		HealthPotionBtn = new JButton(healthPotion);
 		HealthPotionBtn.setName("HealthPotionBtn");
 		HealthPotionBtn.addMouseListener((MouseListener) o);

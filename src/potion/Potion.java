@@ -1,9 +1,7 @@
 package potion;
 
 import java.awt.Image;
-
 import javax.swing.JOptionPane;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,34 +9,46 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Potion {
-    private Image image; // 물약 이미지
+    private Image image; // Potion image
 
-    // 물약의 좌표와 크기
+    // Potion coordinates and size
     private int x;
     private int y;
     private int width;
     private int height;
 
-    // 포션 보유량
+    // Potion quantity
     private int numOfPotion;
 
-    // 포션을 사용했는가
+    // Flag indicating if potion is used
     private boolean isPotionUsed = false;
 
-    // 물약의 투명도 (0이 투명, 255가 완전 불투명)
+    // Flag indicating if potion is selected
+    private boolean isPotionSelected = false;
+
+    // Potion transparency (0 is transparent, 255 is opaque)
     private int alpha = 255;
 
-    // 속도
+    // Game speed
     private int gameSpeed = 10;
+
+    public void tap() {
+        if (isPotionSelected) {
+            use();
+        } else {
+            isPotionSelected = true;
+        }
+    }
 
     public void use() {
         if (numOfPotion > 0) {
             numOfPotion--;
             isPotionUsed = true;
+            isPotionSelected = false;
         } else {
             JOptionPane.showMessageDialog(null, "No more potions left!");
+            isPotionSelected = false;
         }
     }
 
@@ -48,5 +58,13 @@ public class Potion {
 
     public void setIsPotionUsed(boolean isUsed) {
         this.isPotionUsed = isUsed;
+    }
+
+    public boolean getIsPotionSelected() {
+        return isPotionSelected;
+    }
+
+    public void setIsPotionSelected(boolean isSelected) {
+        this.isPotionSelected = isSelected;
     }
 }

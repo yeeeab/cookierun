@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.JOptionPane;
 
 import panels.SpeedrunPanel;
 
@@ -30,13 +31,11 @@ public class NumberOrderGame extends MiniGames {
             button.setFont(new Font("Arial", Font.BOLD, 20));
             button.setBounds((i - 1) % 3 * 100 + 250, (i - 1) / 3 * 100 + 100, 80, 80);
             button.addActionListener(new ActionListener() {
-                @Override
                 public void actionPerformed(ActionEvent e) {
                     handleButtonClick(Integer.parseInt(button.getText()));
                 }
             });
             numberButtons.add(button);
-            add(button);
         }
 
         Collections.shuffle(numberButtons);
@@ -48,6 +47,21 @@ public class NumberOrderGame extends MiniGames {
         instructionLabel.setFont(new Font("Arial", Font.BOLD, 20));
         instructionLabel.setBounds(250, 30, 300, 50);
         add(instructionLabel);
+
+        JButton skipButton = new JButton("Skip Minigame");
+        skipButton.setBounds(350, 400, 150, 30);
+        skipButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int response = JOptionPane.showConfirmDialog(null, "미니게임을 건너뛰시겠습니까? 10초가 추가됩니다.", "Skip Minigame",
+                        JOptionPane.YES_NO_OPTION);
+                if (response == JOptionPane.YES_OPTION) {
+                    parentPanel.setMiniGameFailed(true);
+                    gameFailure();
+                }
+            }
+        });
+        add(skipButton);
     }
 
     private void handleButtonClick(int number) {

@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import panels.SpeedrunPanel;
 
-public abstract class MiniGames extends JPanel {
+public class MiniGames extends JPanel {
     protected SpeedrunPanel parentPanel;
     protected Timer timer;
     protected int elapsedTime; // 경과 시간을 밀리초 단위로 저장
