@@ -23,6 +23,7 @@ import ingame.Cookie;
 import ingame.CookieImg;
 import ingame.Field;
 import ingame.Jelly;
+import ingame.Coin;
 import potion.*;
 import ingame.MapObjectImg;
 import ingame.Tacle;
@@ -55,6 +56,11 @@ public class GamePanel extends JPanel {
 	private ImageIcon backIc4;
 	private ImageIcon secondBackIc4;
 
+	// 맵의 크기
+
+	private int maxX;
+	private int maxY;
+
 	// 젤리 이미지 아이콘들
 	private ImageIcon jelly1Ic;
 	private ImageIcon jelly2Ic;
@@ -62,6 +68,9 @@ public class GamePanel extends JPanel {
 	private ImageIcon jellyHPIc;
 
 	private ImageIcon jellyEffectIc;
+
+	// 코인 이미지 아이콘들
+	private ImageIcon coinIc;
 
 	// 포션 이미지 아이콘들
 	private ImageIcon posion1Ic;
@@ -94,6 +103,8 @@ public class GamePanel extends JPanel {
 
 	// 리스트 생성
 	private List<Jelly> jellyList; // 젤리 리스트
+
+	private List<Coin> coinList; // 코인 리스트
 
 	private List<Field> fieldList; // 발판 리스트
 
@@ -199,6 +210,47 @@ public class GamePanel extends JPanel {
 
 	}
 
+	// 초기화 메서드에서 변수 초기화
+	private void initializeVariables() {
+		// 예제 값으로 초기화, 실제 값은 적절하게 설정해야 합니다.
+		maxX = 20; // 예제 값
+		maxY = 15; // 예제 값
+	}
+
+	// 젤리와 코인을 초기화하는 부분
+	private void initializeObjects() {
+		jellyList.clear();
+		coinList.clear();
+
+		for (int i = 0; i < maxX; i++) {
+			for (int j = 0; j < maxY; j++) {
+				if (colorArr[i][j] == 16776960) { // 기본젤리 생성
+					jellyList.add(new Jelly(jelly1Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 1234));
+				} else if (colorArr[i][j] == 13158400) { // 노란젤리 생성
+					jellyList.add(new Jelly(jelly2Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 2345));
+				} else if (colorArr[i][j] == 9868800) { // 주황젤리 생성
+					jellyList.add(new Jelly(jelly3Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 3456));
+				} else if (colorArr[i][j] == 16737280) { // 피 물약 생성
+					jellyList.add(new Jelly(jellyHPIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 4567));
+				}
+			}
+		}
+
+		// 젤리 위치의 절반을 코인으로 변경
+		for (int i = 0; i < jellyList.size(); i += 2) {
+			Jelly tempJelly = jellyList.get(i);
+			coinList.add(new Coin(coinIc.getImage(), tempJelly.getX(), tempJelly.getY(),
+					tempJelly.getWidth(),
+					tempJelly.getHeight(), 255, 10));
+		}
+
+		// 코인으로 변경된 젤리를 리스트에서 제거
+		for (int i = jellyList.size() - 1; i >= 0; i -= 2) {
+			jellyList.remove(i);
+		}
+
+	}
+
 	// 화면을 그린다
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -215,6 +267,7 @@ public class GamePanel extends JPanel {
 			}
 		}
 
+		super.paintComponent(g);
 		// 투명도 관련
 		Graphics2D g2 = (Graphics2D) buffg;
 
@@ -246,23 +299,41 @@ public class GamePanel extends JPanel {
 
 		}
 
-		// 젤리를 그린다
-		for (int i = 0; i < jellyList.size(); i++) {
+		// // 젤리와 코인을 반씩 나누어 리스트 생성
+		// if (coinList.isEmpty() && !jellyList.isEmpty()) {
+		// List<Jelly> remainingJellies = new ArrayList<>();
+		// for (int i = 0; i < jellyList.size(); i++) {
+		// Jelly tempJelly = jellyList.get(i);
+		// if (i % 2 == 0) {
+		// // 젤리의 절반을 코인으로 교체
+		// Coin tempCoin = new Coin(tempJelly.getImage(), tempJelly.getX(),
+		// tempJelly.getY(),
+		// tempJelly.getWidth(), tempJelly.getHeight(), 255, 10);
+		// coinList.add(tempCoin);
+		// } else {
+		// remainingJellies.add(tempJelly);
+		// }
+		// }
+		// jellyList = remainingJellies;
+		// }
 
-			Jelly tempJelly = jellyList.get(i);
-
-			if (tempJelly.getX() > -90 && tempJelly.getX() < 810) {
-
-				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-						(float) tempJelly.getAlpha() / 255);
-				g2.setComposite(alphaComposite); // 투명하게 하는방법 2
-
-				buffg.drawImage(tempJelly.getImage(), tempJelly.getX(), tempJelly.getY(), tempJelly.getWidth(),
-						tempJelly.getHeight(), null);
+		// 젤리 그리기
+		for (Jelly jelly : jellyList) {
+			if (jelly.getX() > -90 && jelly.getX() < 810) {
+				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) jelly.getAlpha() / 255);
+				g2.setComposite(alphaComposite);
+				g2.drawImage(jelly.getImage(), jelly.getX(), jelly.getY(), jelly.getWidth(), jelly.getHeight(), null);
 
 				// alpha값을 되돌린다
-				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 255 / 255);
+				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
 				g2.setComposite(alphaComposite);
+			}
+		}
+
+		// 코인 그리기
+		for (Coin coin : coinList) {
+			if (coin.getX() > -90 && coin.getX() < 810) {
+				g2.drawImage(coin.getImage(), coin.getX(), coin.getY(), coin.getWidth(), coin.getHeight(), null);
 			}
 		}
 
@@ -355,6 +426,7 @@ public class GamePanel extends JPanel {
 		mo1 = new MapObjectImg(new ImageIcon("img/Objectimg/map1img/bg1.png"),
 				new ImageIcon("img/Objectimg/map1img/bg2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
+				new ImageIcon("img/Objectimg/map1img/coin.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"), new ImageIcon("img/Objectimg/map1img/effectTest.png"),
 				new ImageIcon("img/Objectimg/map1img/fieldIc1.png"),
 				new ImageIcon("img/Objectimg/map1img/fieldIc2.png"), new ImageIcon("img/Objectimg/map1img/tacle1.gif"),
@@ -364,6 +436,7 @@ public class GamePanel extends JPanel {
 		mo2 = new MapObjectImg(new ImageIcon("img/Objectimg/map2img/back1.png"),
 				new ImageIcon("img/Objectimg/map2img/back2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
+				new ImageIcon("img/Objectimg/map1img/coin.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"), new ImageIcon("img/Objectimg/map1img/effectTest.png"),
 				new ImageIcon("img/Objectimg/map2img/field1.png"), new ImageIcon("img/Objectimg/map2img/field2.png"),
 				new ImageIcon("img/Objectimg/map2img/tacle1.png"), new ImageIcon("img/Objectimg/map2img/tacle2.png"),
@@ -372,6 +445,7 @@ public class GamePanel extends JPanel {
 		mo3 = new MapObjectImg(new ImageIcon("img/Objectimg/map3img/bg.png"),
 				new ImageIcon("img/Objectimg/map3img/bg2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
+				new ImageIcon("img/Objectimg/map1img/coin.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"), new ImageIcon("img/Objectimg/map1img/effectTest.png"),
 				new ImageIcon("img/Objectimg/map3img/field.png"), new ImageIcon("img/Objectimg/map3img/field2.png"),
 				new ImageIcon("img/Objectimg/map3img/tacle1.png"), new ImageIcon("img/Objectimg/map3img/tacle2.png"),
@@ -380,6 +454,7 @@ public class GamePanel extends JPanel {
 		mo4 = new MapObjectImg(new ImageIcon("img/Objectimg/map4img/bback.png"),
 				new ImageIcon("img/Objectimg/map4img/bback2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
+				new ImageIcon("img/Objectimg/map1img/coin.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"), new ImageIcon("img/Objectimg/map1img/effectTest.png"),
 				new ImageIcon("img/Objectimg/map4img/ffootTest.png"),
 				new ImageIcon("img/Objectimg/map4img/ffootTest2.png"),
@@ -409,6 +484,9 @@ public class GamePanel extends JPanel {
 		jellyHPIc = mo.getJellyHPIc();
 
 		jellyEffectIc = mo.getJellyEffectIc();
+
+		// 코인 이미지 아이콘
+		coinIc = mo.getCoinIc();
 
 		// 발판 이미지 아이콘들
 		field1Ic = mo.getField1Ic(); // 발판
@@ -449,23 +527,41 @@ public class GamePanel extends JPanel {
 		int maxX = sizeArr[0]; // 맵의 넓이
 		int maxY = sizeArr[1]; // 맵의 높이
 
+		// 젤리와 코인을 생성하는 로직
 		for (int i = 0; i < maxX; i += 1) { // 젤리는 1칸을 차지하기 때문에 1,1사이즈로 반복문을 돌린다.
 			for (int j = 0; j < maxY; j += 1) {
 				if (colorArr[i][j] == 16776960) { // 색값이 16776960일 경우 기본젤리 생성
 					// 좌표에 40을 곱하고, 넓이와 높이는 30으로 한다.
-					jellyList.add(new Jelly(jelly1Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 1234));
-
+					if ((i + j) % 2 == 0) {
+						jellyList.add(
+								new Jelly(jelly1Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 1234));
+					} else {
+						coinList.add(new Coin(coinIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 10));
+					}
 				} else if (colorArr[i][j] == 13158400) { // 색값이 13158400일 경우 노란젤리 생성
 					// 좌표에 40을 곱하고, 넓이와 높이는 30으로 한다.
-					jellyList.add(new Jelly(jelly2Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 2345));
-
+					if ((i + j) % 2 == 0) {
+						jellyList.add(
+								new Jelly(jelly2Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 2345));
+					} else {
+						coinList.add(new Coin(coinIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 10));
+					}
 				} else if (colorArr[i][j] == 9868800) { // 색값이 9868800일 경우 노란젤리 생성
 					// 좌표에 40을 곱하고, 넓이와 높이는 30으로 한다.
-					jellyList.add(new Jelly(jelly3Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 3456));
-
+					if ((i + j) % 2 == 0) {
+						jellyList.add(
+								new Jelly(jelly3Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 3456));
+					} else {
+						coinList.add(new Coin(coinIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 10));
+					}
 				} else if (colorArr[i][j] == 16737280) { // 색값이 16737280일 경우 피 물약 생성
 					// 좌표에 40을 곱하고, 넓이와 높이는 30으로 한다.
-					jellyList.add(new Jelly(jellyHPIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 4567));
+					if ((i + j) % 2 == 0) {
+						jellyList.add(
+								new Jelly(jellyHPIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 4567));
+					} else {
+						coinList.add(new Coin(coinIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 10));
+					}
 				}
 			}
 		}
@@ -524,6 +620,8 @@ public class GamePanel extends JPanel {
 		slideBtn = slideIconUp.getImage();
 
 		jellyList = new ArrayList<>(); // 젤리 리스트
+
+		coinList = new ArrayList<>(); // 코인 리스트
 
 		fieldList = new ArrayList<>(); // 발판 리스트
 
@@ -842,26 +940,21 @@ public class GamePanel extends JPanel {
 						}
 					}
 
-					// 젤리위치를 -4 씩 해준다.
+					// 젤리 위치를 -4씩 이동
 					for (int i = 0; i < jellyList.size(); i++) {
+						Jelly tempJelly = jellyList.get(i);
 
-						Jelly tempJelly = jellyList.get(i); // 임시 변수에 리스트 안에 있는 개별 젤리를 불러오자
-
-						if (tempJelly.getX() < -90) { // 젤리의 x 좌표가 -90 미만이면 해당 젤리를 제거한다.(최적화)
-
-							fieldList.remove(tempJelly);
-
+						if (tempJelly.getX() < -90) {
+							jellyList.remove(tempJelly);
 						} else {
-
-							tempJelly.setX(tempJelly.getX() - gameSpeed); // 위 조건에 해당이 안되면 x좌표를 줄이자
+							tempJelly.setX(tempJelly.getX() - gameSpeed);
 							if (tempJelly.getImage() == jellyEffectIc.getImage() && tempJelly.getAlpha() > 4) {
 								tempJelly.setAlpha(tempJelly.getAlpha() - 5);
 							}
 
-							foot = c1.getY() + c1.getHeight(); // 캐릭터 발 위치 재스캔
+							foot = c1.getY() + c1.getHeight();
 
-							if ( // 캐릭터의 범위 안에 젤리가 있으면 아이템을 먹는다.
-							c1.getImage() != slideIc.getImage()
+							if (c1.getImage() != slideIc.getImage()
 									&& tempJelly.getX() + tempJelly.getWidth() * 20 / 100 >= c1.getX()
 									&& tempJelly.getX() + tempJelly.getWidth() * 80 / 100 <= face
 									&& tempJelly.getY() + tempJelly.getWidth() * 20 / 100 >= c1.getY()
@@ -875,11 +968,9 @@ public class GamePanel extends JPanel {
 										c1.setHealth(c1.getHealth() + 100);
 									}
 								}
-								tempJelly.setImage(jellyEffectIc.getImage()); // 젤리의 이미지를 이펙트로 바꾼다
-								resultScore = resultScore + tempJelly.getScore(); // 총점수에 젤리 점수를 더한다
-
-							} else if ( // 슬라이딩 하는 캐릭터의 범위 안에 젤리가 있으면 아이템을 먹는다.
-							c1.getImage() == slideIc.getImage()
+								jellyList.remove(tempJelly); // 젤리를 리스트에서 제거
+								resultScore = resultScore + tempJelly.getScore();
+							} else if (c1.getImage() == slideIc.getImage()
 									&& tempJelly.getX() + tempJelly.getWidth() * 20 / 100 >= c1.getX()
 									&& tempJelly.getX() + tempJelly.getWidth() * 80 / 100 <= face
 									&& tempJelly.getY() + tempJelly.getWidth() * 20 / 100 >= c1.getY()
@@ -894,9 +985,40 @@ public class GamePanel extends JPanel {
 										c1.setHealth(c1.getHealth() + 100);
 									}
 								}
-								tempJelly.setImage(jellyEffectIc.getImage()); // 젤리의 이미지를 이펙트로 바꾼다
-								resultScore = resultScore + tempJelly.getScore(); // 총점수에 젤리 점수를 더한다
+								jellyList.remove(tempJelly); // 젤리를 리스트에서 제거
+								resultScore = resultScore + tempJelly.getScore();
+							}
+						}
+					}
 
+					// 코인 위치를 -4씩 이동
+					for (int i = 0; i < coinList.size(); i++) {
+						Coin tempCoin = coinList.get(i);
+
+						if (tempCoin.getX() < -90) {
+							coinList.remove(tempCoin);
+						} else {
+							tempCoin.setX(tempCoin.getX() - gameSpeed);
+
+							foot = c1.getY() + c1.getHeight();
+
+							if (c1.getImage() != slideIc.getImage()
+									&& tempCoin.getX() + tempCoin.getWidth() * 20 / 100 >= c1.getX()
+									&& tempCoin.getX() + tempCoin.getWidth() * 80 / 100 <= face
+									&& tempCoin.getY() + tempCoin.getWidth() * 20 / 100 >= c1.getY()
+									&& tempCoin.getY() + tempCoin.getWidth() * 80 / 100 <= foot) {
+
+								resultScore = resultScore + tempCoin.getScore();
+								coinList.remove(tempCoin);
+							} else if (c1.getImage() == slideIc.getImage()
+									&& tempCoin.getX() + tempCoin.getWidth() * 20 / 100 >= c1.getX()
+									&& tempCoin.getX() + tempCoin.getWidth() * 80 / 100 <= face
+									&& tempCoin.getY() + tempCoin.getWidth() * 20 / 100 >= c1.getY()
+											+ c1.getHeight() * 1 / 3
+									&& tempCoin.getY() + tempCoin.getWidth() * 80 / 100 <= foot) {
+
+								resultScore = resultScore + tempCoin.getScore();
+								coinList.remove(tempCoin);
 							}
 						}
 					}
