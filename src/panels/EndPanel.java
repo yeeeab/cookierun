@@ -14,23 +14,38 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import main.Main;
+
 public class EndPanel extends JPanel {
-	
+
 	ImageIcon btn = new ImageIcon("img/end/button.png");
 	JButton btnNewButton;
 	JLabel lblNewLabel_1;
-	JLabel lblNewLabel_2;
+	JLabel lblJellyScore;
+	JLabel lblCoinScore;
+	JLabel lblTotalCoins;
 	JLabel lblNewLabel;
-	
-	
-	private int resultScore;
-	
-	public void setResultScore(int resultScore) {
-		lblNewLabel_2.setText(resultScore+"");
+
+	private int jellyScore;
+	private int coinScore;
+
+	private Main main; // 메인 클래스 참조
+
+	// 점수
+	public void setScore(int jellyScore, int coinScore) {
+		this.jellyScore = jellyScore;
+		this.coinScore = coinScore;
+		main.addCoins(coinScore); // 총 코인 점수 업데이트
+		lblJellyScore.setText("Jelly Score: " + jellyScore);
+		lblCoinScore.setText("Coin Score: " + coinScore);
+		lblTotalCoins.setText("Total Coins: " + main.getTotalCoinScore());
 	}
 
-	public EndPanel(Object o) {
-		//��ư
+	public EndPanel(Object o, Main main) {
+		this.main = main; // Main 클래스 인스턴스 할당
+		setLayout(null);
+
+		// ��ư
 		btnNewButton = new JButton(btn);
 		btnNewButton.setName("endAccept");
 		btnNewButton.addMouseListener((MouseListener) o);
@@ -39,20 +54,35 @@ public class EndPanel extends JPanel {
 		btnNewButton.setFocusPainted(false);
 		btnNewButton.setContentAreaFilled(false);
 		add(btnNewButton);
-		
-		//���� ���� 
-		lblNewLabel_1 = new JLabel("SCORE");	
+
+		// ���� ����
+		lblNewLabel_1 = new JLabel("SCORE");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 37));
 		lblNewLabel_1.setBounds(451, 0, 205, 55);
 		add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("0");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 49));
-		lblNewLabel_2.setBounds(313, 52, 459, 87);
-		add(lblNewLabel_2);
-		
+
+		// Jelly Score 라벨
+		lblJellyScore = new JLabel("Jelly Score: 0");
+		lblJellyScore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJellyScore.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 30));
+		lblJellyScore.setBounds(313, 52, 459, 87);
+		add(lblJellyScore);
+
+		// Coin Score 라벨
+		lblCoinScore = new JLabel("Coin Score: 0");
+		lblCoinScore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoinScore.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 30));
+		lblCoinScore.setBounds(313, 100, 459, 87);
+		add(lblCoinScore);
+
+		// Total Coins 라벨
+		lblTotalCoins = new JLabel("Total Coins: 0");
+		lblTotalCoins.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotalCoins.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 30));
+		lblTotalCoins.setBounds(313, 150, 459, 87);
+		add(lblTotalCoins);
+
 		lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setBackground(SystemColor.activeCaptionText);

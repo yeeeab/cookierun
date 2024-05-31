@@ -58,6 +58,9 @@ public abstract class MiniGames extends JPanel {
                 miniGame = new NumberOrderGame(parentPanel);
                 break;
             // 다른 미니게임을 추가할 경우, 여기에 case를 추가합니다.
+            case 1:
+                miniGame = new RockScissorsPaper(parentPanel);
+                break;
         }
 
         if (miniGame != null) {

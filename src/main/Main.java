@@ -45,6 +45,24 @@ public class Main extends listenAdapter {
 
 	private CookieImg ci; // 쿠키이미지
 
+	private int totalCoinScore = 0; // 코인 점수
+
+	public int getTotalCoinScore() {
+		return totalCoinScore;
+	}
+
+	public void addCoins(int coins) {
+		this.totalCoinScore += coins;
+	}
+
+	public void spendCoins(int coins) {
+		if (totalCoinScore >= coins) {
+			this.totalCoinScore -= coins;
+		} else {
+			System.out.println("코인이 부족합니다!");
+		}
+	}
+
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}
@@ -96,7 +114,7 @@ public class Main extends listenAdapter {
 
 		selectPanel = new SelectPanel(this); // Main의 리스너를 넣기위한 this
 		gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
-		endPanel = new EndPanel(this); // Main의 리스너를 넣기위한 this
+		endPanel = new EndPanel(this, this); // Main의 리스너를 넣기위한 this
 		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
 
 		healthPotion = new HealthPotion();

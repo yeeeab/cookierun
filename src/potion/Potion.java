@@ -33,6 +33,16 @@ public class Potion {
     // 속도
     private int gameSpeed = 10;
 
+    // 생성자
+    public Potion(Image image, int x, int y, int width, int height, int numOfPotion) {
+        this.image = image;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.numOfPotion = numOfPotion;
+    }
+
     public void use() {
         if (numOfPotion > 0) {
             numOfPotion--;

@@ -1,25 +1,26 @@
 package minigame;
 
-import java.awt.FlowLayout;
+import javax.swing.*;
+
+import panels.SpeedrunPanel;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.*;
-import javafx.event.ActionEvent;
 
-public class RockScissorsPaper extends JFrame implements ActionListener {
+public class RockScissorsPaper extends MiniGames implements ActionListener {
     private JButton rockButton, paperButton, scissorsButton;
     private JLabel resultLabel;
 
-    public RockScissorsPaper() {
-        setTitle("가위 바위 보 게임");
-        setSize(400, 200);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public RockScissorsPaper(SpeedrunPanel parentPanel) {
+        super(parentPanel);
         setLayout(new FlowLayout());
 
         // 이미지 아이콘 로드
-        ImageIcon rockIcon = new ImageIcon(getClass().getResource("/resources/rock.png"));
-        ImageIcon paperIcon = new ImageIcon(getClass().getResource("/resources/paper.png"));
-        ImageIcon scissorsIcon = new ImageIcon(getClass().getResource("/resources/scissors.png"));
+        ImageIcon rockIcon = new ImageIcon("img/miniGame/rock.jpg");
+        ImageIcon paperIcon = new ImageIcon("img/miniGame/paper.jpg");
+        ImageIcon scissorsIcon = new ImageIcon("img/miniGame/sicssors.jpg");
 
         // 버튼 초기화 및 이미지 설정
         rockButton = new JButton(rockIcon);
@@ -31,7 +32,7 @@ public class RockScissorsPaper extends JFrame implements ActionListener {
         paperButton.addActionListener(this);
         scissorsButton.addActionListener(this);
 
-        // 버튼을 프레임에 추가
+        // 버튼을 패널에 추가
         add(rockButton);
         add(paperButton);
         add(scissorsButton);
@@ -39,8 +40,6 @@ public class RockScissorsPaper extends JFrame implements ActionListener {
         // 결과 라벨 추가
         resultLabel = new JLabel("결과가 여기 표시됩니다.");
         add(resultLabel);
-
-        setVisible(true);
     }
 
     @Override
@@ -56,15 +55,14 @@ public class RockScissorsPaper extends JFrame implements ActionListener {
         // 승패 결정 로직
         if (userChoice.equals(choices[computerChoice])) {
             resultLabel.setText("결과: 무승부! 다시 시도하세요.");
-            playGame(userChoice); // 무승부일 경우 재귀적으로 게임을 다시 시작
         } else if ((userChoice.equals("바위") && computerChoice == 0) ||
                 (userChoice.equals("보") && computerChoice == 1) ||
                 (userChoice.equals("가위") && computerChoice == 2)) {
             resultLabel.setText("결과: 이겼습니다!");
-            System.exit(0);
+            gameSuccess();
         } else {
             resultLabel.setText("결과: 졌습니다!");
-            System.exit(0);
+            gameFailure();
         }
     }
 }
