@@ -75,7 +75,7 @@ public class Main extends listenAdapter {
 				}
 			}
 		});
-	}
+	}  
 
 	public Main() {
 		initialize();

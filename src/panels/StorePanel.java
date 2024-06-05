@@ -1,5 +1,5 @@
 // 상점 화면
-
+  
 package panels;
 
 import java.awt.Color;

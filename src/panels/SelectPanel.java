@@ -16,7 +16,7 @@ import ingame.CookieImg;
 
 public class SelectPanel extends JPanel {
 
-	// 선택할 캐릭터 이미지 아이콘
+	// 선택할 캐릭터 이미지 아이콘  
 	private ImageIcon ch01 = new ImageIcon("img/select/selectCh1.png");
 	private ImageIcon ch02 = new ImageIcon("img/select/selectCh2.png");
 	private ImageIcon ch03 = new ImageIcon("img/select/selectCh3.png");

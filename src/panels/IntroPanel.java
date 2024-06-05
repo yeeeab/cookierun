@@ -30,7 +30,7 @@ public class IntroPanel extends JPanel {
         Image originalImage = originalIcon.getImage(); // Image 객체로 변환
         Image scaledImage = originalImage.getScaledInstance(130, 40, Image.SCALE_SMOOTH); // 원하는 크기로 조정
         ImageIcon storeIcon = new ImageIcon(scaledImage); // 다시 ImageIcon으로 변환
-
+  
 
         storeBtn = new JButton(storeIcon);
         storeBtn.setName("StoreBtn"); // 버튼의 이름을 설정하여 식별 가능하도록 함
