@@ -18,7 +18,7 @@ import javax.swing.SwingConstants;
 public class StorePanel extends JPanel {
 
 	// 상점 버튼 이미지 아이콘
-	private ImageIcon storeIc = new ImageIcon("img/store/storeBtn.png");
+	private ImageIcon storeIc = new ImageIcon("img/store/storePanel.png");
 
 	private JButton StoreBtn;
 
@@ -26,7 +26,7 @@ public class StorePanel extends JPanel {
 		StoreBtn = new JButton(storeIc);
 		StoreBtn.setName("StoreBtn");
 		StoreBtn.addMouseListener((MouseListener) o);
-		StoreBtn.setBounds(254, 334, 291, 81);
+		// StoreBtn.setBounds(254, 334, 291, 81);
 		add(StoreBtn);
 		StoreBtn.setBorderPainted(false);
 		StoreBtn.setContentAreaFilled(false);
