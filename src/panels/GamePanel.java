@@ -81,6 +81,8 @@ public class GamePanel extends JPanel {
 	// 체력 게이지
 	private ImageIcon lifeBar;
 
+	protected ImageIcon gaugeBar;
+
 	private ImageIcon redBg; // 피격시 붉은 화면
 
 	private ImageIcon jumpButtonIconUp;
@@ -530,6 +532,8 @@ public class GamePanel extends JPanel {
 
 		// 생명게이지 이미지아이콘
 		lifeBar = new ImageIcon("img/Objectimg/lifebar/lifeBar1.png");
+
+		gaugeBar = new ImageIcon("img/Objectimg/lifebar/GaugeBar1.png");
 
 		// 피격 붉은 이미지
 		redBg = new ImageIcon("img/Objectimg/lifebar/redBg.png");

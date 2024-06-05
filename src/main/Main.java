@@ -138,7 +138,6 @@ public class Main extends listenAdapter {
 				gamePanel.gameStart(); // 게임시작
 				gamePanel.requestFocus(); // 리스너를 game패널에 강제로 줌
 			}
-
 		} else if (e.getComponent().getName().equals("SpeedrunBtn")) {
 			if (selectPanel.getCi() == null) {
 				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
@@ -154,12 +153,17 @@ public class Main extends listenAdapter {
 			gamePanel.setLayout(null);
 			frame.getContentPane().add(gamePanel, "game"); // 프레임에 새 게임패널 추가(카드레이아웃 하단)
 
+			frame.getContentPane().remove(speedrunPanel); // 방금 했던 게임 패널을 프레임에서 삭제
+			speedrunPanel = new SpeedrunPanel(frame, cl, this); // 게임패널을 새 패널로 교체
+			speedrunPanel.setLayout(null);
+			frame.getContentPane().add(speedrunPanel, "speedrun");
+
 			frame.getContentPane().remove(selectPanel); // 방금 선택했던 select패널을 삭제
 			selectPanel = new SelectPanel(this); // select 패널을 새 패널로 교체
 			selectPanel.setLayout(null);
 			frame.getContentPane().add(selectPanel, "select"); // 프레임에 새 select패널 추가(카드레이아웃 하단)
-			cl.show(frame.getContentPane(), "select"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
-			selectPanel.requestFocus(); // 리스너를 select패널에 강제로 줌
+			cl.show(frame.getContentPane(), "intro"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
+			introPanel.requestFocus(); // 리스너를 select패널에 강제로 줌
 		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
 			cl.show(frame.getContentPane(), "store");
 			storePanel.requestFocus();

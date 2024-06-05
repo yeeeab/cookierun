@@ -13,13 +13,14 @@ public class SpeedrunPanel extends GamePanel {
     private int elapsedTime = 0;
     private int addTime = 0;
     private Timer timer;
-    private JProgressBar gaugeBar;
     private boolean inMiniGame = false;
     private String currentTimerText = "00:00:00";
     private boolean isGameEnded = false; // 게임 종료 상태 변수 추가
     private boolean isMiniGameFailed = false;
     private MiniGames currentMiniGame;
     private JDialog miniGameDialog;
+    private int score = 0, maxscore = 300000;
+    float alpha = 0.7f;
 
     public SpeedrunPanel(JFrame superFrame, CardLayout cl, Object o) {
         super(superFrame, cl, (Main) o);
@@ -28,9 +29,11 @@ public class SpeedrunPanel extends GamePanel {
 
         elapsedTime = 0;
         timer = new Timer();
+        score = 0;
     }
 
     public void gameStart() {
+        resetGame();
         super.gameStart();
         startSpeedrunTimer();
     }
@@ -69,6 +72,8 @@ public class SpeedrunPanel extends GamePanel {
                     elapsedTime += addTime;
                     addTime = 0;
                 }
+
+                score = resultScore;
             }
         }, 10, 10); // 10 밀리초마다 업데이트
     }
@@ -93,28 +98,35 @@ public class SpeedrunPanel extends GamePanel {
         }
 
         inMiniGame = false;
-        gaugeBar.setValue(0);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
 
-        Util.drawFancyString(g2, currentTimerText, 600, 58, 30, Color.WHITE);
         // 타이머와 게이지 바를 그립니다.
+        Util.drawFancyString(g2, currentTimerText, 600, 58, 30, Color.WHITE);
+
+        // 점수 게이지바를 그립니다
+        g2.drawImage(gaugeBar.getImage(), 20, 70, null);
+        g2.setColor(Color.BLACK);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+        g2.fillRect(55 + (int) (453 * ((double) score / maxscore)), 105,
+                1 + 453 - (int) (453 * ((double) score / maxscore)), 21);
 
         // 점수를 그립니다.
         if (showScore) {
             Util.drawFancyString(g2, Integer.toString(resultScore), 600, 100, 30, Color.WHITE);
         }
 
-        // 200,000점 이상일 때마다 미니게임을 시작하고, 600,000점 이상이면 게임을 종료합니다.
+        // 일정 점수 이상일 때마다 미니게임을 시작하고, maxscore 이상이면 게임을 종료
         if (!isGameEnded) {
-            if (resultScore >= 600000) {
+            if (resultScore >= maxscore) {
                 endGame();
-            } else if (resultScore >= 200000 && (resultScore % 200000 == 0)) {
-                resultScore += 1;
+            } else if (resultScore >= maxscore / 4 && (resultScore % (maxscore / 4) == 0)) {
+                resultScore += 1; // 미니게임 시작을 위한 점수 조정
                 startMiniGame();
             }
         }
@@ -131,9 +143,21 @@ public class SpeedrunPanel extends GamePanel {
             main.getEndPanel().setResultTime(currentTimerText);
             main.getEndPanel().setSpeedrunGame(true);
             cl.show(superFrame.getContentPane(), "end");
-            main.setGamePanel(new SpeedrunPanel(superFrame, cl, main));
+            resetGame(); // 게임 상태 초기화
             superFrame.requestFocus();
         }
     }
 
+    private void resetGame() {
+        elapsedTime = 0;
+        addTime = 0;
+        inMiniGame = false;
+        currentTimerText = "00:00:00";
+        isGameEnded = false;
+        isMiniGameFailed = false;
+        score = 0;
+        resultScore = 0;
+        c1.setHealth(1000); // 쿠키의 체력을 초기화합니다.
+        // 필요에 따라 다른 게임 상태도 초기화합니다.
+    }
 }
