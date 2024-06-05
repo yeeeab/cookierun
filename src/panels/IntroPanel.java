@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 public class IntroPanel extends JPanel {
     private ImageIcon introIc = new ImageIcon("img/intro/intro.png"); // 인트로 이미지
-    private ImageIcon storeIcon = new ImageIcon("img/store/storeBtn.png"); // 상점 버튼(수정 예정)
+    // private ImageIcon storeIcon = new ImageIcon("img/store/storeBtn.png"); // 상점 버튼(수정 예정)
     private JButton storeBtn;
-    private boolean imageToggled = false; // 이미지 상태를 저장하는 플래그
+    // private boolean imageToggled = false; // 이미지 상태를 저장하는 플래그
     private JFrame mainFrame;
     private CardLayout cardLayout;
 
@@ -33,22 +33,13 @@ public class IntroPanel extends JPanel {
         storeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                toggleImage();
+                // toggleImage();
                 cardLayout.show(mainFrame.getContentPane(), "store");
             }
         });
         add(storeBtn); // 패널에 버튼 추가
     }
 
-    private void toggleImage() {
-        if (imageToggled) {
-            introIc = new ImageIcon("img/intro/intro.png"); // 원래 인트로 이미지로 변경
-        } else {
-            introIc = new ImageIcon("img/store/storePanel.png"); // 두 번째 이미지로 변경
-        }
-        imageToggled = !imageToggled; // 이미지 상태 플래그 토글
-        repaint(); // 패널 다시 그리기
-    }
 
     @Override
     protected void paintComponent(Graphics g) {

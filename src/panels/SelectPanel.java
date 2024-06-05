@@ -2,6 +2,7 @@ package panels;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -9,12 +10,15 @@ import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.CardLayout;
 
 import ingame.CookieImg;
 // import javafx.scene.image.Image;
+// import javafx.event.ActionEvent;
 
 public class SelectPanel extends JPanel {
 
@@ -39,6 +43,12 @@ public class SelectPanel extends JPanel {
 	// hp 증가 포션 이미지 아이콘
 	private ImageIcon healthPotion = new ImageIcon("img/store/potion2.png");
 
+	// 뒤로가기 버튼
+	private JButton backButton;
+
+	private JFrame mainFrame;
+    private CardLayout cardLayout;
+
 	// 이미지를 선택할 버튼
 	private JButton ch1;
 	private JButton ch2;
@@ -62,7 +72,7 @@ public class SelectPanel extends JPanel {
 		return ci;
 	}
 
-	public SelectPanel(Object o) {
+	public SelectPanel(JFrame mainFrame, CardLayout cardLayout, Object o) {
 
 		// 시작 버튼
 		ImageIcon originalIcon = new ImageIcon("img/select/itemBtn.png"); // 원본 이미지
@@ -78,6 +88,15 @@ public class SelectPanel extends JPanel {
 		StartBtn.setBorderPainted(false);
 		StartBtn.setContentAreaFilled(false);
 		StartBtn.setFocusPainted(false);
+
+		backButton = new JButton("Back");
+        backButton.setBounds(10, 10, 100, 30); // 버튼의 위치와 크기 설정
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(mainFrame.getContentPane(), "intro");
+            }
+        });
 
 		// 스피드런 모드 시작 버튼
 		ImageIcon originalIcon2 = new ImageIcon("img/select/SpeedrunBtn.png"); // 원본 이미지
@@ -129,6 +148,7 @@ public class SelectPanel extends JPanel {
 		});
 		ch1.setBounds(90, 62, 150, 200);
 		add(ch1);
+		add(backButton);
 		ch1.setBorderPainted(false);
 		ch1.setContentAreaFilled(false);
 		ch1.setFocusPainted(false);

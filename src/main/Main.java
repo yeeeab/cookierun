@@ -81,8 +81,8 @@ public class Main extends listenAdapter {
         introPanel = new IntroPanel(frame, cl);
         introPanel.addMouseListener(this); // intro패널은 여기서 바로 넣는 방식으로 마우스리스너를 추가함.
 
-        storePanel = new StorePanel(this); // 상점
-        selectPanel = new SelectPanel(this); // Main의 리스너를 넣기위한 this
+        storePanel = new StorePanel(frame, cl); // 상점
+        selectPanel = new SelectPanel(frame, cl, this); // Main의 리스너를 넣기위한 this
         gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
         endPanel = new EndPanel(this); // Main의 리스너를 넣기위한 this
         speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
@@ -142,7 +142,7 @@ public class Main extends listenAdapter {
             frame.getContentPane().add(gamePanel, "game"); // 프레임에 새 게임패널 추가(카드레이아웃 하단)
 
             frame.getContentPane().remove(selectPanel); // 방금 선택했던 select패널을 삭제
-            selectPanel = new SelectPanel(this); // select 패널을 새 패널로 교체
+            selectPanel = new SelectPanel(frame, cl, this); // select 패널을 새 패널로 교체
             selectPanel.setLayout(null);
             frame.getContentPane().add(selectPanel, "select"); // 프레임에 새 select패널 추가(카드레이아웃 하단)
             cl.show(frame.getContentPane(), "select"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
