@@ -3,7 +3,6 @@ package minigame;
 import javax.swing.JPanel;
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 import panels.MiniGamePanel;
 import main.Main;
 import java.awt.CardLayout;
@@ -17,14 +16,11 @@ import panels.*;
 
 public abstract class MiniGames extends JPanel {
     protected MiniGamePanel parentPanel;
-    protected Timer timer;
-    protected int elapsedTime; // 경과 시간을 밀리초 단위로 저장
     protected boolean isSuccess;
     private Image backgroundImage;
 
     public MiniGames(MiniGamePanel parentPanel) {
         this.parentPanel = parentPanel;
-        this.elapsedTime = 0;
         this.isSuccess = false;
 
         setLayout(null);
@@ -33,18 +29,6 @@ public abstract class MiniGames extends JPanel {
         // 배경 이미지 로드
         ImageIcon icon = new ImageIcon("img/end/cookierunbg.jpg");
         backgroundImage = icon.getImage();
-
-        startTimer();
-    }
-
-    private void startTimer() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                elapsedTime += 10; // 10 밀리초마다 업데이트
-            }
-        }, 10, 10); // 10 밀리초마다 업데이트
     }
 
     @Override
@@ -64,7 +48,6 @@ public abstract class MiniGames extends JPanel {
     }
 
     protected void endGame() {
-        timer.cancel();
         parentPanel.gameFinished(isSuccess);
     }
 
@@ -80,14 +63,19 @@ public abstract class MiniGames extends JPanel {
 
     public static void startRandomGame(SpeedrunPanel parentPanel, Main main, CardLayout cl, JFrame superFrame) {
         Random random = new Random();
-        int gameIndex = random.nextInt(1); // 현재는 1개의 미니게임만 있음
+        int gameIndex = random.nextInt(3); // 세 개의 미니게임 중 하나를 선택
         MiniGames miniGame = null;
 
         switch (gameIndex) {
             case 0:
                 miniGame = new NumberOrderGame(new MiniGamePanel(parentPanel));
                 break;
-            // 다른 미니게임을 추가할 경우, 여기에 case를 추가합니다.
+            case 1:
+                miniGame = new BidirectionalKeysGame(new MiniGamePanel(parentPanel));
+                break;
+            case 2:
+                miniGame = new RockScissorsPaper(new MiniGamePanel(parentPanel));
+                break;
         }
 
         if (miniGame != null) {
@@ -95,7 +83,5 @@ public abstract class MiniGames extends JPanel {
         }
     }
 
-    public void startGame() {
-        // Initialize or reset any necessary components before starting the game
-    }
+    public abstract void startGame();
 }

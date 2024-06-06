@@ -168,6 +168,10 @@ public class GamePanel extends JPanel {
 		return resultScore;
 	}
 
+	public void setResultScore(int score) {
+		this.resultScore = score;
+	}
+
 	public boolean isEscKeyOn() {
 		return escKeyOn;
 	}

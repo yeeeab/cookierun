@@ -31,6 +31,8 @@ public class Main extends listenAdapter {
 
 	private SpeedrunPanel speedrunPanel;
 
+	private MiniGamePanel minigamePanel;
+
 	private EndPanel endPanel; // 게임결과
 
 	private HealthPotion healthPotion;
@@ -92,6 +94,7 @@ public class Main extends listenAdapter {
 		gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
 		endPanel = new EndPanel(this); // Main의 리스너를 넣기위한 this
 		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
+		minigamePanel = new MiniGamePanel(speedrunPanel); // 미니게임 패널 추가
 
 		healthPotion = new HealthPotion();
 
@@ -101,6 +104,7 @@ public class Main extends listenAdapter {
 		selectPanel.setLayout(null);
 		gamePanel.setLayout(null);
 		endPanel.setLayout(null);
+		// minigamePanel.setLayout(cl); // This line is not needed
 
 		// 프레임에 패널들을 추가한다.(카드 레이아웃을 위한 패널들)
 		frame.getContentPane().add(introPanel, "intro");
@@ -109,7 +113,6 @@ public class Main extends listenAdapter {
 		frame.getContentPane().add(gamePanel, "game");
 		frame.getContentPane().add(speedrunPanel, "speedrun");
 		frame.getContentPane().add(endPanel, "end");
-
 	}
 
 	@Override
@@ -170,9 +173,10 @@ public class Main extends listenAdapter {
 	public void switchToMiniGame(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame,
 			MiniGames currentMiniGame) {
 		// Switch to the minigame panel
-		superFrame.getContentPane().add(currentMiniGame, "minigame");
+		minigamePanel.setLayout(cl);
+		frame.getContentPane().add(minigamePanel, "minigame");
 		cl.show(superFrame.getContentPane(), "minigame");
-		currentMiniGame.setVisible(true);
+		minigamePanel.requestFocus();
 	}
 
 	public void returnToSpeedrunPanel(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame, boolean success) {
@@ -181,6 +185,7 @@ public class Main extends listenAdapter {
 
 		// Switch back to the speedrun panel
 		cl.show(superFrame.getContentPane(), "speedrun");
+		speedrunPanel.requestFocus();
 	}
 
 	public JFrame getFrame() {
