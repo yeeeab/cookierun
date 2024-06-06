@@ -12,10 +12,14 @@ public class HealthPotion extends Potion {
         if (getNumOfPotion() > 0) {
             setNumOfPotion(getNumOfPotion() - 1);
             setIsPotionUsed(true);
-            // Additional logic to increase health by 1.2x can be added here
+            setdrinkHealthPotion(); // Set the flag to true when potion is used
         } else {
             JOptionPane.showMessageDialog(null, "No more potions left!");
         }
         setIsPotionSelected(false); // Reset selection after use
+    }
+
+    public void setdrinkHealthPotion() {
+        drinkHealthPotion = true;
     }
 }

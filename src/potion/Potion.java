@@ -2,6 +2,8 @@ package potion;
 
 import java.awt.Image;
 import javax.swing.JOptionPane;
+
+import ingame.Cookie;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ public class Potion {
 
     // Flag indicating if potion is used
     private boolean isPotionUsed = false;
+    protected boolean drinkHealthPotion = false; // default
 
     // Flag indicating if potion is selected
     private boolean isPotionSelected = false;
@@ -66,5 +69,15 @@ public class Potion {
 
     public void setIsPotionSelected(boolean isSelected) {
         this.isPotionSelected = isSelected;
+    }
+
+    public boolean drinkHealthPotion(Cookie c1) {
+        if (drinkHealthPotion) {
+            c1.setHealth(1100);
+            System.err.println("health = 1100");
+            drinkHealthPotion = false; // Reset after usage
+            return true;
+        }
+        return false;
     }
 }

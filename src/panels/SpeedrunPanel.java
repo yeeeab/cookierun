@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import main.Main;
-import minigame.*;
+import minigame.MiniGames;
 import util.Util;
 
 public class SpeedrunPanel extends GamePanel {
@@ -17,8 +17,6 @@ public class SpeedrunPanel extends GamePanel {
     private String currentTimerText = "00:00:00";
     private boolean isGameEnded = false; // 게임 종료 상태 변수 추가
     private boolean isMiniGameFailed = false;
-    private MiniGames currentMiniGame;
-    private JDialog miniGameDialog;
     private int score = 0, maxscore = 300000;
     float alpha = 0.7f;
 
@@ -74,6 +72,11 @@ public class SpeedrunPanel extends GamePanel {
                 }
 
                 score = resultScore;
+                if (resultScore == maxscore)
+                    endGame();
+                else if (score >= maxscore / 4 && score % (maxscore / 4) == 0 && !inMiniGame) {
+                    startMiniGame();
+                }
             }
         }, 10, 10); // 10 밀리초마다 업데이트
     }
@@ -82,22 +85,22 @@ public class SpeedrunPanel extends GamePanel {
         inMiniGame = true;
         setEscKeyOn(true);
 
-        main.switchToMiniGame(this, cl, superFrame);
+        MiniGamePanel miniGamePanel = new MiniGamePanel(this);
+        main.getFrame().getContentPane().add(miniGamePanel, "minigame");
+        miniGamePanel.startMiniGame();
     }
 
     public void miniGameFinished(boolean success) {
-        if (currentMiniGame != null) {
-            remove(currentMiniGame);
-            currentMiniGame = null;
-        }
         if (success) {
             JOptionPane.showMessageDialog(this, "미니게임 성공!");
         } else {
-            JOptionPane.showMessageDialog(this, "미니게임 실패! 10초 추가");
+            JOptionPane.showMessageDialog(this, "미니게임 실패! 10초가 추가됩니다.");
             isMiniGameFailed = true;
         }
-
         inMiniGame = false;
+        setEscKeyOn(false); // 게임을 다시 시작하도록 설정
+        main.getFrame().getContentPane().remove(main.getFrame().getContentPane().getComponentCount() - 1); // Remove
+                                                                                                           // MiniGamePanel
     }
 
     @Override
@@ -119,16 +122,6 @@ public class SpeedrunPanel extends GamePanel {
         // 점수를 그립니다.
         if (showScore) {
             Util.drawFancyString(g2, Integer.toString(resultScore), 600, 100, 30, Color.WHITE);
-        }
-
-        // 일정 점수 이상일 때마다 미니게임을 시작하고, maxscore 이상이면 게임을 종료
-        if (!isGameEnded) {
-            if (resultScore >= maxscore) {
-                endGame();
-            } else if (resultScore >= maxscore / 4 && (resultScore % (maxscore / 4) == 0)) {
-                resultScore += 1; // 미니게임 시작을 위한 점수 조정
-                startMiniGame();
-            }
         }
     }
 
@@ -158,6 +151,10 @@ public class SpeedrunPanel extends GamePanel {
         score = 0;
         resultScore = 0;
         c1.setHealth(1000); // 쿠키의 체력을 초기화합니다.
-        // 필요에 따라 다른 게임 상태도 초기화합니다.
     }
+
+    public Main getMain() {
+        return main;
+    }
+
 }

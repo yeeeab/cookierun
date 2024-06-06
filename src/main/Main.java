@@ -10,18 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import ingame.CookieImg;
-import panels.EndPanel;
-import panels.GamePanel;
-import panels.IntroPanel;
-import panels.SelectPanel;
-import panels.SpeedrunPanel;
-import panels.StorePanel;
+import panels.*;
 import main.listenAdapter;
+import minigame.MiniGames;
 import potion.*;
 
 import java.awt.CardLayout;
-
-// windowBuilder 로 프레임만 제작하고 나머지는 입력
 
 public class Main extends listenAdapter {
 
@@ -41,7 +35,7 @@ public class Main extends listenAdapter {
 
 	private HealthPotion healthPotion;
 
-	private CardLayout cl; // 카드 레이이웃 오브젝트
+	private CardLayout cl; // 카드레이아웃 오브젝트
 
 	private CookieImg ci; // 쿠키이미지
 
@@ -145,7 +139,7 @@ public class Main extends listenAdapter {
 				cl.show(frame.getContentPane(), "speedrun"); // 게임패널을 카드레이아웃 최상단으로 변경
 				speedrunPanel.gameSet(selectPanel.getCi()); // 쿠키이미지를 넘겨주고 게임패널 세팅
 				speedrunPanel.gameStart(); // 게임시작
-				speedrunPanel.requestFocus(); // 리스너를 game패널에 강제로 줌
+				speedrunPanel.requestFocus(); // 리스너를 speedrun패널에 강제로 줌
 			}
 		} else if (e.getComponent().getName().equals("endAccept")) { // endAccept 이라는 이름을 가진 버튼을 눌렀다면
 			frame.getContentPane().remove(gamePanel); // 방금 했던 게임 패널을 프레임에서 삭제
@@ -154,7 +148,7 @@ public class Main extends listenAdapter {
 			frame.getContentPane().add(gamePanel, "game"); // 프레임에 새 게임패널 추가(카드레이아웃 하단)
 
 			frame.getContentPane().remove(speedrunPanel); // 방금 했던 게임 패널을 프레임에서 삭제
-			speedrunPanel = new SpeedrunPanel(frame, cl, this); // 게임패널을 새 패널로 교체
+			speedrunPanel = new SpeedrunPanel(frame, cl, this); // speedrun패널을 새 패널로 교체
 			speedrunPanel.setLayout(null);
 			frame.getContentPane().add(speedrunPanel, "speedrun");
 
@@ -163,7 +157,7 @@ public class Main extends listenAdapter {
 			selectPanel.setLayout(null);
 			frame.getContentPane().add(selectPanel, "select"); // 프레임에 새 select패널 추가(카드레이아웃 하단)
 			cl.show(frame.getContentPane(), "intro"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
-			introPanel.requestFocus(); // 리스너를 select패널에 강제로 줌
+			introPanel.requestFocus(); // 리스너를 intro패널에 강제로 줌
 		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
 			cl.show(frame.getContentPane(), "store");
 			storePanel.requestFocus();
@@ -173,10 +167,12 @@ public class Main extends listenAdapter {
 		}
 	}
 
-	public void switchToMiniGame(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame) {
-
+	public void switchToMiniGame(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame,
+			MiniGames currentMiniGame) {
 		// Switch to the minigame panel
+		superFrame.getContentPane().add(currentMiniGame, "minigame");
 		cl.show(superFrame.getContentPane(), "minigame");
+		currentMiniGame.setVisible(true);
 	}
 
 	public void returnToSpeedrunPanel(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame, boolean success) {
@@ -186,4 +182,9 @@ public class Main extends listenAdapter {
 		// Switch back to the speedrun panel
 		cl.show(superFrame.getContentPane(), "speedrun");
 	}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
 }

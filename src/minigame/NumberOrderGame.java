@@ -1,5 +1,7 @@
 package minigame;
 
+import panels.MiniGamePanel;
+import panels.SpeedrunPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -9,13 +11,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 
-import panels.SpeedrunPanel;
-
 public class NumberOrderGame extends MiniGames {
     private ArrayList<JButton> numberButtons;
     private int nextNumber;
 
-    public NumberOrderGame(SpeedrunPanel parentPanel) {
+    public NumberOrderGame(MiniGamePanel parentPanel) {
         super(parentPanel);
 
         numberButtons = new ArrayList<>();
@@ -56,8 +56,7 @@ public class NumberOrderGame extends MiniGames {
                 int response = JOptionPane.showConfirmDialog(null, "미니게임을 건너뛰시겠습니까? 10초가 추가됩니다.", "Skip Minigame",
                         JOptionPane.YES_NO_OPTION);
                 if (response == JOptionPane.YES_OPTION) {
-                    parentPanel.setMiniGameFailed(true);
-                    gameFailure();
+                    parentPanel.gameFinished(false);
                 }
             }
         });
@@ -68,10 +67,10 @@ public class NumberOrderGame extends MiniGames {
         if (number == nextNumber) {
             nextNumber++;
             if (nextNumber > 9) {
-                gameSuccess();
+                parentPanel.gameFinished(true);
             }
         } else {
-            gameFailure();
+            parentPanel.gameFinished(false);
         }
     }
 }

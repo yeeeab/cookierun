@@ -80,6 +80,7 @@ public class GamePanel extends JPanel {
 
 	// 체력 게이지
 	private ImageIcon lifeBar;
+	private ImageIcon extraBar;
 
 	protected ImageIcon gaugeBar;
 
@@ -155,6 +156,9 @@ public class GamePanel extends JPanel {
 	MapObjectImg mo3;
 	MapObjectImg mo4;
 
+	private Potion potion;
+	boolean drinkHealthPotion;
+
 	// 외부
 	JFrame superFrame;
 	CardLayout cl;
@@ -186,6 +190,7 @@ public class GamePanel extends JPanel {
 		this.superFrame = superFrame;
 		this.cl = cl;
 		this.main = (Main) o;
+		this.potion = new Potion();
 
 		// 일시정지 버튼
 		escButton = new JButton("back");
@@ -212,6 +217,7 @@ public class GamePanel extends JPanel {
 		initListener(); // 키리스너 추가
 
 		runRepaint(); // 리페인트 무한반복 실행
+
 	}
 
 	// 게임을 시작한다
@@ -345,10 +351,16 @@ public class GamePanel extends JPanel {
 
 		// 체력게이지를 그린다
 		buffg.drawImage(lifeBar.getImage(), 20, 30, null);
-		buffg.setColor(Color.BLACK);
-		buffg.fillRect(84 + (int) (470 * ((double) c1.getHealth() / 1000)), 65,
-				1 + 470 - (int) (470 * ((double) c1.getHealth() / 1000)), 21);
-
+		if (drinkHealthPotion) {
+			buffg.drawImage(extraBar.getImage(), 105, 30, null);
+			buffg.setColor(Color.BLACK);
+			buffg.fillRect(121 + (int) (470 * ((double) c1.getHealth() / 1000)), 65,
+					1 + 470 - (int) (470 * ((double) c1.getHealth() / 1000)), 21);
+		} else {
+			buffg.setColor(Color.BLACK);
+			buffg.fillRect(84 + (int) (470 * ((double) c1.getHealth() / 1000)), 65,
+					1 + 470 - (int) (470 * ((double) c1.getHealth() / 1000)), 21);
+		}
 		// 버튼을 그린다
 		buffg.drawImage(jumpBtn, 0, 360, 132, 100, null);
 		buffg.drawImage(slideBtn, 650, 360, 132, 100, null);
@@ -525,6 +537,7 @@ public class GamePanel extends JPanel {
 		}
 
 		this.mapLength = this.mapLength + tempMapLength;
+
 	}
 
 	// makeMo, initImageIcon, imitMap 메서드를 이용해서 객체 생성
@@ -532,7 +545,7 @@ public class GamePanel extends JPanel {
 
 		// 생명게이지 이미지아이콘
 		lifeBar = new ImageIcon("img/Objectimg/lifebar/lifeBar1.png");
-
+		extraBar = new ImageIcon("img/Objectimg/lifebar/extraBar.png");
 		gaugeBar = new ImageIcon("img/Objectimg/lifebar/GaugeBar1.png");
 
 		// 피격 붉은 이미지
@@ -591,6 +604,7 @@ public class GamePanel extends JPanel {
 
 		// 쿠키 인스턴스 생성 / 기본 자료는 클래스안에 내장 되어 있기 때문에 이미지만 넣었다.
 		c1 = new Cookie(cookieIc.getImage());
+		drinkHealthPotion = potion.drinkHealthPotion(c1);
 
 		// 쿠키의 정면 위치 / 쿠키의 x값과 높이를 더한 값
 		face = c1.getX() + c1.getWidth();
