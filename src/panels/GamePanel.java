@@ -19,6 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import ingame.Back;
+import ingame.Coin;
 import ingame.Cookie;
 import ingame.CookieImg;
 import ingame.Field;
@@ -55,6 +56,10 @@ public class GamePanel extends JPanel {
 	private ImageIcon backIc4;
 	private ImageIcon secondBackIc4;
 
+	// 맵의 크기
+	private int maxX;
+	private int maxY;
+
 	// 젤리 이미지 아이콘들
 	private ImageIcon jelly1Ic;
 	private ImageIcon jelly2Ic;
@@ -62,6 +67,9 @@ public class GamePanel extends JPanel {
 	private ImageIcon jellyHPIc;
 
 	private ImageIcon jellyEffectIc;
+
+	// 코인 이미지 아이콘들
+	private ImageIcon coinIc;
 
 	// 포션 이미지 아이콘들
 	private ImageIcon posion1Ic;
@@ -95,6 +103,8 @@ public class GamePanel extends JPanel {
 	// 리스트 생성
 	private List<Jelly> jellyList; // 젤리 리스트
 
+	private List<Coin> coinList; // 코인 리스트
+
 	private List<Field> fieldList; // 발판 리스트
 
 	private List<Tacle> tacleList; // 장애물 리스트
@@ -107,7 +117,9 @@ public class GamePanel extends JPanel {
 
 	private int runStage = 1; // 스테이지를 확인하는 변수이다. (미구현)
 
-	private int resultScore = 0; // 결과점수를 수집하는 변수
+	// private int resultScore = 0; // 결과점수를 수집하는 변수
+	private int jellyScore = 0; // 젤리 점수
+	private int coinScore = 0; // 코인 점수
 
 	private int gameSpeed = 5; // 게임 속도
 
@@ -156,9 +168,12 @@ public class GamePanel extends JPanel {
 	CardLayout cl;
 	Main main;
 
+	// 스피드업 포션
+	private JButton speedUpPotionBtn;
+	private SpeedUpPotion speedUpPotion;
+
 	// 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
 	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
-
 		this.superFrame = superFrame;
 		this.cl = cl;
 		this.main = (Main) o;
@@ -174,8 +189,41 @@ public class GamePanel extends JPanel {
 			}
 		});
 
+		// Initialize speed up potion
+        speedUpPotion = new SpeedUpPotion();
+		
+		// Load the potion image
+        ImageIcon potionIcon = new ImageIcon("img/store/potion1.png");
+		Image potionImage = potionIcon.getImage();
+        Image resizedPotionImage = potionImage.getScaledInstance(60, 80, Image.SCALE_SMOOTH); // Resize to 50x50
+        ImageIcon resizedPotionIcon = new ImageIcon(resizedPotionImage);
+
+        // Initialize speed up potion button
+        speedUpPotionBtn = new JButton(resizedPotionIcon);
+        speedUpPotionBtn.setName("SpeedUpPotionBtn");
+		int buttonWidth = resizedPotionIcon.getIconWidth();
+        int buttonHeight = resizedPotionIcon.getIconHeight();
+        speedUpPotionBtn.setBounds((superFrame.getWidth() - buttonWidth) / 2, superFrame.getHeight() - buttonHeight - 40, buttonWidth, buttonHeight); // Position the button at the bottom center
+        speedUpPotionBtn.addMouseListener(main);
+        this.add(speedUpPotionBtn);
 	}
 
+	// 스피드업 포션 속도 증가
+	public void increaseSpeedTemporarily(int amount, int durationMillis) {
+		new Thread(() -> {
+			int originalSpeed = this.gameSpeed;
+			this.gameSpeed += amount;
+			
+			try {
+				Thread.sleep(durationMillis);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+			this.gameSpeed = originalSpeed;
+		}).start();
+	}
+	
 	// 게임을 세팅한다
 	public void gameSet(CookieImg ci) {
 
@@ -196,6 +244,45 @@ public class GamePanel extends JPanel {
 		mapMove(); // 배경 젤리 발판 장애물 작동
 
 		fall(); // 낙하 스레드 발동
+
+	}
+
+	// 초기화 메서드에서 변수 초기화
+	private void initializeVariables() {
+		// 예제 값으로 초기화, 실제 값은 적절하게 설정해야 합니다.
+		maxX = 20; // 예제 값
+		maxY = 15; // 예제 값
+	}
+
+	// 젤리와 코인을 초기화하는 부분
+	private void initializeObjects() {
+		jellyList.clear();
+		coinList.clear();
+
+		for (int i = 0; i < maxX; i++) {
+			for (int j = 0; j < maxY; j++) {
+				if (colorArr[i][j] == 16776960) { // 기본젤리 생성
+					jellyList.add(new Jelly(jelly1Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 1234));
+				} else if (colorArr[i][j] == 13158400) { // 노란젤리 생성
+					jellyList.add(new Jelly(jelly2Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 2345));
+				} else if (colorArr[i][j] == 9868800) { // 주황젤리 생성
+					jellyList.add(new Jelly(jelly3Ic.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 3456));
+				} else if (colorArr[i][j] == 16737280) { // 피 물약 생성
+					jellyList.add(new Jelly(jellyHPIc.getImage(), i * 40 + mapLength * 40, j * 40, 30, 30, 255, 4567));
+				}
+			}
+		}
+		// 젤리 위치의 절반을 코인으로 변경
+		for (int i = 0; i < jellyList.size(); i += 2) {
+			Jelly tempJelly = jellyList.get(i);
+			coinList.add(new Coin(coinIc.getImage(), tempJelly.getX(), tempJelly.getY(),
+					tempJelly.getWidth(), tempJelly.getHeight(), 255, 10));
+		}
+
+		// 코인으로 변경된 젤리를 리스트에서 제거
+		for (int i = jellyList.size() - 1; i >= 0; i -= 2) {
+			jellyList.remove(i);
+		}
 
 	}
 
@@ -246,23 +333,23 @@ public class GamePanel extends JPanel {
 
 		}
 
-		// 젤리를 그린다
-		for (int i = 0; i < jellyList.size(); i++) {
-
-			Jelly tempJelly = jellyList.get(i);
-
-			if (tempJelly.getX() > -90 && tempJelly.getX() < 810) {
-
-				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-						(float) tempJelly.getAlpha() / 255);
-				g2.setComposite(alphaComposite); // 투명하게 하는방법 2
-
-				buffg.drawImage(tempJelly.getImage(), tempJelly.getX(), tempJelly.getY(), tempJelly.getWidth(),
-						tempJelly.getHeight(), null);
+		// 젤리 그리기
+		for (Jelly jelly : jellyList) {
+			if (jelly.getX() > -90 && jelly.getX() < 810) {
+				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) jelly.getAlpha() / 255);
+				g2.setComposite(alphaComposite);
+				g2.drawImage(jelly.getImage(), jelly.getX(), jelly.getY(), jelly.getWidth(), jelly.getHeight(), null);
 
 				// alpha값을 되돌린다
-				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 255 / 255);
+				alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
 				g2.setComposite(alphaComposite);
+			}
+		}
+
+		// 코인 그리기
+		for (Coin coin : coinList) {
+			if (coin.getX() > -90 && coin.getX() < 810) {
+				g2.drawImage(coin.getImage(), coin.getX(), coin.getY(), coin.getWidth(), coin.getHeight(), null);
 			}
 		}
 
@@ -316,7 +403,10 @@ public class GamePanel extends JPanel {
 
 		// 점수를 그린다(수정됨)
 		if (showScore) {
-			Util.drawFancyString(g2, Integer.toString(resultScore), 600, 58, 30, Color.WHITE);
+			// Util.drawFancyString(g2, Integer.toString(resultScore), 600, 58, 30,
+			// Color.WHITE);
+			Util.drawFancyString(g2, "Jelly: " + Integer.toString(jellyScore), 600, 30, 30, Color.WHITE);
+			Util.drawFancyString(g2, "Coin: " + Integer.toString(coinScore), 600, 58, 30, Color.WHITE);
 		}
 
 		// 체력게이지를 그린다
@@ -409,6 +499,9 @@ public class GamePanel extends JPanel {
 		jellyHPIc = mo.getJellyHPIc();
 
 		jellyEffectIc = mo.getJellyEffectIc();
+
+		// 코인 이미지 아이콘
+		coinIc = mo.getCoinIc();
 
 		// 발판 이미지 아이콘들
 		field1Ic = mo.getField1Ic(); // 발판
