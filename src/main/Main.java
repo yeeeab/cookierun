@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -18,6 +20,7 @@ import panels.SpeedrunPanel;
 import panels.StorePanel;
 import main.listenAdapter;
 import potion.*;
+import minigame.*;
 
 import java.awt.CardLayout;
 
@@ -30,9 +33,31 @@ public class Main extends listenAdapter {
     private GamePanel gamePanel; // 게임진행
     private SpeedrunPanel speedrunPanel;
     private EndPanel endPanel; // 게임결과
-    private HealthPotion healthPotion;
     private CardLayout cl; // 카드 레이이웃 오브젝트
     private CookieImg ci; // 쿠키이미지
+    private HealthPotion healthPotion; // 체력증가 포션
+    private SpeedUpPotion speedUpPotion; // 스피드업 포션
+    private CoinPotion coinPotion; // 코인증가 포션
+
+    private int totalCoinScore = 0; // 코인 점수
+
+	private List<Potion> potions;
+
+	public int getTotalCoinScore() {
+		return totalCoinScore;
+	}
+
+	public void addCoins(int coins) {
+		this.totalCoinScore += coins;
+	}
+
+	public void spendCoins(int coins) {
+		if (totalCoinScore >= coins) {
+			this.totalCoinScore -= coins;
+		} else {
+			System.out.println("코인이 부족합니다!");
+		}
+	}
 
     public GamePanel getGamePanel() {
         return gamePanel;
@@ -84,10 +109,21 @@ public class Main extends listenAdapter {
         storePanel = new StorePanel(frame, cl); // 상점
         selectPanel = new SelectPanel(frame, cl, this); // Main의 리스너를 넣기위한 this
         gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
-        endPanel = new EndPanel(this); // Main의 리스너를 넣기위한 this
+        endPanel = new EndPanel(this, this); // Main의 리스너를 넣기위한 this
         speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
 
+        // 포션
         healthPotion = new HealthPotion();
+        speedUpPotion = new SpeedUpPotion();
+        ImageIcon coinPotionIcon = new ImageIcon("img/store/Potion3.png");
+        coinPotion = new CoinPotion(coinPotionIcon.getImage(), 0, 0, coinPotionIcon.getIconWidth(), coinPotionIcon.getIconHeight(), 1);
+
+		// 미니게임 - 스페이바게이지 채우는 게임
+		// SpaceBarKeysGame spacebarkeysgame = new SpaceBarKeysGame();
+        // frame.add(spacebarkeysgame);
+        // frame.addKeyListener(spacebarkeysgame); // KeyListener 추가
+        // frame.setFocusable(true);
+        // frame.requestFocus();
 
         // 모든 패널의 레이아웃을 null로 변환
         introPanel.setLayout(null);
@@ -103,6 +139,11 @@ public class Main extends listenAdapter {
         frame.getContentPane().add(gamePanel, "game");
         frame.getContentPane().add(speedrunPanel, "speedrun");
         frame.getContentPane().add(endPanel, "end");
+
+        // Initialize potions
+        speedUpPotion = new SpeedUpPotion();
+
+        introPanel.addMouseListener(this);
     }
 
     @Override
@@ -153,6 +194,12 @@ public class Main extends listenAdapter {
         } else if (e.getComponent().getName().equals("HealthPotionBtn")) {
             cl.show(frame.getContentPane(), "healthpotion");
             healthPotion.use(); // 추가 기능 구현 필요
-        }
+        } else if (e.getComponent().getName().equals("SpeedUpPotionBtn")) {
+            if (!speedUpPotion.isUsed()) {
+                speedUpPotion.use(gamePanel);
+                gamePanel.remove(e.getComponent());
+                gamePanel.repaint();
+            }
+        } 
     }
 }

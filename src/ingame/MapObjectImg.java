@@ -23,6 +23,9 @@ public class MapObjectImg {
 
 	private ImageIcon jellyEffectIc;
 
+	// 코인 이미지 아이콘들
+	private ImageIcon coinIc;
+
 	// 발판 이미지 아이콘들
 	private ImageIcon field1Ic; // 발판
 	private ImageIcon field2Ic; // 공중발판
