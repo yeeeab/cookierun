@@ -63,23 +63,26 @@ public abstract class MiniGames extends JPanel {
 
     public static void startRandomGame(SpeedrunPanel parentPanel, Main main, CardLayout cl, JFrame superFrame) {
         Random random = new Random();
-        int gameIndex = random.nextInt(3); // 세 개의 미니게임 중 하나를 선택
-        MiniGames miniGame = null;
+        while (true) {
+            int gameIndex = random.nextInt(3); // 세 개의 미니게임 중 하나를 선택
+            MiniGames miniGame = null;
 
-        switch (gameIndex) {
-            case 0:
-                miniGame = new NumberOrderGame(new MiniGamePanel(parentPanel));
-                break;
-            case 1:
-                miniGame = new BidirectionalKeysGame(new MiniGamePanel(parentPanel));
-                break;
-            case 2:
-                miniGame = new RockScissorsPaper(new MiniGamePanel(parentPanel));
-                break;
-        }
+            switch (gameIndex) {
+                case 0:
+                    miniGame = new NumberOrderGame(new MiniGamePanel(parentPanel));
+                    break;
+                case 1:
+                    // miniGame = new BidirectionalKeysGame(new MiniGamePanel(parentPanel));
+                    break;
+                case 2:
+                    miniGame = new RockScissorsPaper(new MiniGamePanel(parentPanel));
+                    break;
+            }
 
-        if (miniGame != null) {
-            main.switchToMiniGame(parentPanel, cl, superFrame, miniGame);
+            if (miniGame != null) {
+                main.switchToMiniGame(parentPanel, cl, superFrame, miniGame);
+                break;
+            }
         }
     }
 

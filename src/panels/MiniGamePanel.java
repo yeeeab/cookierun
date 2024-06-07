@@ -52,8 +52,10 @@ public class MiniGamePanel extends JPanel {
     }
 
     private MiniGames getRandomMiniGame(SpeedrunPanel parentPanel) {
-        MiniGames[] miniGames = { new NumberOrderGame(this), new BidirectionalKeysGame(this),
-                new RockScissorsPaper(this) };
+        // MiniGames[] miniGames = { new NumberOrderGame(this), new
+        // BidirectionalKeysGame(this),
+        // new RockScissorsPaper(this) };
+        MiniGames[] miniGames = { new NumberOrderGame(this), new RockScissorsPaper(this) };
         return miniGames[new java.util.Random().nextInt(miniGames.length)];
     }
 }

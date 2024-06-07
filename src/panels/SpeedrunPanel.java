@@ -34,7 +34,6 @@ public class SpeedrunPanel extends GamePanel {
     }
 
     public void gameStart() {
-        resetGame();
         super.gameStart();
         startSpeedrunTimer();
     }
@@ -165,21 +164,8 @@ public class SpeedrunPanel extends GamePanel {
             main.getEndPanel().setResultTime(currentTimerText);
             main.getEndPanel().setSpeedrunGame(true);
             cl.show(superFrame.getContentPane(), "end");
-            resetGame();
             superFrame.requestFocus();
         }
-    }
-
-    private void resetGame() {
-        elapsedTime = 0;
-        addTime = 0;
-        inMiniGame = false;
-        currentTimerText = "00:00:00";
-        isGameEnded = false;
-        isMiniGameFailed = false;
-        resultScore = 0;
-        miniGamesPlayed = 0; // 초기화
-        c1.setHealth(1000);
     }
 
     public Main getMain() {

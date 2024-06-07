@@ -17,7 +17,7 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
     }
 
     private void setupGame() {
-        setLayout(new FlowLayout());
+        setLayout(null); // 절대 위치 사용
 
         // 이미지 아이콘 로드
         ImageIcon rockIcon = new ImageIcon("img/miniGame/rock.jpg");
@@ -29,6 +29,11 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
         paperButton = new JButton("보", paperIcon);
         scissorsButton = new JButton("가위", scissorsIcon);
 
+        // 버튼 크기 및 위치 설정
+        rockButton.setBounds(200, 150, 120, 120);
+        paperButton.setBounds(340, 150, 120, 120);
+        scissorsButton.setBounds(480, 150, 120, 120);
+
         // 버튼 리스너 추가
         rockButton.addActionListener(this);
         paperButton.addActionListener(this);
@@ -39,8 +44,10 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
         add(paperButton);
         add(scissorsButton);
 
-        // 결과 라벨 추가
-        resultLabel = new JLabel("결과가 여기 표시됩니다.");
+        // 결과 라벨 추가 및 위치 설정
+        resultLabel = new JLabel("Rock, paper, scissors!", SwingConstants.CENTER);
+        resultLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        resultLabel.setBounds(300, 300, 400, 30); // 라벨 크기 및 위치 설정
         add(resultLabel);
     }
 
@@ -56,20 +63,20 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
 
         // 승패 결정 로직
         if (userChoice.equals(choices[computerChoice])) {
-            resultLabel.setText("결과: 무승부! 다시 시도하세요.");
+            resultLabel.setText("Result: A draw, try again.");
         } else if ((userChoice.equals("바위") && computerChoice == 0) ||
                 (userChoice.equals("보") && computerChoice == 1) ||
                 (userChoice.equals("가위") && computerChoice == 2)) {
-            resultLabel.setText("결과: 이겼습니다!");
+            resultLabel.setText("Result: You win!");
             gameSuccess();
         } else {
-            resultLabel.setText("결과: 졌습니다!");
+            resultLabel.setText("Result: You lose!");
             gameFailure();
         }
     }
 
     @Override
     public void startGame() {
-        resultLabel.setText("결과가 여기 표시됩니다.");
+        resultLabel.setText("The result will display here");
     }
 }
