@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import ingame.CookieImg;
+import potion.HealthPotion;
 
 public class SelectPanel extends JPanel {
 
@@ -55,14 +56,18 @@ public class SelectPanel extends JPanel {
 
 	// 게임에서 사용할 쿠키 이미지들을 담을 오브젝트
 	private CookieImg ci;
+	private HealthPotion healthPotionObj;
 
 	// 쿠키 이미지를 메인에서 gamePanel로 보내기 위한 게터
 	public CookieImg getCi() {
 		return ci;
 	}
 
-	public SelectPanel(Object o) {
+	public HealthPotion getHealthPotion() {
+		return healthPotionObj;
+	}
 
+	public SelectPanel(Object o) {
 		// 시작 버튼
 		StartBtn = new JButton(start);
 		StartBtn.setName("StartBtn");
@@ -97,6 +102,8 @@ public class SelectPanel extends JPanel {
 		HealthPotionBtn.setBorderPainted(false);
 		HealthPotionBtn.setContentAreaFilled(false);
 		HealthPotionBtn.setFocusPainted(false);
+
+		healthPotionObj = new HealthPotion();
 
 		// 캐릭터 ch1
 		ch1 = new JButton(ch01);
@@ -204,10 +211,11 @@ public class SelectPanel extends JPanel {
 
 		// 캐릭터 선택 타이틀
 		JLabel selectTxt = new JLabel("");
-		selectTxt.setHorizontalAlignment(SwingConstants.CENTER);
-		selectTxt.setIcon(new ImageIcon("img/select/selectTxt.png"));
-		selectTxt.setBounds(174, 15, 397, 112);
+		selectTxt.setIcon(new ImageIcon("img/select/selectText.png"));
+		selectTxt.setBounds(152, 10, 495, 55);
 		add(selectTxt);
 
+		setLayout(null);
+		setBounds(0, 0, 800, 500);
 	}
 }
