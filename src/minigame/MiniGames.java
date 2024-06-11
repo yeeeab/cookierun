@@ -2,17 +2,13 @@ package minigame;
 
 import javax.swing.JPanel;
 import java.util.Random;
-import java.util.Timer;
-import panels.MiniGamePanel;
-import main.Main;
-import java.awt.CardLayout;
-import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.AlphaComposite;
-import panels.*;
+import panels.MiniGamePanel;
+import panels.SpeedrunPanel;
 
 public abstract class MiniGames extends JPanel {
     protected MiniGamePanel parentPanel;
@@ -61,10 +57,10 @@ public abstract class MiniGames extends JPanel {
         endGame();
     }
 
-    public static void startRandomGame(SpeedrunPanel parentPanel, Main main, CardLayout cl, JFrame superFrame) {
+    public static void startRandomGame(SpeedrunPanel parentPanel) {
         Random random = new Random();
         while (true) {
-            int gameIndex = random.nextInt(3); // 세 개의 미니게임 중 하나를 선택
+            int gameIndex = random.nextInt(2); // 두 개의 미니게임 중 하나를 선택
             MiniGames miniGame = null;
 
             switch (gameIndex) {
@@ -72,15 +68,12 @@ public abstract class MiniGames extends JPanel {
                     miniGame = new NumberOrderGame(new MiniGamePanel(parentPanel));
                     break;
                 case 1:
-                    // miniGame = new BidirectionalKeysGame(new MiniGamePanel(parentPanel));
-                    break;
-                case 2:
                     miniGame = new RockScissorsPaper(new MiniGamePanel(parentPanel));
                     break;
             }
 
             if (miniGame != null) {
-                main.switchToMiniGame(parentPanel, cl, superFrame, miniGame);
+                parentPanel.switchToMiniGame(miniGame);
                 break;
             }
         }

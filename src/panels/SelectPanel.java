@@ -2,6 +2,7 @@ package panels;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.CardLayout;
+import javax.swing.JFrame;
 
 import ingame.CookieImg;
 import potion.HealthPotion;
@@ -54,6 +57,12 @@ public class SelectPanel extends JPanel {
 	// hp 증가 포션 버튼
 	private JButton HealthPotionBtn;
 
+	// 뒤로가기 버튼
+	private JButton backButton;
+
+	private JFrame mainFrame;
+	private CardLayout cardLayout;
+
 	// 게임에서 사용할 쿠키 이미지들을 담을 오브젝트
 	private CookieImg ci;
 	private HealthPotion healthPotionObj;
@@ -67,9 +76,17 @@ public class SelectPanel extends JPanel {
 		return healthPotionObj;
 	}
 
-	public SelectPanel(Object o) {
+	public SelectPanel(JFrame mainFrame, CardLayout cardLayout, Object o) {
+		this.mainFrame = mainFrame;
+		this.cardLayout = cardLayout;
+
 		// 시작 버튼
-		StartBtn = new JButton(start);
+		ImageIcon originalIcon = new ImageIcon("img/select/itemBtn.png"); // 원본 이미지
+		Image originalImage = originalIcon.getImage(); // Image 객체로 변환
+		Image scaledImage = originalImage.getScaledInstance(291, 80, Image.SCALE_SMOOTH); // 원하는 크기로 조정
+		ImageIcon ItemStartIcon = new ImageIcon(scaledImage); // 다시 ImageIcon으로 변환
+
+		StartBtn = new JButton(ItemStartIcon);
 		StartBtn.setName("StartBtn");
 		StartBtn.addMouseListener((MouseListener) o);
 		StartBtn.setBounds(254, 284, 291, 81);
@@ -78,8 +95,27 @@ public class SelectPanel extends JPanel {
 		StartBtn.setContentAreaFilled(false);
 		StartBtn.setFocusPainted(false);
 
+		// 뒤로가기 버튼
+		ImageIcon backIcon = new ImageIcon("img/select/backBtn.png");
+		backButton = new JButton(backIcon);
+		backButton.setBounds(670, 10, 100, 50); // 버튼의 위치와 크기 설정
+		backButton.setBorderPainted(false);
+		backButton.setContentAreaFilled(false);
+		backButton.setFocusPainted(false);
+		backButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				cardLayout.show(mainFrame.getContentPane(), "intro");
+			}
+		});
+
 		// 스피드런 모드 시작 버튼
-		SpeedrunBtn = new JButton(speedrunStart);
+		ImageIcon originalIcon2 = new ImageIcon("img/select/SpeedrunBtn.png"); // 원본 이미지
+		Image originalImage2 = originalIcon2.getImage(); // Image 객체로 변환
+		Image scaledImage2 = originalImage2.getScaledInstance(291, 80, Image.SCALE_SMOOTH); // 원하는 크기로 조정
+		ImageIcon SpeedrunStartIcon = new ImageIcon(scaledImage2); // 다시 ImageIcon으로 변환
+
+		SpeedrunBtn = new JButton(SpeedrunStartIcon);
 		SpeedrunBtn.setName("SpeedrunBtn");
 		SpeedrunBtn.addMouseListener((MouseListener) o);
 		SpeedrunBtn.setBounds(254, 364, 291, 81);
@@ -89,15 +125,15 @@ public class SelectPanel extends JPanel {
 		SpeedrunBtn.setFocusPainted(false);
 
 		// hp 증가 포션 버튼
-		ImageIcon originalIcon3 = new ImageIcon("img/store/potion2.png");
-		Image originalImage3 = originalIcon3.getImage();
-		Image scaledImage3 = originalImage3.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-		healthPotion = new ImageIcon(scaledImage3);
+		ImageIcon originalIcon3 = new ImageIcon("img/store/potion2.png"); // 원본 이미지
+		Image originalImage3 = originalIcon3.getImage(); // Image 객체로 변환
+		Image scaledImage3 = originalImage3.getScaledInstance(100, 100, Image.SCALE_SMOOTH); // 원하는 크기로 조정
+		ImageIcon HealthPotionIcon = new ImageIcon(scaledImage3); // 다시 ImageIcon으로 변환
 
-		HealthPotionBtn = new JButton(healthPotion);
+		HealthPotionBtn = new JButton(HealthPotionIcon);
 		HealthPotionBtn.setName("HealthPotionBtn");
 		HealthPotionBtn.addMouseListener((MouseListener) o);
-		HealthPotionBtn.setBounds(104, 304, 100, 100); // 크기조정 필요
+		HealthPotionBtn.setBounds(104, 304, 100, 100);
 		add(HealthPotionBtn);
 		HealthPotionBtn.setBorderPainted(false);
 		HealthPotionBtn.setContentAreaFilled(false);
@@ -125,6 +161,7 @@ public class SelectPanel extends JPanel {
 		});
 		ch1.setBounds(90, 62, 150, 200);
 		add(ch1);
+		add(backButton);
 		ch1.setBorderPainted(false);
 		ch1.setContentAreaFilled(false);
 		ch1.setFocusPainted(false);

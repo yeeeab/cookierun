@@ -19,25 +19,31 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
     private void setupGame() {
         setLayout(null); // 절대 위치 사용
 
-        // 이미지 아이콘 로드
+        // 이미지 아이콘 로드 및 크기 조정
         ImageIcon rockIcon = new ImageIcon("img/miniGame/rock.jpg");
+        Image rockImage = rockIcon.getImage();
+        Image scaledRockImage = rockImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon scaledRockIcon = new ImageIcon(scaledRockImage);
+
         ImageIcon paperIcon = new ImageIcon("img/miniGame/paper.jpg");
+        Image paperImage = paperIcon.getImage();
+        Image scaledPaperImage = paperImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon scaledPaperIcon = new ImageIcon(scaledPaperImage);
+
         ImageIcon scissorsIcon = new ImageIcon("img/miniGame/scissors.jpg");
+        Image scissorsImage = scissorsIcon.getImage();
+        Image scaledScissorsImage = scissorsImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon scaledScissorsIcon = new ImageIcon(scaledScissorsImage);
 
         // 버튼 초기화 및 이미지 설정
-        rockButton = new JButton("바위", rockIcon);
-        paperButton = new JButton("보", paperIcon);
-        scissorsButton = new JButton("가위", scissorsIcon);
+        rockButton = createButton("바위", scaledRockIcon);
+        paperButton = createButton("보", scaledPaperIcon);
+        scissorsButton = createButton("가위", scaledScissorsIcon);
 
         // 버튼 크기 및 위치 설정
         rockButton.setBounds(200, 150, 120, 120);
         paperButton.setBounds(340, 150, 120, 120);
         scissorsButton.setBounds(480, 150, 120, 120);
-
-        // 버튼 리스너 추가
-        rockButton.addActionListener(this);
-        paperButton.addActionListener(this);
-        scissorsButton.addActionListener(this);
 
         // 버튼을 패널에 추가
         add(rockButton);
@@ -49,6 +55,16 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
         resultLabel.setFont(new Font("Arial", Font.BOLD, 20));
         resultLabel.setBounds(300, 300, 400, 30); // 라벨 크기 및 위치 설정
         add(resultLabel);
+    }
+
+    private JButton createButton(String text, ImageIcon icon) {
+        JButton button = new JButton(text, icon);
+        button.setMargin(new Insets(0, 0, 0, 0));
+        button.setIconTextGap(10); // 아이콘과 텍스트 간격 설정
+        button.setHorizontalTextPosition(SwingConstants.CENTER);
+        button.setVerticalTextPosition(SwingConstants.BOTTOM);
+        button.addActionListener(this);
+        return button;
     }
 
     @Override

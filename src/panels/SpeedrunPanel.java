@@ -17,6 +17,7 @@ public class SpeedrunPanel extends GamePanel {
     private String currentTimerText = "00:00:00";
     private boolean isGameEnded = false;
     private boolean isMiniGameFailed = false;
+    int resultScore = 0;
     private int maxscore = 300000;
     private int[] miniGameScoreThresholds = { 75000, 150000, 225000 };
     private int thresholdMargin = 1000;
@@ -62,12 +63,12 @@ public class SpeedrunPanel extends GamePanel {
 
                     if (!isGameEnded) {
                         if (resultScore >= maxscore) {
+                            System.out.println("Game should end now due to max score");
                             endGame();
                         } else if (shouldStartMiniGame(resultScore)) {
                             System.out.println("Mini game start");
                             setEscKeyOn(true);
                             startMiniGame();
-                            addScoreToExitRange(resultScore);
                         }
                     }
                 }
@@ -90,12 +91,7 @@ public class SpeedrunPanel extends GamePanel {
     private void startMiniGame() {
         try {
             inMiniGame = true;
-            MiniGamePanel miniGamePanel = new MiniGamePanel(this);
-            main.getFrame().getContentPane().add(miniGamePanel, "minigame");
-            ((CardLayout) main.getFrame().getContentPane().getLayout()).show(main.getFrame().getContentPane(),
-                    "minigame");
-            miniGamePanel.startRandomGame(this, main, cl, superFrame);
-            miniGamePanel.requestFocus();
+            MiniGames.startRandomGame(this);
         } catch (Exception e) {
             System.err.println("Exception occurred in startMiniGame: " + e.getMessage());
             e.printStackTrace();
@@ -128,8 +124,7 @@ public class SpeedrunPanel extends GamePanel {
 
     private boolean shouldStartMiniGame(int score) {
         if (miniGamesPlayed < miniGameScoreThresholds.length
-                && score >= miniGameScoreThresholds[miniGamesPlayed] - thresholdMargin
-                && score <= miniGameScoreThresholds[miniGamesPlayed] + thresholdMargin) {
+                && score >= miniGameScoreThresholds[miniGamesPlayed]) {
             System.out.println("Score in range for mini game: " + score);
             return true;
         }
@@ -161,8 +156,11 @@ public class SpeedrunPanel extends GamePanel {
             timer.cancel();
             c1.setHealth(0);
 
-            main.getEndPanel().setResultTime(currentTimerText);
+            main.getEndPanel().setSpeedrunScore(currentTimerText, getResultScore());
+            main.getEndPanel().setCoinScore(coinScore); // Ensure the coin score is set
+            main.getEndPanel().setTotalCoins(main.getTotalCoinScore());
             main.getEndPanel().setSpeedrunGame(true);
+            main.getEndPanel().updateLabel();
             cl.show(superFrame.getContentPane(), "end");
             superFrame.requestFocus();
         }
@@ -170,5 +168,11 @@ public class SpeedrunPanel extends GamePanel {
 
     public Main getMain() {
         return main;
+    }
+
+    public void switchToMiniGame(MiniGames miniGame) {
+        main.getFrame().getContentPane().add(miniGame, "minigame");
+        ((CardLayout) main.getFrame().getContentPane().getLayout()).show(main.getFrame().getContentPane(), "minigame");
+        miniGame.startGame();
     }
 }

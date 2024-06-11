@@ -4,30 +4,60 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import main.Main;
 
 public class EndPanel extends JPanel {
-
 	ImageIcon btn = new ImageIcon("img/end/button.png");
 	JButton btnNewButton;
-	JLabel lblNewLabel_1;
-	JLabel lblNewLabel_2;
-	JLabel lblNewLabel;
+	JLabel lblTitle;
+	JLabel lblTimeOrJellyScore;
+	JLabel lblCoinScore;
+	JLabel lblTotalCoins;
+	JLabel lblBackground;
+
+	int jellyScore = 0;
+	String time = null;
+
 	boolean isSpeedrunGame;
 
-	private int resultScore;
+	private Main main;
 
 	public void setResultScore(int resultScore) {
-		lblNewLabel_2.setText(resultScore + "");
+		if (!isSpeedrunGame) {
+			lblTimeOrJellyScore.setText("Jelly Score: " + resultScore);
+		}
 	}
 
 	public void setResultTime(String time) {
-		lblNewLabel_2.setText(time);
+		if (isSpeedrunGame) {
+			this.time = time;
+			lblTimeOrJellyScore.setText("Time: " + time);
+		}
+	}
+
+	public void setScore(int jellyScore, int coinScore) {
+		this.jellyScore = jellyScore;
+		lblTimeOrJellyScore.setText("Jelly Score: " + jellyScore);
+		lblCoinScore.setText("Coin Score: " + coinScore);
+	}
+
+	public void setSpeedrunScore(String time, int coinScore) {
+		this.time = time;
+		lblTimeOrJellyScore.setText("Time: " + time);
+		lblCoinScore.setText("Coin Score: " + coinScore);
+	}
+
+	public void setCoinScore(int coinScore) {
+		lblCoinScore.setText("Coin Score: " + coinScore);
+	}
+
+	public void setTotalCoins(int totalCoins) {
+		lblTotalCoins.setText("Total Coins: " + totalCoins);
 	}
 
 	public void setSpeedrunGame(boolean isIt) {
@@ -35,9 +65,10 @@ public class EndPanel extends JPanel {
 		updateLabel();
 	}
 
-	public EndPanel(Object o) {
+	public EndPanel(Object o, Main main) {
+		this.main = main;
 		setLayout(null);
-		// 버튼
+
 		btnNewButton = new JButton(btn);
 		btnNewButton.setName("endAccept");
 		btnNewButton.addMouseListener((MouseListener) o);
@@ -47,35 +78,47 @@ public class EndPanel extends JPanel {
 		btnNewButton.setContentAreaFilled(false);
 		add(btnNewButton);
 
-		// 점수 또는 시간 라벨
-		lblNewLabel_1 = new JLabel();
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 37));
-		lblNewLabel_1.setBounds(451, 0, 205, 55);
-		add(lblNewLabel_1);
+		lblTitle = new JLabel();
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setFont(new Font("Gill Sans Ultra Bold", Font.PLAIN, 37));
+		lblTitle.setBounds(451, 0, 205, 55);
+		add(lblTitle);
 
-		lblNewLabel_2 = new JLabel("0");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Harlow Solid Italic", Font.PLAIN, 49));
-		lblNewLabel_2.setBounds(313, 52, 459, 87);
-		add(lblNewLabel_2);
+		lblTimeOrJellyScore = new JLabel("0");
+		lblTimeOrJellyScore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTimeOrJellyScore.setFont(new Font("Gill Sans", Font.PLAIN, 49));
+		lblTimeOrJellyScore.setBounds(313, 52, 459, 87);
+		add(lblTimeOrJellyScore);
 
-		lblNewLabel = new JLabel("");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNewLabel.setBackground(SystemColor.activeCaptionText);
-		lblNewLabel.setIcon(new ImageIcon("img/end/cookierunbg.jpg"));
-		lblNewLabel.setBounds(0, 0, 784, 461);
-		add(lblNewLabel);
+		lblCoinScore = new JLabel("Coin Score: 0");
+		lblCoinScore.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCoinScore.setFont(new Font("Gill Sans", Font.PLAIN, 30));
+		lblCoinScore.setBounds(313, 150, 459, 87);
+		add(lblCoinScore);
 
-		// 초기 라벨 업데이트
+		lblTotalCoins = new JLabel("Total Coins: " + main.getTotalCoinScore());
+		lblTotalCoins.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotalCoins.setFont(new Font("Gill Sans", Font.PLAIN, 30));
+		lblTotalCoins.setBounds(313, 200, 459, 87);
+		add(lblTotalCoins);
+
+		lblBackground = new JLabel("");
+		lblBackground.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblBackground.setBackground(SystemColor.activeCaptionText);
+		lblBackground.setIcon(new ImageIcon("img/end/cookierunbg.jpg"));
+		lblBackground.setBounds(0, 0, 784, 461);
+		add(lblBackground);
+
 		updateLabel();
 	}
 
-	private void updateLabel() {
+	public void updateLabel() {
 		if (isSpeedrunGame) {
-			lblNewLabel_1.setText("TIME");
+			lblTitle.setText("TIME");
+			lblTimeOrJellyScore.setText(time);
 		} else {
-			lblNewLabel_1.setText("SCORE");
+			lblTitle.setText("SCORE");
+			lblTimeOrJellyScore.setText(String.valueOf(jellyScore));
 		}
 	}
 }
