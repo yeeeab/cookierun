@@ -1,15 +1,18 @@
 package panels;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.AlphaComposite;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.event.MouseListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import main.Main;
+import java.awt.event.MouseListener;
+import java.awt.Font;
 
 public class EndPanel extends JPanel {
 	ImageIcon btn = new ImageIcon("img/end/button.png");
@@ -63,6 +66,18 @@ public class EndPanel extends JPanel {
 	public void setSpeedrunGame(boolean isIt) {
 		isSpeedrunGame = isIt;
 		updateLabel();
+	}
+
+	public boolean isSpeedrunGame() {
+		return isSpeedrunGame;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public int getJellyScore() {
+		return jellyScore;
 	}
 
 	public EndPanel(Object o, Main main) {

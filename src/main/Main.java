@@ -37,6 +37,8 @@ public class Main extends listenAdapter {
 
 	private EndPanel endPanel; // 게임결과
 
+	private RankPanel rankPanel; // 순위 패널 추가
+
 	private HealthPotion healthPotion;
 	private CoinPotion coinPotion;
 	private SpeedUpPotion speedUpPotion;
@@ -81,6 +83,10 @@ public class Main extends listenAdapter {
 		return endPanel;
 	}
 
+	public RankPanel getRankPanel() {
+		return rankPanel;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -119,6 +125,7 @@ public class Main extends listenAdapter {
 		endPanel = new EndPanel(this, this); // Main의 리스너를 넣기위한 this
 		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
 		minigamePanel = new MiniGamePanel(speedrunPanel); // 미니게임 패널 추가
+		rankPanel = new RankPanel(frame, cl); // 순위 패널 추가
 
 		healthPotion = new HealthPotion();
 
@@ -128,7 +135,7 @@ public class Main extends listenAdapter {
 		selectPanel.setLayout(null);
 		gamePanel.setLayout(null);
 		endPanel.setLayout(null);
-		// minigamePanel.setLayout(cl); // This line is not needed
+		rankPanel.setLayout(null);
 
 		// 프레임에 패널들을 추가한다.(카드 레이아웃을 위한 패널들)
 		frame.getContentPane().add(introPanel, "intro");
@@ -137,10 +144,11 @@ public class Main extends listenAdapter {
 		frame.getContentPane().add(gamePanel, "game");
 		frame.getContentPane().add(speedrunPanel, "speedrun");
 		frame.getContentPane().add(endPanel, "end");
+		frame.getContentPane().add(rankPanel, "rank"); // RankPanel 추가
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) { // mouseClicked로 변경가능
+	public void mousePressed(MouseEvent e) {
 		if (e.getComponent().toString().contains("IntroPanel")) { // IntroPanel에서 마우스를 눌렀다면
 			try {
 				Thread.sleep(300);
@@ -183,6 +191,14 @@ public class Main extends listenAdapter {
 			selectPanel = new SelectPanel(frame, cl, this); // select 패널을 새 패널로 교체
 			selectPanel.setLayout(null);
 			frame.getContentPane().add(selectPanel, "select"); // 프레임에 새 select패널 추가(카드레이아웃 하단)
+
+			// 순위 업데이트
+			if (endPanel.isSpeedrunGame()) {
+				rankPanel.updateRanks(0, endPanel.getTime());
+			} else {
+				rankPanel.updateRanks(endPanel.getJellyScore(), "00:00:00");
+			}
+
 			cl.show(frame.getContentPane(), "intro"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
 			introPanel.requestFocus(); // 리스너를 intro패널에 강제로 줌
 		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
@@ -215,5 +231,4 @@ public class Main extends listenAdapter {
 	public JFrame getFrame() {
 		return frame;
 	}
-
 }

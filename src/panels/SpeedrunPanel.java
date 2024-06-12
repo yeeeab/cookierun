@@ -161,6 +161,14 @@ public class SpeedrunPanel extends GamePanel {
             main.getEndPanel().setTotalCoins(main.getTotalCoinScore());
             main.getEndPanel().setSpeedrunGame(true);
             main.getEndPanel().updateLabel();
+
+            if (resultScore < maxscore) {
+                currentTimerText = "00:00:00";
+            }
+
+            // Update ranks
+            main.getRankPanel().updateRanks(0, currentTimerText);
+
             cl.show(superFrame.getContentPane(), "end");
             superFrame.requestFocus();
         }
