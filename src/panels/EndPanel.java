@@ -17,7 +17,7 @@ import javax.swing.SwingConstants;
 import main.Main;
 
 public class EndPanel extends JPanel {
-
+ 
 	ImageIcon btn = new ImageIcon("img/end/button.png");
 	JButton btnNewButton;
 	JLabel lblNewLabel_1;

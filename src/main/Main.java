@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import ingame.CookieImg;
-import panels.EndPanel;
+import panels.EndPanel; 
 import panels.GamePanel;
 import panels.IntroPanel;
 import panels.SelectPanel;

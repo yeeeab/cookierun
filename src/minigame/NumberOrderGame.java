@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Collections;
 
 import panels.SpeedrunPanel;

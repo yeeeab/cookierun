@@ -13,7 +13,7 @@ import util.Util;
 public class SpeedrunPanel extends GamePanel {
     private Main main;
     private int elapsedTime = 0;
-    private Timer timer;
+    private Timer timer; 
     private JProgressBar gaugeBar;
     private boolean inMiniGame = false;
     private String currentTimerText = "00:00:00";

@@ -18,7 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ingame.Back;
+import ingame.Back; 
 import ingame.Coin;
 import ingame.Cookie;
 import ingame.CookieImg;

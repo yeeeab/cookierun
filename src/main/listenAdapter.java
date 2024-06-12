@@ -13,7 +13,7 @@ public abstract class listenAdapter implements KeyListener, MouseListener, Actio
 	@Override
 	public void mouseClicked(MouseEvent e) {
 	}
-
+ 
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}

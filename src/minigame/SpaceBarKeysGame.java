@@ -15,7 +15,7 @@ public class SpaceBarKeysGame extends JPanel implements KeyListener {
 
     private int progress;
     private int timeLeft;
-    private Timer timer;
+    private Timer timer; 
 
     public SpaceBarKeysGame() {
         this.progress = 0;

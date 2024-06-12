@@ -15,7 +15,7 @@ public class StorePanel extends JPanel {
 
     private ImageIcon storeIc;
     private JButton StoreBtn;
-    private JButton backButton;
+    private JButton backButton; 
     private JFrame mainFrame;
     private CardLayout cardLayout;
 

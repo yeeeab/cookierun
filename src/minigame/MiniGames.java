@@ -14,7 +14,7 @@ public abstract class MiniGames extends JPanel {
 
     public MiniGames(SpeedrunPanel parentPanel) {
         this.parentPanel = parentPanel;
-        this.elapsedTime = 0;
+        this.elapsedTime = 0; 
         this.isSuccess = false;
 
         setLayout(null);
