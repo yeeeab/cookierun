@@ -17,7 +17,7 @@ public class IntroPanel extends JPanel {
         this.mainFrame = mainFrame;
         this.cardLayout = cardLayout;
         initialize();
-    }
+    } 
 
     private void initialize() {
         setLayout(null); // 절대 위치 지정을 위해 레이아웃을 null로 설정
