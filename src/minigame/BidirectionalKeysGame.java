@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BidirectionalKeysGame extends JFrame {
-    private final int MAX_TIME = 30; // 최대 제한 시간 (초)
+    private final int MAX_TIME = 30; // 제한 시간
     private int currentStage = 1; // 현재 스테이지
     private int timeLeft = MAX_TIME; // 남은 시간
-    private int scrollSpeed = 20; // 스크롤 타이머 초기 속도
+    private int scrollSpeed = 20; // 스크롤 초기 속도
     private Timer timer;
     private Timer scrollTimer;
     private List<Integer> keySequence; // 키 시퀀스
@@ -118,7 +118,7 @@ public class BidirectionalKeysGame extends JFrame {
     }
 
     private void checkKeyMissed() {
-        int squareCenterX = 390; // 네모 칸의 중심 X 좌표 (UI와 일치하도록 수정)
+        int squareCenterX = 390; // 네모 칸의 중심 X 좌표 
         int keyPosition = scrollX + keyIndex * 150; // 간격 변경
         if (keyPosition < squareCenterX - 50 && !keyPressed) {
             triggerGameOver(); // 네모 칸을 지나갔는데도 방향키를 누르지 않으면 게임 종료
@@ -126,7 +126,7 @@ public class BidirectionalKeysGame extends JFrame {
     }
 
     private void checkKeyPress(int keyCode) {
-        int squareCenterX = 390; // 네모 칸의 중심 X 좌표 (UI와 일치하도록 수정)
+        int squareCenterX = 390; // 네모 칸의 중심 X 좌표 
         int keyPosition = scrollX + keyIndex * 150; // 간격 변경
 
         if (Math.abs(squareCenterX - keyPosition) <= 50) {
@@ -211,16 +211,15 @@ public class BidirectionalKeysGame extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            int squareCenterX = 390; // 네모 칸의 중심 X 좌표 (UI와 일치하도록 수정)
-            int squareCenterY = 280; // 네모 칸의 중심 Y 좌표 (예: 280)
+            int squareCenterX = 390; // 네모 칸의 중심 X 좌표 
+            int squareCenterY = 280; // 네모 칸의 중심 Y 좌표
             int squareSize = 110;
 
-            // 네모 칸을 그립니다.
             g.setColor(Color.RED);
             g.drawRect(squareCenterX - squareSize / 2, squareCenterY - squareSize / 2, squareSize, squareSize);
 
             int x = scrollX;
-            g.setColor(Color.BLACK); // 방향키 색상을 검은색으로 설정합니다.
+            g.setColor(Color.BLACK); 
             for (int key : keySequence) {
                 g.setFont(new Font("CookieRunOTF", Font.BOLD, 80));
                 g.drawString(getKeyName(key), x, squareCenterY + 40);
