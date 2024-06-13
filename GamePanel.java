@@ -32,6 +32,18 @@ import main.Main;
 import util.Util;
 
 public class GamePanel extends JPanel {
+    // Existing fields
+    protected ImageIcon gaugeBar;
+
+    // Add these getter methods
+    public ImageIcon getGaugeBar() {
+        return gaugeBar;
+    }
+
+    public int getCoinScore() {
+        return coinScore;
+    }
+
     private static GamePanel instance; // 싱글톤 인스턴스
 
 	/* 스피드런 모드 */
@@ -119,8 +131,7 @@ public class GamePanel extends JPanel {
 
     private int runStage = 1; // 스테이지를 확인하는 변수이다. (미구현)
 
-    // private int resultScore = 0; // 결과점수를 수집하는 변수
-    private int jellyScore = 0; // 젤리 점수
+    private int jellyScore = 0; // 젤리 점수 == resultScore
     private int coinScore = 0; // 코인 점수
 
     private int gameSpeed = 5; // 게임 속도
@@ -165,14 +176,52 @@ public class GamePanel extends JPanel {
     MapObjectImg mo3;
     MapObjectImg mo4;
 
+    private Potion potion;
+	boolean drinkHealthPotion;
+
     // 외부
     JFrame superFrame;
     CardLayout cl;
     Main main;
 
+    public int getResultScore() {
+		return jellyScore;
+	}
+
+	public void setResultScore(int score) {
+		this.jellyScore = score;
+	}
+
+	public boolean isEscKeyOn() {
+		return escKeyOn;
+	}
+
+	public void setEscKeyOn(boolean setKey) {
+		this.escKeyOn = setKey;
+	}
+
+    // Declaration of isHit variable added to the class
+    private boolean isHit = false; // 피격 여부
+
+	public boolean isHit() {
+		return isHit;
+	}
+
+	public void setHit(boolean setKey) {
+		this.isHit = setKey;
+	}
+
     // 스피드업 포션
     private JButton speedUpPotionBtn;
     private SpeedUpPotion speedUpPotion;
+
+    // Alternatively, you can provide public getter methods
+    public SpeedUpPotion getSpeedUpPotion() {
+        return speedUpPotion;
+    }
+    public JButton getSpeedUpPotionBtn() {
+        return speedUpPotionBtn;
+    }
 
 	// 체력 증가 포션
 	private JButton healthPotionBtn;
@@ -183,22 +232,22 @@ public class GamePanel extends JPanel {
     private CoinPotion coinPotion;
 
     // 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
-    public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
-        instance = this;
-        this.superFrame = superFrame;
-        this.cl = cl;
-        this.main = (Main) o;
+	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
+		this.superFrame = superFrame;
+		this.cl = cl;
+		this.main = (Main) o;
+		this.potion = new Potion();
 
-        // 일시정지 버튼
-        escButton = new JButton("back");
-        escButton.setBounds(350, 200, 100, 30);
-        escButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                remove(escButton);
-                escKeyOn = false;
-            }
-        });
+		// 일시정지 버튼
+		escButton = new JButton("back");
+		escButton.setBounds(350, 200, 100, 30);
+		escButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				remove(escButton);
+				escKeyOn = false;
+			}
+		});
 
         // Initialize speed up potion
         speedUpPotion = new SpeedUpPotion();
@@ -407,7 +456,6 @@ public class GamePanel extends JPanel {
     // 화면을 그린다
     @Override
     protected void paintComponent(Graphics g) {
-
         // 더블버퍼는 그림을 미리그려놓고 화면에 출력한다.
 
         // 더블버퍼 관련
@@ -514,10 +562,6 @@ public class GamePanel extends JPanel {
             alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 255 / 255);
             g2.setComposite(alphaComposite);
         }
-
-        // buffg.setFont(new Font("Arial", Font.BOLD, 30));
-        // buffg.setColor(Color.WHITE);
-        // buffg.drawString(Integer.toString(resultScore), 700, 85);
 
         // 점수를 그린다(수정됨)
         if (showScore) {
