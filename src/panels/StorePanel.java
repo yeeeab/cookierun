@@ -133,11 +133,11 @@ public class StorePanel extends JPanel {
 
 		// 포션 이미지 로드 및 크기 조정
 		potion1 = new ImageIcon(
-				new ImageIcon("img/store/potion1.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+				new ImageIcon("img/store/potion1Store.png").getImage().getScaledInstance(130, 200, Image.SCALE_SMOOTH));
 		potion2 = new ImageIcon(
-				new ImageIcon("img/store/potion2.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+				new ImageIcon("img/store/potion2Store.png").getImage().getScaledInstance(130, 200, Image.SCALE_SMOOTH));
 		potion3 = new ImageIcon(
-				new ImageIcon("img/store/potion3.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+				new ImageIcon("img/store/potion3Store.png").getImage().getScaledInstance(130, 200, Image.SCALE_SMOOTH));
 
 		setLayout(null);
 	}
@@ -155,7 +155,7 @@ public class StorePanel extends JPanel {
 		int boxWidth = 100;
 		int boxHeight = 100;
 		int[] boxX = { 120, 320, 520 }; // X 좌표
-		int boxY = 280; // Y 좌표
+		int boxY = 270; // Y 좌표
 
 		// 포션 이미지를 박스 위치에 그리기
 		g.drawImage(potion1.getImage(), boxX[0] + (boxWidth - potion1.getIconWidth()) / 2,
@@ -177,12 +177,12 @@ public class StorePanel extends JPanel {
 			String potionName = "";
 			switch (potionNumber) {
 				case 1:
-					main.addPotion(main.getHealthPotion());
-					potionName = main.getHealthPotion().getName();
+					main.addPotion(main.getCoinPotion());
+					potionName = main.getCoinPotion().getName();
 					break;
 				case 2:
 					main.addHealthPotion(1);
-					potionName = main.getCoinPotion().getName();
+					potionName = main.getHealthPotion().getName();
 					break;
 				case 3:
 					main.addPotion(main.getSpeedUpPotion());

@@ -125,7 +125,7 @@ public class SelectPanel extends JPanel {
 		SpeedrunBtn.setFocusPainted(false);
 
 		// hp 증가 포션 버튼
-		ImageIcon originalIcon3 = new ImageIcon("img/store/potion2.png"); // 원본 이미지
+		ImageIcon originalIcon3 = new ImageIcon("img/store/potion2Btn.png"); // 원본 이미지
 		Image originalImage3 = originalIcon3.getImage(); // Image 객체로 변환
 		Image scaledImage3 = originalImage3.getScaledInstance(100, 100, Image.SCALE_SMOOTH); // 원하는 크기로 조정
 		ImageIcon HealthPotionIcon = new ImageIcon(scaledImage3); // 다시 ImageIcon으로 변환
@@ -134,12 +134,11 @@ public class SelectPanel extends JPanel {
 		HealthPotionBtn.setName("HealthPotionBtn");
 		HealthPotionBtn.addMouseListener((MouseListener) o);
 		HealthPotionBtn.setBounds(104, 304, 100, 100);
+
 		add(HealthPotionBtn);
 		HealthPotionBtn.setBorderPainted(false);
 		HealthPotionBtn.setContentAreaFilled(false);
 		HealthPotionBtn.setFocusPainted(false);
-
-		// healthPotionObj = new HealthPotion();
 
 		// 캐릭터 ch1
 		ch1 = new JButton(ch01);

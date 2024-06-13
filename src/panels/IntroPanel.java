@@ -47,7 +47,7 @@ public class IntroPanel extends JPanel {
 		add(storeBtn); // 패널에 버튼 추가
 
 		// 순위 버튼 추가
-		ImageIcon originalRankIcon = new ImageIcon("img/rank/rankBtn.png"); // 원본 이미지
+		ImageIcon originalRankIcon = new ImageIcon("img/select/rankBtn.png"); // 원본 이미지
 		Image originalRankImage = originalRankIcon.getImage(); // Image 객체로 변환
 		Image scaledRankImage = originalRankImage.getScaledInstance(130, 40, Image.SCALE_SMOOTH); // 원하는 크기로 조정
 		ImageIcon scaledRankIcon = new ImageIcon(scaledRankImage); // 다시 ImageIcon으로 변환

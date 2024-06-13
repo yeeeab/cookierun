@@ -22,14 +22,13 @@ public class NumberOrderGame extends MiniGames {
         numberButtons = new ArrayList<>();
         nextNumber = 1;
 
-        // 1부터 9까지의 숫자를 랜덤하게 섞는다.
         ArrayList<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
 
-        // 랜덤하게 섞인 숫자 버튼을 생성하고 패널에 추가한다.
+        // 랜덤하게 섞인 숫자 버튼을 생성하고 패널에 추가
         for (int i = 0; i < 9; i++) {
             int number = numbers.get(i);
             JButton button = new JButton(String.valueOf(number));
@@ -64,9 +63,9 @@ public class NumberOrderGame extends MiniGames {
 
     @Override
     public void startGame() {
-        removeAll(); // 모든 컴포넌트를 제거하여 초기 상태로 만듦
-        setupGame(); // 게임을 새로 설정
-        revalidate(); // 컴포넌트 트리를 다시 검증
-        repaint(); // 다시 그리기
+        removeAll();
+        setupGame();
+        revalidate();
+        repaint();
     }
 }

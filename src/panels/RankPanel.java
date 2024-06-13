@@ -32,6 +32,8 @@ public class RankPanel extends JPanel {
         jellyScores = new int[MAX_RANKS];
         speedrunTimes = new String[MAX_RANKS];
 
+        Font labelFont = new Font("Arial", Font.BOLD, 18); // 글씨 크기 설정
+
         // Initialize scores
         for (int i = 0; i < MAX_RANKS; i++) {
             jellyScores[i] = 0;
@@ -43,6 +45,9 @@ public class RankPanel extends JPanel {
             itemModeLabels[i].setBounds(50, 100 + i * 40, 200, 30);
             speedrunModeLabels[i].setBounds(450, 100 + i * 40, 200, 30);
 
+            itemModeLabels[i].setFont(labelFont); // 폰트 설정
+            speedrunModeLabels[i].setFont(labelFont); // 폰트 설정
+
             add(itemModeLabels[i]);
             add(speedrunModeLabels[i]);
         }
@@ -52,6 +57,9 @@ public class RankPanel extends JPanel {
 
         itemModeTitle.setBounds(50, 60, 200, 30);
         speedrunModeTitle.setBounds(450, 60, 200, 30);
+
+        itemModeTitle.setFont(labelFont); // 타이틀 폰트 설정
+        speedrunModeTitle.setFont(labelFont); // 타이틀 폰트 설정
 
         add(itemModeTitle);
         add(speedrunModeTitle);

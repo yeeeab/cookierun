@@ -22,7 +22,6 @@ public abstract class MiniGames extends JPanel {
         setLayout(null);
         setBounds(0, 0, 800, 500);
 
-        // 배경 이미지 로드
         ImageIcon icon = new ImageIcon("img/end/cookierunbg.jpg");
         backgroundImage = icon.getImage();
     }
@@ -32,10 +31,8 @@ public abstract class MiniGames extends JPanel {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
 
-        // 배경 이미지 그리기
         g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
-        // 명도 낮추기 위해 투명도 설정
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
         g2d.setColor(getBackground());
         g2d.fillRect(0, 0, getWidth(), getHeight());
@@ -60,7 +57,7 @@ public abstract class MiniGames extends JPanel {
     public static void startRandomGame(SpeedrunPanel parentPanel) {
         Random random = new Random();
         while (true) {
-            int gameIndex = random.nextInt(2); // 두 개의 미니게임 중 하나를 선택
+            int gameIndex = random.nextInt(2);
             MiniGames miniGame = null;
 
             switch (gameIndex) {

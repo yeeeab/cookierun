@@ -48,9 +48,9 @@ public class Main extends listenAdapter {
 
 	private CardLayout cl; // 카드레이아웃 오브젝트
 
-	private int totalCoinScore = 1000; // 코인 점수
+	private int totalCoinScore = 0; // 코인 점수
 
-	private int healthPotionCount = 1; // HealthPotion 갯수
+	private int healthPotionCount = 0; // HealthPotion 갯수
 	private boolean healthPotionSelected = false; // HealthPotion 선택 여부
 
 	public int getTotalCoinScore() {
@@ -155,7 +155,7 @@ public class Main extends listenAdapter {
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 500); // 창 사이즈 (100,100좌표는 아래의 frame.setLocationRelativeTo(null) 때문에 의미가 없어진다)
+		frame.setBounds(100, 100, 800, 500); // 창 사이즈
 		frame.setLocationRelativeTo(null); // 창을 화면 중앙에 배치
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 엑스버튼을 누르면 종료
 		cl = new CardLayout(0, 0); // 카드레이아웃 객체 생성
@@ -166,11 +166,11 @@ public class Main extends listenAdapter {
 
 		storePanel = new StorePanel(this, frame, cl); // 상점
 		selectPanel = new SelectPanel(frame, cl, this); // Main의 리스너를 넣기위한 this
-		gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
-		endPanel = new EndPanel(this, this); // Main의 리스너를 넣기위한 this
-		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
-		minigamePanel = new MiniGamePanel(speedrunPanel); // 미니게임 패널 추가
-		rankPanel = new RankPanel(frame, cl); // 순위 패널 추가
+		gamePanel = new GamePanel(frame, cl, this);
+		endPanel = new EndPanel(this, this);
+		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널
+		minigamePanel = new MiniGamePanel(speedrunPanel); // 미니게임 패널
+		rankPanel = new RankPanel(frame, cl); // 순위 패널
 
 		// 포션 이미지 로드 및 초기화
 		Image healthPotionImage = new ImageIcon("img/store/potion1.png").getImage().getScaledInstance(100, 100,
@@ -266,7 +266,7 @@ public class Main extends listenAdapter {
 
 			cl.show(frame.getContentPane(), "intro"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)
 			introPanel.requestFocus(); // 리스너를 intro패널에 강제로 줌
-		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
+		} else if (e.getComponent().getName().equals("StoreBtn")) {
 			cl.show(frame.getContentPane(), "store");
 			storePanel.requestFocus();
 		} else if (e.getComponent().getName().equals("HealthPotionBtn")) {
@@ -283,7 +283,6 @@ public class Main extends listenAdapter {
 
 	public void switchToMiniGame(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame,
 			MiniGames currentMiniGame) {
-		// Switch to the minigame panel
 		minigamePanel.setLayout(cl);
 		frame.getContentPane().add(minigamePanel, "minigame");
 		cl.show(superFrame.getContentPane(), "minigame");
@@ -291,10 +290,8 @@ public class Main extends listenAdapter {
 	}
 
 	public void returnToSpeedrunPanel(SpeedrunPanel speedrunPanel, CardLayout cl, JFrame superFrame, boolean success) {
-		// Handle minigame result
 		speedrunPanel.miniGameFinished(success);
 
-		// Switch back to the speedrun panel
 		cl.show(superFrame.getContentPane(), "speedrun");
 		speedrunPanel.requestFocus();
 	}

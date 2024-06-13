@@ -17,7 +17,7 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
     }
 
     private void setupGame() {
-        setLayout(null); // 절대 위치 사용
+        setLayout(null);
 
         // 이미지 아이콘 로드 및 크기 조정
         ImageIcon rockIcon = new ImageIcon("img/miniGame/rock.jpg");
