@@ -139,7 +139,7 @@ public class SelectPanel extends JPanel {
 		HealthPotionBtn.setContentAreaFilled(false);
 		HealthPotionBtn.setFocusPainted(false);
 
-		healthPotionObj = new HealthPotion();
+		// healthPotionObj = new HealthPotion();
 
 		// 캐릭터 ch1
 		ch1 = new JButton(ch01);

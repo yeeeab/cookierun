@@ -173,12 +173,25 @@ public class StorePanel extends JPanel {
 		if (main.getTotalCoinScore() >= 1000) {
 			main.spendCoins(1000);
 			coinLabel.setText("Coins: " + main.getTotalCoinScore());
-			JOptionPane.showMessageDialog(this, "Potion " + potionNumber + " purchased!");
-			if (potionNumber == 2) {
-				main.addHealthPotion(1);
+
+			String potionName = "";
+			switch (potionNumber) {
+				case 1:
+					main.addPotion(main.getHealthPotion());
+					potionName = main.getHealthPotion().getName();
+					break;
+				case 2:
+					main.addPotion(main.getCoinPotion());
+					potionName = main.getCoinPotion().getName();
+					break;
+				case 3:
+					main.addPotion(main.getSpeedUpPotion());
+					potionName = main.getSpeedUpPotion().getName();
+					break;
 			}
+			JOptionPane.showMessageDialog(this, potionName + " purchased!");
 		} else {
-			JOptionPane.showMessageDialog(this, "Not enough coins!");
+			JOptionPane.showMessageDialog(this, "No enough coins!");
 		}
 	}
 }

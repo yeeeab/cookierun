@@ -17,6 +17,7 @@ public class SpeedrunPanel extends GamePanel {
     private String currentTimerText = "00:00:00";
     private boolean isGameEnded = false;
     private boolean isMiniGameFailed = false;
+    private boolean ranksUpdated = false; // New flag to track if ranks have been updated
     int resultScore = 0;
     private int maxscore = 300000;
     private int[] miniGameScoreThresholds = { 75000, 150000, 225000 };
@@ -120,6 +121,10 @@ public class SpeedrunPanel extends GamePanel {
         setEscKeyOn(false);
         ((CardLayout) main.getFrame().getContentPane().getLayout()).show(main.getFrame().getContentPane(), "speedrun");
         requestFocus();
+
+        if (resultScore >= maxscore) {
+            endGame();
+        }
     }
 
     private boolean shouldStartMiniGame(int score) {
@@ -165,9 +170,6 @@ public class SpeedrunPanel extends GamePanel {
             if (resultScore < maxscore) {
                 currentTimerText = "00:00:00";
             }
-
-            // Update ranks
-            main.getRankPanel().updateRanks(0, currentTimerText);
 
             cl.show(superFrame.getContentPane(), "end");
             superFrame.requestFocus();
