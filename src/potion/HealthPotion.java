@@ -1,25 +1,17 @@
 package potion;
 
-import javax.swing.JOptionPane;
+public class HealthPotion {
+    private int healAmount;
 
-public class HealthPotion extends Potion {
     public HealthPotion() {
-        super();
+        this.healAmount = 50; // 포션 사용 시 회복할 체력량
     }
 
-    @Override
-    public void use() {
-        if (getNumOfPotion() > 0) {
-            setNumOfPotion(getNumOfPotion() - 1);
-            setIsPotionUsed(true);
-            setdrinkHealthPotion(); // Set the flag to true when potion is used
-        } else {
-            JOptionPane.showMessageDialog(null, "No more potions left!");
-        }
-        setIsPotionSelected(false); // Reset selection after use
+    public int getHealAmount() {
+        return healAmount;
     }
 
-    public void setdrinkHealthPotion() {
-        drinkHealthPotion = true;
+    public void setHealAmount(int healAmount) {
+        this.healAmount = healAmount;
     }
 }

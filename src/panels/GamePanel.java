@@ -61,7 +61,6 @@ public class GamePanel extends JPanel {
 	private ImageIcon secondBackIc4;
 
 	// 맵의 크기
-
 	private int maxX;
 	private int maxY;
 
@@ -206,7 +205,6 @@ public class GamePanel extends JPanel {
 
 	// 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
 	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
-
 		this.superFrame = superFrame;
 		this.cl = cl;
 		this.main = (Main) o;
@@ -222,11 +220,17 @@ public class GamePanel extends JPanel {
 				escKeyOn = false;
 			}
 		});
-
 	}
 
 	// 게임을 세팅한다
-	public void gameSet(CookieImg ci) {
+	public void gameSet(CookieImg ci, boolean drinkHealthPotion) {
+		this.drinkHealthPotion = drinkHealthPotion;
+
+		// 쿠키 인스턴스 생성 / 기본 자료는 클래스안에 내장 되어 있기 때문에 이미지만 넣었다.
+		c1 = new Cookie(ci.getCookieIc().getImage());
+		if (drinkHealthPotion) {
+			c1.setHealth(1100); // 헬스 포션 사용 시 초기 체력 증가
+		}
 
 		setFocusable(true);
 
@@ -237,16 +241,12 @@ public class GamePanel extends JPanel {
 		initListener(); // 키리스너 추가
 
 		runRepaint(); // 리페인트 무한반복 실행
-
 	}
 
 	// 게임을 시작한다
 	public void gameStart() {
-
 		mapMove(); // 배경 젤리 발판 장애물 작동
-
 		fall(); // 낙하 스레드 발동
-
 	}
 
 	// 초기화 메서드에서 변수 초기화
@@ -286,13 +286,11 @@ public class GamePanel extends JPanel {
 		for (int i = jellyList.size() - 1; i >= 0; i -= 2) {
 			jellyList.remove(i);
 		}
-
 	}
 
 	// 화면을 그린다
 	@Override
 	protected void paintComponent(Graphics g) {
-
 		// 더블버퍼는 그림을 미리그려놓고 화면에 출력한다.
 
 		// 더블버퍼 관련
@@ -311,6 +309,10 @@ public class GamePanel extends JPanel {
 
 		super.paintComponent(buffg); // 이전 화면을 지운다.
 
+		if (b11 == null || b12 == null || b21 == null || b22 == null) {
+			initObject(); // 배경이 null이면 초기화
+		}
+
 		// 배경이미지를 그린다
 		buffg.drawImage(b11.getImage(), b11.getX(), 0, b11.getWidth(), b11.getHeight() * 5 / 4, null);
 		buffg.drawImage(b12.getImage(), b12.getX(), 0, b12.getWidth(), b12.getHeight() * 5 / 4, null);
@@ -325,16 +327,12 @@ public class GamePanel extends JPanel {
 
 		// 발판을 그린다
 		for (int i = 0; i < fieldList.size(); i++) {
-
 			Field tempFoot = fieldList.get(i);
-
 			// 사양을 덜 잡아먹게 하기위한 조치
 			if (tempFoot.getX() > -90 && tempFoot.getX() < 810) { // x값이 -90~810인 객체들만 그린다.
-
 				buffg.drawImage(tempFoot.getImage(), tempFoot.getX(), tempFoot.getY(), tempFoot.getWidth(),
 						tempFoot.getHeight(), null);
 			}
-
 		}
 
 		// 젤리 그리기
@@ -359,11 +357,8 @@ public class GamePanel extends JPanel {
 
 		// 장애물을 그린다
 		for (int i = 0; i < tacleList.size(); i++) {
-
 			Tacle tempTacle = tacleList.get(i);
-
 			if (tempTacle.getX() > -90 && tempTacle.getX() < 810) {
-
 				buffg.drawImage(tempTacle.getImage(), tempTacle.getX(), tempTacle.getY(), tempTacle.getWidth(),
 						tempTacle.getHeight(), null);
 			}
@@ -383,7 +378,6 @@ public class GamePanel extends JPanel {
 			g2.setComposite(alphaComposite);
 
 		} else { // 무적상태가 아닐 경우
-
 			// 쿠키를 그린다
 			buffg.drawImage(c1.getImage(), c1.getX() - 110, c1.getY() - 170,
 					cookieIc.getImage().getWidth(null) * 8 / 10, cookieIc.getImage().getHeight(null) * 8 / 10, null);
@@ -391,7 +385,6 @@ public class GamePanel extends JPanel {
 
 		// 피격시 붉은 화면
 		if (redScreen) {
-
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 125 / 255);
 			g2.setComposite(alphaComposite);
 
@@ -401,14 +394,8 @@ public class GamePanel extends JPanel {
 			g2.setComposite(alphaComposite);
 		}
 
-		// buffg.setFont(new Font("Arial", Font.BOLD, 30));
-		// buffg.setColor(Color.WHITE);
-		// buffg.drawString(Integer.toString(resultScore), 700, 85);
-
 		// 점수를 그린다(수정됨)
 		if (showScore) {
-			// Util.drawFancyString(g2, Integer.toString(resultScore), 600, 58, 30,
-			// Color.WHITE);
 			Util.drawFancyString(g2, "Jelly: " + Integer.toString(jellyScore), 600, 30, 30, Color.WHITE);
 			Util.drawFancyString(g2, "Coin: " + Integer.toString(coinScore), 600, 58, 30, Color.WHITE);
 		}
@@ -418,19 +405,19 @@ public class GamePanel extends JPanel {
 		if (drinkHealthPotion) {
 			buffg.drawImage(extraBar.getImage(), 105, 30, null);
 			buffg.setColor(Color.BLACK);
-			buffg.fillRect(121 + (int) (470 * ((double) c1.getHealth() / 1000)), 65,
-					1 + 470 - (int) (470 * ((double) c1.getHealth() / 1000)), 21);
+			buffg.fillRect(121 + (int) (470 * ((double) c1.getHealth() / 1100)), 65,
+					1 + 470 - (int) (470 * ((double) c1.getHealth() / 1100)), 21);
 		} else {
 			buffg.setColor(Color.BLACK);
 			buffg.fillRect(84 + (int) (470 * ((double) c1.getHealth() / 1000)), 65,
 					1 + 470 - (int) (470 * ((double) c1.getHealth() / 1000)), 21);
 		}
+
 		// 버튼을 그린다
 		buffg.drawImage(jumpBtn, 0, 360, 132, 100, null);
 		buffg.drawImage(slideBtn, 650, 360, 132, 100, null);
 
 		if (escKeyOn) { // esc키를 누를경우 화면을 흐리게 만든다
-
 			// alpha값을 반투명하게 만든다
 			alphaComposite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float) 100 / 255);
 			g2.setComposite(alphaComposite);
@@ -446,12 +433,10 @@ public class GamePanel extends JPanel {
 
 		// 버퍼이미지를 화면에 출력한다
 		g.drawImage(buffImage, 0, 0, this);
-
 	}
 
 	// 맵 오브젝트 이미지들을 저장
 	private void makeMo() {
-
 		mo1 = new MapObjectImg(new ImageIcon("img/Objectimg/map1img/bg1.png"),
 				new ImageIcon("img/Objectimg/map1img/bg2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
@@ -463,8 +448,7 @@ public class GamePanel extends JPanel {
 				new ImageIcon("img/Objectimg/map1img/tacle3.png"));
 
 		mo2 = new MapObjectImg(new ImageIcon("img/Objectimg/map2img/back1.png"),
-				new ImageIcon("img/Objectimg/map2img/back2.png"),
-				new ImageIcon("img/Objectimg/map1img/jelly1.png"),
+				new ImageIcon("img/Objectimg/map2img/back2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"),
 				new ImageIcon("img/Objectimg/map1img/effectTest.png"), new ImageIcon("img/Objectimg/map1img/coin.png"),
@@ -473,8 +457,7 @@ public class GamePanel extends JPanel {
 				new ImageIcon("img/Objectimg/map2img/tacle3.png"), new ImageIcon("img/Objectimg/map2img/tacle3.png"));
 
 		mo3 = new MapObjectImg(new ImageIcon("img/Objectimg/map3img/bg.png"),
-				new ImageIcon("img/Objectimg/map3img/bg2.png"),
-				new ImageIcon("img/Objectimg/map1img/jelly1.png"),
+				new ImageIcon("img/Objectimg/map3img/bg2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"),
 				new ImageIcon("img/Objectimg/map1img/effectTest.png"), new ImageIcon("img/Objectimg/map1img/coin.png"),
@@ -483,16 +466,15 @@ public class GamePanel extends JPanel {
 				new ImageIcon("img/Objectimg/map3img/tacle3.png"), new ImageIcon("img/Objectimg/map3img/tacle3.png"));
 
 		mo4 = new MapObjectImg(new ImageIcon("img/Objectimg/map4img/bback.png"),
-				new ImageIcon("img/Objectimg/map4img/bback2.png"),
-				new ImageIcon("img/Objectimg/map1img/jelly1.png"),
+				new ImageIcon("img/Objectimg/map4img/bback2.png"), new ImageIcon("img/Objectimg/map1img/jelly1.png"),
 				new ImageIcon("img/Objectimg/map1img/jelly2.png"), new ImageIcon("img/Objectimg/map1img/jelly3.png"),
 				new ImageIcon("img/Objectimg/map1img/life.png"),
 				new ImageIcon("img/Objectimg/map1img/effectTest.png"), new ImageIcon("img/Objectimg/map1img/coin.png"),
 				new ImageIcon("img/Objectimg/map4img/ffootTest.png"),
 				new ImageIcon("img/Objectimg/map4img/ffootTest2.png"),
-				new ImageIcon("img/Objectimg/map4img/tacle1.png"), new ImageIcon("img/Objectimg/map4img/tacle2.png"),
-				new ImageIcon("img/Objectimg/map4img/tacle2.png"), new ImageIcon("img/Objectimg/map4img/tacle2.png"));
-
+				new ImageIcon("img/Objectimg/map4img/tacle1.png"),
+				new ImageIcon("img/Objectimg/map4img/tacle2.png"), new ImageIcon("img/Objectimg/map4img/tacle2.png"),
+				new ImageIcon("img/Objectimg/map4img/tacle2.png"));
 	}
 
 	// 메인에서 받은 쿠키 이미지 아이콘들을 인스턴스화
@@ -508,7 +490,6 @@ public class GamePanel extends JPanel {
 
 	// 젤리 발판 장애물 등을 인스턴스화
 	private void initImageIcon(MapObjectImg mo) {
-
 		// 젤리 이미지 아이콘들
 		jelly1Ic = mo.getJelly1Ic();
 		jelly2Ic = mo.getJelly2Ic();
@@ -533,7 +514,6 @@ public class GamePanel extends JPanel {
 
 	// 맵의 구조를 그림판 이미지를 받아서 세팅
 	private void initMap(int num, int mapLength) {
-
 		String tempMap = null;
 		int tempMapLength = 0;
 
@@ -629,12 +609,10 @@ public class GamePanel extends JPanel {
 		}
 
 		this.mapLength = this.mapLength + tempMapLength;
-
 	}
 
 	// makeMo, initImageIcon, imitMap 메서드를 이용해서 객체 생성
 	private void initObject() {
-
 		// 생명게이지 이미지아이콘
 		lifeBar = new ImageIcon("img/Objectimg/lifebar/lifeBar1.png");
 		extraBar = new ImageIcon("img/Objectimg/lifebar/extraBar.png");
@@ -697,7 +675,10 @@ public class GamePanel extends JPanel {
 		secondBackIc4 = mo4.getSecondBackIc();
 
 		// 쿠키 인스턴스 생성 / 기본 자료는 클래스안에 내장 되어 있기 때문에 이미지만 넣었다.
-		c1 = new Cookie(cookieIc.getImage());
+		if (c1 == null) {
+			c1 = new Cookie(cookieIc.getImage());
+		}
+
 		drinkHealthPotion = potion.drinkHealthPotion(c1);
 
 		// 쿠키의 정면 위치 / 쿠키의 x값과 높이를 더한 값
@@ -722,7 +703,6 @@ public class GamePanel extends JPanel {
 				secondBackIc.getImage().getWidth(null), secondBackIc.getImage().getHeight(null));
 
 		backFade = new Color(0, 0, 0, 0);
-
 	}
 
 	// 리스너 추가 메서드
@@ -731,7 +711,6 @@ public class GamePanel extends JPanel {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // esc키를 눌렀을 때
 					if (!escKeyOn) {
 						escKeyOn = true;
@@ -744,7 +723,7 @@ public class GamePanel extends JPanel {
 				}
 
 				if (!escKeyOn) {
-					if (e.getKeyCode() == KeyEvent.VK_SPACE) {// 스페이스 키를 누르고 더블점프가 2가 아닐때
+					if (e.getKeyCode() == KeyEvent.VK_SPACE) { // 스페이스 키를 누르고 더블점프가 2가 아닐때
 						jumpBtn = jumpButtonIconDown.getImage();
 						if (c1.getCountJump() < 2) {
 							jump(); // 점프 메서드 가동
@@ -757,9 +736,7 @@ public class GamePanel extends JPanel {
 						if (c1.getImage() != slideIc.getImage() // 쿠키이미지가 슬라이드 이미지가 아니고
 								&& !c1.isJump() // 점프 중이 아니며
 								&& !c1.isFall()) { // 낙하 중도 아닐 때
-
 							c1.setImage(slideIc.getImage()); // 이미지를 슬라이드이미지로 변경
-
 						}
 					}
 				}
@@ -767,7 +744,6 @@ public class GamePanel extends JPanel {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) { // 다운키를 뗐을 때
 					slideBtn = slideIconUp.getImage();
 					downKeyOn = false; // downKeyOn 변수를 false로
@@ -775,7 +751,6 @@ public class GamePanel extends JPanel {
 					if (c1.getImage() != cookieIc.getImage() // 쿠키이미지가 기본이미지가 아니고
 							&& !c1.isJump() // 점프 중이 아니며
 							&& !c1.isFall()) { // 낙하 중도 아닐 때
-
 						c1.setImage(cookieIc.getImage()); // 이미지를 기본이미지로 변경
 					}
 				}
@@ -791,7 +766,6 @@ public class GamePanel extends JPanel {
 	private void runRepaint() {
 		// 리페인트 전용 쓰레드
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				while (true) {
@@ -821,11 +795,9 @@ public class GamePanel extends JPanel {
 	// private > protected 변경
 	protected void mapMove() {
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				while (true) {
-
 					if (runPage > 800) { // 800픽셀 이동 마다 체력이 10씩 감소한다 (추후 맵길이에  上 감소량 조절)
 						c1.setHealth(c1.getHealth() - 10);
 						runPage = 0;
@@ -858,10 +830,8 @@ public class GamePanel extends JPanel {
 							fadeOn = true;
 
 							new Thread(new Runnable() {
-
 								@Override
 								public void run() {
-
 									backFadeOut();
 
 									b11 = new Back(backIc4.getImage(), 0, 0, backIc4.getImage().getWidth(null),
@@ -889,10 +859,8 @@ public class GamePanel extends JPanel {
 							fadeOn = true;
 
 							new Thread(new Runnable() {
-
 								@Override
 								public void run() {
-
 									backFadeOut();
 
 									b11 = new Back(backIc3.getImage(), 0, 0, backIc3.getImage().getWidth(null),
@@ -921,10 +889,8 @@ public class GamePanel extends JPanel {
 							fadeOn = true;
 
 							new Thread(new Runnable() {
-
 								@Override
 								public void run() {
-
 									backFadeOut();
 
 									b11 = new Back(backIc2.getImage(), 0, 0, backIc2.getImage().getWidth(null),
@@ -974,17 +940,12 @@ public class GamePanel extends JPanel {
 
 					// 발판위치를 -3 씩 해준다. (왼쪽으로 흐르는 효과)
 					for (int i = 0; i < fieldList.size(); i++) {
-
 						Field tempField = fieldList.get(i); // 임시 변수에 리스트 안에 있는 개별 발판을 불러오자
 
 						if (tempField.getX() < -90) { // 발판의 x좌표가 -90 미만이면 해당 발판을 제거한다.(최적화)
-
 							fieldList.remove(tempField);
-
 						} else {
-
 							tempField.setX(tempField.getX() - gameSpeed); // 위 조건에 해당이 안되면 x좌표를 줄이자
-
 						}
 					}
 
@@ -1010,14 +971,13 @@ public class GamePanel extends JPanel {
 									&& tempJelly.getImage() != jellyEffectIc.getImage()) {
 
 								if (tempJelly.getImage() == jellyHPIc.getImage()) {
-									if ((c1.getHealth() + 100) > 1000) {
-										c1.setHealth(1000);
+									if ((c1.getHealth() + 100) > 1100) {
+										c1.setHealth(1100);
 									} else {
 										c1.setHealth(c1.getHealth() + 100);
 									}
 								}
 								jellyList.remove(tempJelly); // 젤리를 리스트에서 제거
-								// resultScore = resultScore + tempJelly.getScore();
 								jellyScore = jellyScore + tempJelly.getScore();
 							} else if (c1.getImage() == slideIc.getImage()
 									&& tempJelly.getX() + tempJelly.getWidth() * 20 / 100 >= c1.getX()
@@ -1028,14 +988,13 @@ public class GamePanel extends JPanel {
 									&& tempJelly.getImage() != jellyEffectIc.getImage()) {
 
 								if (tempJelly.getImage() == jellyHPIc.getImage()) {
-									if ((c1.getHealth() + 100) > 1000) {
-										c1.setHealth(1000);
+									if ((c1.getHealth() + 100) > 1100) {
+										c1.setHealth(1100);
 									} else {
 										c1.setHealth(c1.getHealth() + 100);
 									}
 								}
 								jellyList.remove(tempJelly); // 젤리를 리스트에서 제거
-								// resultScore = resultScore + tempJelly.getScore();
 								jellyScore = jellyScore + tempJelly.getScore();
 							}
 						}
@@ -1058,7 +1017,6 @@ public class GamePanel extends JPanel {
 									&& tempCoin.getY() + tempCoin.getWidth() * 20 / 100 >= c1.getY()
 									&& tempCoin.getY() + tempCoin.getWidth() * 80 / 100 <= foot) {
 
-								// resultScore = resultScore + tempCoin.getScore();
 								coinScore = coinScore + tempCoin.getScore();
 								coinList.remove(tempCoin);
 							} else if (c1.getImage() == slideIc.getImage()
@@ -1068,7 +1026,6 @@ public class GamePanel extends JPanel {
 											+ c1.getHeight() * 1 / 3
 									&& tempCoin.getY() + tempCoin.getWidth() * 80 / 100 <= foot) {
 
-								// resultScore = resultScore + tempCoin.getScore();
 								coinScore = coinScore + tempCoin.getScore();
 								coinList.remove(tempCoin);
 							}
@@ -1077,55 +1034,40 @@ public class GamePanel extends JPanel {
 
 					// 장애물위치를 - 4 씩 해준다.
 					for (int i = 0; i < tacleList.size(); i++) {
-
 						Tacle tempTacle = tacleList.get(i); // 임시 변수에 리스트 안에 있는 개별 장애물을 불러오자
 
 						if (tempTacle.getX() < -90) {
-
 							fieldList.remove(tempTacle); // 장애물의 x 좌표가 -90 미만이면 해당 젤리를 제거한다.(최적화)
-
 						} else {
-
 							tempTacle.setX(tempTacle.getX() - gameSpeed); // 위 조건에 해당이 안되면 x좌표를 줄이자
 
 							face = c1.getX() + c1.getWidth(); // 캐릭터 정면 위치 재스캔
 							foot = c1.getY() + c1.getHeight(); // 캐릭터 발 위치 재스캔
 
-							if ( // 무적상태가 아니고 슬라이드 중이 아니며 캐릭터의 범위 안에 장애물이 있으면 부딛힌다
-							!c1.isInvincible() && c1.getImage() != slideIc.getImage()
+							if (!c1.isInvincible() && c1.getImage() != slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 >= c1.getY()
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 <= foot) {
-
 								hit(); // 피격 + 무적 쓰레드 메서드
-
-							} else if ( // 슬라이딩 아닐시 공중장애물
-							!c1.isInvincible() && c1.getImage() != slideIc.getImage()
+							} else if (!c1.isInvincible() && c1.getImage() != slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() <= c1.getY()
 									&& tempTacle.getY() + tempTacle.getHeight() * 95 / 100 > c1.getY()) {
-
 								hit(); // 피격 + 무적 쓰레드 메서드
-
-							} else if ( // 무적상태가 아니고 슬라이드 중이며 캐릭터의 범위 안에 장애물이 있으면 부딛힌다
-							!c1.isInvincible() && c1.getImage() == slideIc.getImage()
+							} else if (!c1.isInvincible() && c1.getImage() == slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 >= c1.getY()
 											+ c1.getHeight() * 2 / 3
 									&& tempTacle.getY() + tempTacle.getHeight() / 2 <= foot) {
-
 								hit(); // 피격 + 무적 쓰레드 메서드
-
-							} else if ( // 슬라이딩시 공중장애물
-							!c1.isInvincible() && c1.getImage() == slideIc.getImage()
+							} else if (!c1.isInvincible() && c1.getImage() == slideIc.getImage()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 >= c1.getX()
 									&& tempTacle.getX() + tempTacle.getWidth() / 2 <= face
 									&& tempTacle.getY() < c1.getY() && tempTacle.getY()
 											+ tempTacle.getHeight() * 95 / 100 > c1.getY() + c1.getHeight() * 2 / 3) {
-
 								hit(); // 피격 + 무적 쓰레드 메서드
 							}
 						}
@@ -1143,11 +1085,9 @@ public class GamePanel extends JPanel {
 					}
 
 					for (int i = 0; i < fieldList.size(); i++) { // 발판의 개수만큼 반복
-
 						int tempX = fieldList.get(i).getX(); // 발판의 x값
 
 						if (tempX > c1.getX() - 60 && tempX <= face) { // 발판이 캐릭 범위 안이라면
-
 							tempField = fieldList.get(i).getY(); // 발판의 y값을 tempField에 저장한다
 
 							foot = c1.getY() + c1.getHeight(); // 캐릭터 발 위치 재스캔
@@ -1155,9 +1095,7 @@ public class GamePanel extends JPanel {
 							// 발판위치가 tempNowField보다 높고, 발바닥 보다 아래 있다면
 							// 즉, 캐릭터 발 아래에 제일 높이 있는 발판이라면 tempNowField에 저장한다.
 							if (tempField < tempNowField && tempField >= foot) {
-
 								tempNowField = tempField;
-
 							}
 						}
 					}
@@ -1179,7 +1117,6 @@ public class GamePanel extends JPanel {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-
 				}
 			}
 		}).start();
@@ -1188,7 +1125,6 @@ public class GamePanel extends JPanel {
 	// 부딛혔을 때 일어나는 상태를 담당하는 메서드
 	private void hit() {
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				setHit(true);
@@ -1219,21 +1155,14 @@ public class GamePanel extends JPanel {
 				}
 
 				if (c1.getImage() == hitIc.getImage()) { // 0.5초 동안 이미지가 바뀌지 않았다면 기본이미지로 변경
-
 					c1.setImage(cookieIc.getImage());
-
 				}
 
 				for (int j = 0; j < 11; j++) { // 2.5초간 캐릭터가 깜빡인다. (피격후 무적 상태를 인식)
-
 					if (c1.getAlpha() == 80) { // 이미지의 알파값이 80이면 160으로
-
 						c1.setAlpha(160);
-
 					} else { // 아니면 80으로
-
 						c1.setAlpha(80);
-
 					}
 					try {
 						Thread.sleep(250);
@@ -1243,7 +1172,6 @@ public class GamePanel extends JPanel {
 				}
 
 				c1.setAlpha(255); // 쿠키의 투명도를 정상으로 변경
-
 				c1.setInvincible(false);
 				System.out.println("피격무적종료");
 			}
@@ -1253,11 +1181,9 @@ public class GamePanel extends JPanel {
 	// 낙하 메서드
 	private void fall() {
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
 				while (true) {
-
 					foot = c1.getY() + c1.getHeight(); // 캐릭터 발 위치 재스캔
 
 					// 발바닥이 발판보다 위에 있으면 작동
@@ -1278,7 +1204,6 @@ public class GamePanel extends JPanel {
 						int set = 1; // 처음 낙하량 (0~10) 까지 테스트해보자
 
 						while (foot < nowField) { // 발이 발판에 닿기 전까지 반복
-
 							t2 = Util.getTime() - t1; // 지금 시간에서 t1을 뺀다
 
 							int fallY = set + (int) ((t2) / 40); // 낙하량을 늘린다.
@@ -1314,7 +1239,6 @@ public class GamePanel extends JPanel {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
-
 						}
 						c1.setFall(false);
 
@@ -1324,7 +1248,6 @@ public class GamePanel extends JPanel {
 								&& c1.getImage() != slideIc.getImage()) { // 쿠키 이미지가 슬라이드 이미지가 아닐 경우
 
 							c1.setImage(slideIc.getImage()); // 쿠키 이미지를 슬라이드로 변경
-
 						} else if (!downKeyOn // 다운키를 누른상태가 아니고
 								&& !c1.isJump() // 점프 상태가 아니고
 								&& !c1.isFall() // 낙하 상태가 아니고
@@ -1350,10 +1273,8 @@ public class GamePanel extends JPanel {
 	// 점프 메서드
 	private void jump() {
 		new Thread(new Runnable() {
-
 			@Override
 			public void run() {
-
 				c1.setCountJump(c1.getCountJump() + 1); // 점프 횟수 증가
 
 				int nowJump = c1.getCountJump(); // 이번점프가 점프인지 더블점프인지 저장
@@ -1361,15 +1282,11 @@ public class GamePanel extends JPanel {
 				c1.setJump(true); // 점프중으로 변경
 
 				if (c1.getCountJump() == 1) { // 점프 횟수가 1이라면
-
 					System.out.println("점프");
 					c1.setImage(jumpIc.getImage());
-
 				} else if (c1.getCountJump() == 2) { // 점프 횟수가 2라면
-
 					System.out.println("더블점프");
 					c1.setImage(doubleJumpIc.getImage());
-
 				}
 
 				long t1 = Util.getTime(); // 현재시간을 가져온다
@@ -1378,7 +1295,6 @@ public class GamePanel extends JPanel {
 				int jumpY = 1; // 1이상으로만 설정하면 된다.(while문 조건 때문)
 
 				while (jumpY >= 0) { // 상승 높이가 0일때까지 반복
-
 					t2 = Util.getTime() - t1; // 지금 시간에서 t1을 뺀다
 
 					jumpY = set - (int) ((t2) / 40); // jumpY 를 세팅한다.
@@ -1413,7 +1329,6 @@ public class GamePanel extends JPanel {
 				if (nowJump == c1.getCountJump()) { // 점프가 진짜 끝났을 때를 확인
 					c1.setJump(false); // 점프상태를 false로 변경
 				}
-
 			}
 		}).start();
 	}
@@ -1427,7 +1342,6 @@ public class GamePanel extends JPanel {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	private void backFadeIn() {
@@ -1440,5 +1354,4 @@ public class GamePanel extends JPanel {
 			}
 		}
 	}
-
 }

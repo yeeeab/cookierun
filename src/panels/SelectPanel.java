@@ -224,12 +224,12 @@ public class SelectPanel extends JPanel {
 				ch2.setIcon(ch02);
 				ch3.setIcon(ch03);
 				ch4.setIcon(ch044);
-				ci = new CookieImg(new ImageIcon("img/cookieimg/cookie4/kch.gif"),
-						new ImageIcon("img/cookieimg/cookie4/kjump.gif"),
-						new ImageIcon("img/cookieimg/cookie4/kjump.gif"),
-						new ImageIcon("img/cookieimg/cookie4/kjump.gif"),
-						new ImageIcon("img/cookieimg/cookie4/kslide.gif"),
-						new ImageIcon("img/cookieimg/cookie4/kch.gif"));
+				ci = new CookieImg(new ImageIcon("img/cookieimg/cookie4/main.gif"),
+						new ImageIcon("img/cookieimg/cookie4/jump.png"),
+						new ImageIcon("img/cookieimg/cookie4/doublejump.png"),
+						new ImageIcon("img/cookieimg/cookie4/fall.png"),
+						new ImageIcon("img/cookieimg/cookie4/slide.png"),
+						new ImageIcon("img/cookieimg/cookie4/hit.png"));
 			}
 		});
 		ch4.setBounds(534, 62, 150, 200);

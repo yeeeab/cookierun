@@ -174,6 +174,9 @@ public class StorePanel extends JPanel {
 			main.spendCoins(1000);
 			coinLabel.setText("Coins: " + main.getTotalCoinScore());
 			JOptionPane.showMessageDialog(this, "Potion " + potionNumber + " purchased!");
+			if (potionNumber == 2) {
+				main.addHealthPotion(1);
+			}
 		} else {
 			JOptionPane.showMessageDialog(this, "Not enough coins!");
 		}

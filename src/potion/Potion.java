@@ -83,9 +83,6 @@ public class Potion {
 
     public boolean drinkHealthPotion(Cookie c1) {
         if (drinkHealthPotion) {
-            c1.setHealth(1100);
-            System.err.println("health = 1100");
-            drinkHealthPotion = false; // Reset after usage
             return true;
         }
         return false;

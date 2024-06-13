@@ -2,7 +2,6 @@ package main;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,17 +38,12 @@ public class Main extends listenAdapter {
 
 	private RankPanel rankPanel; // 순위 패널 추가
 
-	private HealthPotion healthPotion;
-	private CoinPotion coinPotion;
-	private SpeedUpPotion speedUpPotion;
-
 	private CardLayout cl; // 카드레이아웃 오브젝트
-
-	private CookieImg ci; // 쿠키이미지
 
 	private int totalCoinScore = 0; // 코인 점수
 
-	private List<Potion> potions;
+	private int healthPotionCount = 1; // HealthPotion 갯수
+	private boolean healthPotionSelected = false; // HealthPotion 선택 여부
 
 	public int getTotalCoinScore() {
 		return totalCoinScore;
@@ -65,6 +59,28 @@ public class Main extends listenAdapter {
 		} else {
 			System.out.println("코인이 부족합니다!");
 		}
+	}
+
+	public void addHealthPotion(int count) {
+		this.healthPotionCount += count;
+	}
+
+	public void useHealthPotion() {
+		if (healthPotionCount > 0) {
+			healthPotionCount--;
+		}
+	}
+
+	public int getHealthPotionCount() {
+		return healthPotionCount;
+	}
+
+	public boolean isHealthPotionSelected() {
+		return healthPotionSelected;
+	}
+
+	public void setHealthPotionSelected(boolean selected) {
+		this.healthPotionSelected = selected;
 	}
 
 	public GamePanel getGamePanel() {
@@ -127,8 +143,6 @@ public class Main extends listenAdapter {
 		minigamePanel = new MiniGamePanel(speedrunPanel); // 미니게임 패널 추가
 		rankPanel = new RankPanel(frame, cl); // 순위 패널 추가
 
-		healthPotion = new HealthPotion();
-
 		// 모든 패널의 레이아웃을 null로 변환
 		introPanel.setLayout(null);
 		storePanel.setLayout(null);
@@ -163,7 +177,7 @@ public class Main extends listenAdapter {
 				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
 			} else {
 				cl.show(frame.getContentPane(), "game"); // 캐릭터를 골랐다면 게임패널을 카드레이아웃 최상단으로 변경
-				gamePanel.gameSet(selectPanel.getCi()); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				gamePanel.gameSet(selectPanel.getCi(), isHealthPotionSelected()); // 쿠키이미지를 넘겨주고 게임패널 세팅
 				gamePanel.gameStart(); // 게임시작
 				gamePanel.requestFocus(); // 리스너를 game패널에 강제로 줌
 			}
@@ -172,7 +186,7 @@ public class Main extends listenAdapter {
 				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
 			} else {
 				cl.show(frame.getContentPane(), "speedrun"); // 게임패널을 카드레이아웃 최상단으로 변경
-				speedrunPanel.gameSet(selectPanel.getCi()); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				speedrunPanel.gameSet(selectPanel.getCi(), isHealthPotionSelected()); // 쿠키이미지를 넘겨주고 게임패널 세팅
 				speedrunPanel.gameStart(); // 게임시작
 				speedrunPanel.requestFocus(); // 리스너를 speedrun패널에 강제로 줌
 			}
@@ -205,8 +219,13 @@ public class Main extends listenAdapter {
 			cl.show(frame.getContentPane(), "store");
 			storePanel.requestFocus();
 		} else if (e.getComponent().getName().equals("HealthPotionBtn")) {
-			cl.show(frame.getContentPane(), "healthpotion");
-			healthPotion.use(); // 추가 기능 구현 필요
+			if (getHealthPotionCount() > 0) {
+				setHealthPotionSelected(!isHealthPotionSelected());
+				JOptionPane.showMessageDialog(frame,
+						"Health Potion " + (isHealthPotionSelected() ? "Selected" : "Deselected"));
+			} else {
+				JOptionPane.showMessageDialog(frame, "No Health Potions available!");
+			}
 		}
 	}
 
