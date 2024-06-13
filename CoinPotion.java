@@ -22,7 +22,6 @@ public class CoinPotion extends Potion {
         this.used = false;
     }
 
-    @Override
     public void use(GamePanel gamePanel) {
         if (!used) {
             gamePanel.doubleCoinsTemporarily(5000); // 5초 동안 코인 두 배
