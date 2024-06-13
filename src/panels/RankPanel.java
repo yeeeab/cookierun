@@ -32,12 +32,12 @@ public class RankPanel extends JPanel {
         jellyScores = new int[MAX_RANKS];
         speedrunTimes = new String[MAX_RANKS];
 
-        Font labelFont = new Font("Arial", Font.BOLD, 18); // 글씨 크기 설정
+        Font labelFont = new Font("Arial", Font.BOLD, 18);
 
         // Initialize scores
         for (int i = 0; i < MAX_RANKS; i++) {
             jellyScores[i] = 0;
-            speedrunTimes[i] = "99:99:99"; // Initialize with a high value
+            speedrunTimes[i] = "99:99:99";
 
             itemModeLabels[i] = new JLabel((i + 1) + ". " + jellyScores[i], SwingConstants.LEFT);
             speedrunModeLabels[i] = new JLabel((i + 1) + ". " + speedrunTimes[i], SwingConstants.LEFT);
@@ -45,8 +45,8 @@ public class RankPanel extends JPanel {
             itemModeLabels[i].setBounds(50, 100 + i * 40, 200, 30);
             speedrunModeLabels[i].setBounds(450, 100 + i * 40, 200, 30);
 
-            itemModeLabels[i].setFont(labelFont); // 폰트 설정
-            speedrunModeLabels[i].setFont(labelFont); // 폰트 설정
+            itemModeLabels[i].setFont(labelFont);
+            speedrunModeLabels[i].setFont(labelFont);
 
             add(itemModeLabels[i]);
             add(speedrunModeLabels[i]);
@@ -58,8 +58,8 @@ public class RankPanel extends JPanel {
         itemModeTitle.setBounds(50, 60, 200, 30);
         speedrunModeTitle.setBounds(450, 60, 200, 30);
 
-        itemModeTitle.setFont(labelFont); // 타이틀 폰트 설정
-        speedrunModeTitle.setFont(labelFont); // 타이틀 폰트 설정
+        itemModeTitle.setFont(labelFont);
+        speedrunModeTitle.setFont(labelFont);
 
         add(itemModeTitle);
         add(speedrunModeTitle);
@@ -72,7 +72,6 @@ public class RankPanel extends JPanel {
         backButton.setContentAreaFilled(false);
         backButton.setFocusPainted(false);
         backButton.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 cardLayout.show(mainFrame.getContentPane(), "intro");
             }
@@ -82,7 +81,6 @@ public class RankPanel extends JPanel {
         setOpaque(false);
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();
@@ -90,7 +88,6 @@ public class RankPanel extends JPanel {
         // 배경 이미지 그리기
         g2d.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
 
-        // 명도 낮추기 위해 투명도 설정
         g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
         g2d.setColor(getBackground());
         g2d.fillRect(0, 0, getWidth(), getHeight());
@@ -99,23 +96,21 @@ public class RankPanel extends JPanel {
     }
 
     public void updateRanks(int jellyScore) {
-        System.out.println("Updating ranks..."); // Debug
+        System.out.println("Updating ranks...");
         updateJellyScores(jellyScore);
 
-        // Update labels
         for (int i = 0; i < MAX_RANKS; i++) {
             itemModeLabels[i].setText((i + 1) + ". " + jellyScores[i]);
         }
     }
 
     public void updateRanks(String speedrunTime) {
-        System.out.println("Updating ranks..."); // Debug
+        System.out.println("Updating ranks...");
         updateSpeedrunTimes(speedrunTime);
 
-        // Update labels
         for (int i = 0; i < MAX_RANKS; i++) {
             speedrunModeLabels[i].setText((i + 1) + ". " + speedrunTimes[i]);
-            System.out.println("Speedrun time rank " + (i + 1) + ": " + speedrunTimes[i]); // Debug
+            System.out.println("Speedrun time rank " + (i + 1) + ": " + speedrunTimes[i]);
         }
     }
 

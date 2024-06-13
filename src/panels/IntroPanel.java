@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 
 public class IntroPanel extends JPanel {
 
-	ImageIcon introIc = new ImageIcon("img/intro/intro.png"); // 인트로 이미지
-	private ImageIcon storeIcon = new ImageIcon("img/store/storeBtn.png"); // 상점 버튼(수정 예정)
+	ImageIcon introIc = new ImageIcon("img/intro/intro.png");
+	private ImageIcon storeIcon = new ImageIcon("img/store/storeBtn.png");
 	private JButton storeBtn;
-	private JButton rankBtn; // 순위 버튼 추가
+	private JButton rankBtn;
 	private JFrame mainFrame;
 	private CardLayout cardLayout;
 
@@ -27,49 +27,45 @@ public class IntroPanel extends JPanel {
 	}
 
 	private void initialize() {
-		setLayout(null); // 절대 위치 지정을 위해 레이아웃을 null로 설정
+		setLayout(null);
 
-		ImageIcon originalStoreIcon = new ImageIcon("img/store/storeBtn.png"); // 원본 이미지
-		Image originalStoreImage = originalStoreIcon.getImage(); // Image 객체로 변환
-		Image scaledStoreImage = originalStoreImage.getScaledInstance(130, 40, Image.SCALE_SMOOTH); // 원하는 크기로 조정
-		ImageIcon scaledStoreIcon = new ImageIcon(scaledStoreImage); // 다시 ImageIcon으로 변환
+		ImageIcon originalStoreIcon = new ImageIcon("img/store/storeBtn.png");
+		Image originalStoreImage = originalStoreIcon.getImage();
+		Image scaledStoreImage = originalStoreImage.getScaledInstance(130, 40, Image.SCALE_SMOOTH);
+		ImageIcon scaledStoreIcon = new ImageIcon(scaledStoreImage);
 
 		storeBtn = new JButton(scaledStoreIcon);
-		storeBtn.setName("StoreBtn"); // 버튼의 이름을 설정하여 식별 가능하도록 함
-		storeBtn.setBounds(640, 80, 130, 40); // 버튼의 위치와 크기 설정
+		storeBtn.setName("StoreBtn");
+		storeBtn.setBounds(640, 80, 130, 40);
 		storeBtn.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(mainFrame.getContentPane(), "store");
 			}
 		});
 
-		add(storeBtn); // 패널에 버튼 추가
+		add(storeBtn);
 
 		// 순위 버튼 추가
-		ImageIcon originalRankIcon = new ImageIcon("img/select/rankBtn.png"); // 원본 이미지
-		Image originalRankImage = originalRankIcon.getImage(); // Image 객체로 변환
+		ImageIcon originalRankIcon = new ImageIcon("img/select/rankBtn.png");
+		Image originalRankImage = originalRankIcon.getImage();
 		Image scaledRankImage = originalRankImage.getScaledInstance(130, 40, Image.SCALE_SMOOTH); // 원하는 크기로 조정
-		ImageIcon scaledRankIcon = new ImageIcon(scaledRankImage); // 다시 ImageIcon으로 변환
+		ImageIcon scaledRankIcon = new ImageIcon(scaledRankImage);
 
 		rankBtn = new JButton(scaledRankIcon);
-		rankBtn.setName("RankBtn"); // 버튼의 이름을 설정하여 식별 가능하도록 함
-		rankBtn.setBounds(640, 130, 130, 40); // 버튼의 위치와 크기 설정
+		rankBtn.setName("RankBtn");
+		rankBtn.setBounds(640, 130, 130, 40);
 		rankBtn.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(mainFrame.getContentPane(), "rank");
 			}
 		});
 
-		add(rankBtn); // 패널에 버튼 추가
+		add(rankBtn);
 	}
 
-	@Override
 	protected void paintComponent(Graphics g) {
-		super.paintComponent(g); // 화면을 비운다
+		super.paintComponent(g);
 
-		// 인트로 화면을 그린다
 		g.drawImage(introIc.getImage(), -60, 0, null);
 	}
 }

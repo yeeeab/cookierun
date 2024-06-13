@@ -67,7 +67,6 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
         return button;
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
         playGame(((JButton) e.getSource()).getText());
     }
@@ -91,7 +90,6 @@ public class RockScissorsPaper extends MiniGames implements ActionListener {
         }
     }
 
-    @Override
     public void startGame() {
         resultLabel.setText("The result will display here");
     }

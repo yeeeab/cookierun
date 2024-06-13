@@ -16,7 +16,6 @@ public class Potion {
     private Image image; // 물약 이미지
     private String name; // 포션 이름
 
-    // Potion coordinates and size
     private int x;
     private int y;
     private int width;

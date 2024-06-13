@@ -26,7 +26,6 @@ public abstract class MiniGames extends JPanel {
         backgroundImage = icon.getImage();
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g.create();

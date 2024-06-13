@@ -61,7 +61,6 @@ public class NumberOrderGame extends MiniGames {
         }
     }
 
-    @Override
     public void startGame() {
         removeAll();
         setupGame();

@@ -9,12 +9,10 @@ public class HealthPotion extends Potion {
         super(image, name, x, y, width, height, numOfPotion);
     }
 
-    @Override
     public void use(GamePanel gamePanel) {
         if (getNumOfPotion() > 0) {
             setNumOfPotion(getNumOfPotion() - 1);
             setIsPotionUsed(true);
-            // Additional logic to increase health by 1.2x can be added here
         } else {
             JOptionPane.showMessageDialog(null, "No more potions left!");
         }

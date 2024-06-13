@@ -22,7 +22,6 @@ public class SpaceBarKeysGame extends MiniGames implements KeyListener {
         addKeyListener(this);
 
         timer = new Timer(1000, new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 timeLeft--;
                 if (timeLeft <= 0) {
@@ -36,7 +35,6 @@ public class SpaceBarKeysGame extends MiniGames implements KeyListener {
         gaugeBar = new ImageIcon("img/Objectimg/lifebar/GaugeBar1.png");
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -49,7 +47,7 @@ public class SpaceBarKeysGame extends MiniGames implements KeyListener {
         g.setColor(Color.BLACK);
         g.setFont(new Font("CookierunOTF", Font.BOLD, 40));
         g.drawString("스페이스 연타!", 300, 50);
-        
+
         // 게이지 바
         g2.drawImage(gaugeBar.getImage(), 20, 70, null);
         g2.setColor(Color.BLACK);
@@ -63,11 +61,9 @@ public class SpaceBarKeysGame extends MiniGames implements KeyListener {
         g2.drawString("남은 시간: " + timeLeft + "초", 50, 50);
     }
 
-    @Override
     public void keyTyped(KeyEvent e) {
     }
 
-    @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE && timeLeft > 0) {
             progress += 10;
@@ -81,11 +77,9 @@ public class SpaceBarKeysGame extends MiniGames implements KeyListener {
         }
     }
 
-    @Override
     public void keyReleased(KeyEvent e) {
     }
 
-    @Override
     public void startGame() {
         this.progress = 0;
         this.timeLeft = 10; // 게임 시간 초기화

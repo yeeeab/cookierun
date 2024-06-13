@@ -8,10 +8,10 @@ import java.awt.event.ActionListener;
 import ingame.Coin;
 
 public class CoinPotion extends Potion {
-    // 포션 사용 후 효과 지속 시간 (7초)
-    private static final int EFFECT_DURATION = 7000; // 7 seconds in milliseconds
+    // 효과 지속 시간 (7초)
+    private static final int EFFECT_DURATION = 7000;
 
-    // 타이머 객체
+    // 타이머
     private Timer timer;
     private boolean isUsed;
 
@@ -31,12 +31,10 @@ public class CoinPotion extends Potion {
         }
     }
 
-    // 효과 시작 메서드
     private void startEffect() {
-        // 코인 점수를 두배로 증가시키는 로직을 추가합니다.
+        // 코인 점수를 두배로 증가
         Coin.setDoubleScore(true);
 
-        // EFFECT_DURATION 후에 효과를 종료하는 타이머를 설정합니다.
         timer = new Timer(EFFECT_DURATION, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

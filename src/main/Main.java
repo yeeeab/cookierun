@@ -233,7 +233,6 @@ public class Main extends listenAdapter {
 		frame.getContentPane().add(rankPanel, "rank"); // RankPanel 추가
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		if (e.getComponent().toString().contains("IntroPanel")) { // IntroPanel에서 마우스를 눌렀다면
 			try {

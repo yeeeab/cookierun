@@ -48,13 +48,11 @@ public class BidirectionalKeysGame extends JFrame {
         add(timeLabel, BorderLayout.SOUTH);
 
         addKeyListener(new KeyAdapter() {
-            @Override
             public void keyPressed(KeyEvent e) {
                 keyPressed = true;
                 checkKeyPress(e.getKeyCode());
             }
 
-            @Override
             public void keyReleased(KeyEvent e) {
                 keyPressed = false;
             }
@@ -88,7 +86,6 @@ public class BidirectionalKeysGame extends JFrame {
             timer.stop();
         }
         timer = new Timer(1000, new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 timeLeft--;
                 timeLabel.setText("제한시간: " + timeLeft);
@@ -107,7 +104,6 @@ public class BidirectionalKeysGame extends JFrame {
             scrollTimer.stop();
         }
         scrollTimer = new Timer(scrollSpeed, new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 scrollX -= 6;
                 if (scrollX + keySequence.size() * 150 < 0) { // 간격 변경
@@ -136,7 +132,6 @@ public class BidirectionalKeysGame extends JFrame {
             if (keyCode == keySequence.get(keyIndex)) {
                 keyPanel.setKeyHit(true);
                 Timer animationTimer = new Timer(100, new ActionListener() {
-                    @Override
                     public void actionPerformed(ActionEvent e) {
                         keyPanel.setKeyHit(false);
                         ((Timer) e.getSource()).stop();
@@ -210,7 +205,6 @@ public class BidirectionalKeysGame extends JFrame {
     private class KeyPanel extends JPanel {
         private boolean keyHit = false;
 
-        @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 

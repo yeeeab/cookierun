@@ -224,7 +224,6 @@ public class GamePanel extends JPanel {
 		escButton = new JButton("back");
 		escButton.setBounds(350, 200, 100, 30);
 		escButton.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				remove(escButton);
 				escKeyOn = false;
@@ -272,7 +271,6 @@ public class GamePanel extends JPanel {
 			coinPotionBtn.setBounds((superFrame.getWidth() - buttonWidth) / 2 + 100,
 					superFrame.getHeight() - buttonHeight - 40, buttonWidth, buttonHeight);
 			coinPotionBtn.addMouseListener(new MouseAdapter() {
-				@Override
 				public void mouseClicked(MouseEvent e) {
 					coinPotion.use();
 					main.useCoinPotion();
@@ -373,7 +371,6 @@ public class GamePanel extends JPanel {
 	}
 
 	// 화면을 그린다
-	@Override
 	protected void paintComponent(Graphics g) {
 		// 더블버퍼는 그림을 미리그려놓고 화면에 출력한다.
 
@@ -791,7 +788,6 @@ public class GamePanel extends JPanel {
 	private void initListener() {
 		addKeyListener(new KeyAdapter() { // 키 리스너 추가
 
-			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_ESCAPE) { // esc키를 눌렀을 때
 					if (!escKeyOn) {
@@ -824,7 +820,6 @@ public class GamePanel extends JPanel {
 				}
 			}
 
-			@Override
 			public void keyReleased(KeyEvent e) {
 				if (e.getKeyCode() == KeyEvent.VK_DOWN) { // 다운키를 뗐을 때
 					slideBtn = slideIconUp.getImage();
@@ -848,7 +843,6 @@ public class GamePanel extends JPanel {
 	private void runRepaint() {
 		// 리페인트 전용 쓰레드
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				while (true) {
 					repaint();
@@ -874,10 +868,8 @@ public class GamePanel extends JPanel {
 	}
 
 	// 화면을 움직이고 젤리를 먹거나, 장애물에 부딛히는 등의 이벤트를 발생시키는 메서드
-	// private > protected 변경
 	protected void mapMove() {
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				while (true) {
 					if (runPage > 800) { // 800픽셀 이동 마다 체력이 10씩 감소한다 (추후 맵길이에  上 감소량 조절)
@@ -914,7 +906,6 @@ public class GamePanel extends JPanel {
 							fadeOn = true;
 
 							new Thread(new Runnable() {
-								@Override
 								public void run() {
 									backFadeOut();
 
@@ -943,7 +934,6 @@ public class GamePanel extends JPanel {
 							fadeOn = true;
 
 							new Thread(new Runnable() {
-								@Override
 								public void run() {
 									backFadeOut();
 
@@ -973,7 +963,6 @@ public class GamePanel extends JPanel {
 							fadeOn = true;
 
 							new Thread(new Runnable() {
-								@Override
 								public void run() {
 									backFadeOut();
 
@@ -1209,7 +1198,6 @@ public class GamePanel extends JPanel {
 	// 부딛혔을 때 일어나는 상태를 담당하는 메서드
 	private void hit() {
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				setHit(true);
 				c1.setInvincible(true); // 쿠키를 무적상태로 전환
@@ -1265,7 +1253,6 @@ public class GamePanel extends JPanel {
 	// 낙하 메서드
 	private void fall() {
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				while (true) {
 					foot = c1.getY() + c1.getHeight(); // 캐릭터 발 위치 재스캔
@@ -1357,7 +1344,6 @@ public class GamePanel extends JPanel {
 	// 점프 메서드
 	private void jump() {
 		new Thread(new Runnable() {
-			@Override
 			public void run() {
 				c1.setCountJump(c1.getCountJump() + 1); // 점프 횟수 증가
 

@@ -17,7 +17,6 @@ public class SpeedrunPanel extends GamePanel {
     private String currentTimerText = "00:00:00";
     private boolean isGameEnded = false;
     private boolean isMiniGameFailed = false;
-    private boolean ranksUpdated = false; // New flag to track if ranks have been updated
     int resultScore = 0;
     private int maxscore = 300000;
     private int[] miniGameScoreThresholds = { 75000, 150000, 225000 };
@@ -148,7 +147,6 @@ public class SpeedrunPanel extends GamePanel {
         return false;
     }
 
-    @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 

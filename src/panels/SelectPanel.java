@@ -36,7 +36,7 @@ public class SelectPanel extends JPanel {
 	// 시작 버튼 이미지 아이콘
 	private ImageIcon start = new ImageIcon("img/select/GameStartBtn.png");
 
-	// 스피드런 모드 시작 버튼 이미지 아이콘 (임시 이미지)
+	// 스피드런 모드 시작 버튼 이미지 아이콘
 	private ImageIcon speedrunStart = new ImageIcon("img/select/SpeedrunBtn.png");
 
 	// hp 증가 포션 이미지 아이콘
@@ -67,7 +67,6 @@ public class SelectPanel extends JPanel {
 	private CookieImg ci;
 	private HealthPotion healthPotionObj;
 
-	// 쿠키 이미지를 메인에서 gamePanel로 보내기 위한 게터
 	public CookieImg getCi() {
 		return ci;
 	}
@@ -103,7 +102,6 @@ public class SelectPanel extends JPanel {
 		backButton.setContentAreaFilled(false);
 		backButton.setFocusPainted(false);
 		backButton.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				cardLayout.show(mainFrame.getContentPane(), "intro");
 			}
@@ -144,7 +142,6 @@ public class SelectPanel extends JPanel {
 		ch1 = new JButton(ch01);
 		ch1.setName("ch1");
 		ch1.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mousePressed(MouseEvent e) {
 				ch1.setIcon(ch011);
 				ch2.setIcon(ch02);
@@ -169,7 +166,6 @@ public class SelectPanel extends JPanel {
 		ch2 = new JButton(ch02);
 		ch2.setName("ch2");
 		ch2.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mousePressed(MouseEvent e) {
 				ch1.setIcon(ch01);
 				ch2.setIcon(ch022);
@@ -193,7 +189,6 @@ public class SelectPanel extends JPanel {
 		ch3 = new JButton(ch03);
 		ch3.setName("ch3");
 		ch3.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mousePressed(MouseEvent e) {
 				ch1.setIcon(ch01);
 				ch2.setIcon(ch02);
@@ -217,7 +212,6 @@ public class SelectPanel extends JPanel {
 		ch4 = new JButton(ch04);
 		ch4.setName("ch4");
 		ch4.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mousePressed(MouseEvent e) {
 				ch1.setIcon(ch01);
 				ch2.setIcon(ch02);
