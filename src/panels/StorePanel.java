@@ -181,7 +181,7 @@ public class StorePanel extends JPanel {
 					potionName = main.getHealthPotion().getName();
 					break;
 				case 2:
-					main.addPotion(main.getCoinPotion());
+					main.addHealthPotion(1);
 					potionName = main.getCoinPotion().getName();
 					break;
 				case 3:

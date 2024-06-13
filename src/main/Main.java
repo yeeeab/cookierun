@@ -48,7 +48,7 @@ public class Main extends listenAdapter {
 
 	private CardLayout cl; // 카드레이아웃 오브젝트
 
-	private int totalCoinScore = 0; // 코인 점수
+	private int totalCoinScore = 1000; // 코인 점수
 
 	private int healthPotionCount = 1; // HealthPotion 갯수
 	private boolean healthPotionSelected = false; // HealthPotion 선택 여부
