@@ -50,6 +50,9 @@ public class StorePanel extends JPanel {
 	// 현재 코인 표시 레이블
 	private JLabel coinLabel;
 
+	// 보유 포션 현황 레이블
+	private JLabel potionInventoryLabel;
+
 	public StorePanel(Main main, JFrame mainFrame, CardLayout cardLayout) {
 		this.mainFrame = mainFrame;
 		this.cardLayout = cardLayout;
@@ -126,6 +129,9 @@ public class StorePanel extends JPanel {
 		});
 		add(buyPotion3Btn);
 
+		// 포션 인벤토리 레이블 초기화
+		updatePotionInventory();
+
 	}
 
 	private void initialize() {
@@ -196,4 +202,15 @@ public class StorePanel extends JPanel {
 		}
 	}
 
+	// 포션 인벤토리 레이블 업데이트 메서드
+	private void updatePotionInventory() {
+		StringBuilder inventoryText = new StringBuilder("Potion Inventory: ");
+		for (Potion potion : main.getPotions()) {
+			inventoryText.append(potion.getName()).append(", ");
+		}
+		if (inventoryText.length() > 0) {
+			inventoryText.setLength(inventoryText.length() - 2); // 마지막 ", " 제거
+		}
+		potionInventoryLabel.setText(inventoryText.toString());
+	}
 }
