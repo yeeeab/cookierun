@@ -218,7 +218,12 @@ public class Main extends listenAdapter {
 				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
 			} else {
 				cl.show(frame.getContentPane(), "game"); // 캐릭터를 골랐다면 게임패널을 카드레이아웃 최상단으로 변경
-				gamePanel.gameSet(selectPanel.getCi(), isHealthPotionSelected()); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				if (isHealthPotionSelected()) {
+					setHealthPotionSelected(false);
+					addHealthPotion(-1);
+					gamePanel.gameSet(selectPanel.getCi(), true); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				} else
+					gamePanel.gameSet(selectPanel.getCi(), false); // 쿠키이미지를 넘겨주고 게임패널 세팅
 				gamePanel.gameStart(); // 게임시작
 				gamePanel.requestFocus(); // 리스너를 game패널에 강제로 줌
 			}
@@ -227,7 +232,12 @@ public class Main extends listenAdapter {
 				JOptionPane.showMessageDialog(null, "캐릭터를 골라주세요"); // 캐릭터를 안골랐을경우 팝업
 			} else {
 				cl.show(frame.getContentPane(), "speedrun"); // 게임패널을 카드레이아웃 최상단으로 변경
-				speedrunPanel.gameSet(selectPanel.getCi(), isHealthPotionSelected()); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				if (isHealthPotionSelected()) {
+					setHealthPotionSelected(false);
+					addHealthPotion(-1);
+					speedrunPanel.gameSet(selectPanel.getCi(), true); // 쿠키이미지를 넘겨주고 게임패널 세팅
+				} else
+					speedrunPanel.gameSet(selectPanel.getCi(), false); // 쿠키이미지를 넘겨주고 게임패널 세팅
 				speedrunPanel.gameStart(); // 게임시작
 				speedrunPanel.requestFocus(); // 리스너를 speedrun패널에 강제로 줌
 			}
@@ -261,7 +271,8 @@ public class Main extends listenAdapter {
 			storePanel.requestFocus();
 		} else if (e.getComponent().getName().equals("HealthPotionBtn")) {
 			if (getHealthPotionCount() > 0) {
-				setHealthPotionSelected(!isHealthPotionSelected());
+				healthPotionSelected = !healthPotionSelected;
+				setHealthPotionSelected(isHealthPotionSelected());
 				JOptionPane.showMessageDialog(frame,
 						"Health Potion " + (isHealthPotionSelected() ? "Selected" : "Deselected"));
 			} else {

@@ -206,8 +206,8 @@ public class GamePanel extends JPanel {
 	}
 
 	// 스피드업 포션
-	private JButton speedUpPotionBtn;
-	private SpeedUpPotion speedUpPotion;
+	protected JButton speedUpPotionBtn;
+	protected SpeedUpPotion speedUpPotion;
 
 	// 코인 증가 포션
 	private JButton coinPotionBtn;
@@ -735,8 +735,6 @@ public class GamePanel extends JPanel {
 		if (c1 == null) {
 			c1 = new Cookie(cookieIc.getImage());
 		}
-
-		drinkHealthPotion = potion.drinkHealthPotion(c1);
 
 		// 쿠키의 정면 위치 / 쿠키의 x값과 높이를 더한 값
 		face = c1.getX() + c1.getWidth();

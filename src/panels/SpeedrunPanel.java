@@ -33,6 +33,16 @@ public class SpeedrunPanel extends GamePanel {
 
         elapsedTime = 0;
         timer = new Timer();
+
+        removeSpeedUpPotion();
+    }
+
+    private void removeSpeedUpPotion() {
+        if (speedUpPotionBtn != null) {
+            main.getPotions().remove(speedUpPotion);
+            super.remove(speedUpPotionBtn);
+            super.repaint();
+        }
     }
 
     public void gameStart() {
@@ -161,15 +171,15 @@ public class SpeedrunPanel extends GamePanel {
             timer.cancel();
             c1.setHealth(0);
 
-            main.getEndPanel().setSpeedrunScore(currentTimerText, getResultScore());
+            if (resultScore < maxscore) {
+                main.getEndPanel().setSpeedrunScore("99:99:99", getResultScore());
+            } else {
+                main.getEndPanel().setSpeedrunScore(currentTimerText, getResultScore());
+            }
             main.getEndPanel().setCoinScore(coinScore); // Ensure the coin score is set
             main.getEndPanel().setTotalCoins(main.getTotalCoinScore());
             main.getEndPanel().setSpeedrunGame(true);
             main.getEndPanel().updateLabel();
-
-            if (resultScore < maxscore) {
-                currentTimerText = "00:00:00";
-            }
 
             cl.show(superFrame.getContentPane(), "end");
             superFrame.requestFocus();
