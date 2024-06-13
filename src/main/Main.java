@@ -48,10 +48,13 @@ public class Main extends listenAdapter {
 
 	private CardLayout cl; // 카드레이아웃 오브젝트
 
-	private int totalCoinScore = 0; // 코인 점수
+	private int totalCoinScore = 1000; // 코인 점수
 
-	private int healthPotionCount = 0; // HealthPotion 갯수
+	private int healthPotionCount = 1; // HealthPotion 갯수
 	private boolean healthPotionSelected = false; // HealthPotion 선택 여부
+
+	private int coinPotionCount = 1;
+	private int speedupPotionCount = 1;
 
 	public int getTotalCoinScore() {
 		return totalCoinScore;
@@ -81,6 +84,34 @@ public class Main extends listenAdapter {
 
 	public int getHealthPotionCount() {
 		return healthPotionCount;
+	}
+
+	public void addCoinPotion(int count) {
+		this.coinPotionCount += count;
+	}
+
+	public void useCoinPotion() {
+		if (coinPotionCount > 0) {
+			coinPotionCount--;
+		}
+	}
+
+	public int getCoinPotionCount() {
+		return coinPotionCount;
+	}
+
+	public void addSpeedupPotion(int count) {
+		this.speedupPotionCount += count;
+	}
+
+	public void useSpeedupPotion() {
+		if (speedupPotionCount > 0) {
+			speedupPotionCount--;
+		}
+	}
+
+	public int getSpeedupPotionCount() {
+		return speedupPotionCount;
 	}
 
 	public boolean isHealthPotionSelected() {

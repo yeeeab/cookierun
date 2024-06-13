@@ -232,11 +232,15 @@ public class GamePanel extends JPanel {
 		});
 		try {
 			// 포션 이미지 로드
-			ImageIcon speedUpPotionIcon = new ImageIcon("img/store/potion3.png");
+			ImageIcon speedUpPotionIcon = new ImageIcon("img/store/potion3Btn.png");
 			Image speedUpPotionImage = speedUpPotionIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+			ImageIcon coinPotionIcon = new ImageIcon("img/store/potion1Btn.png");
+			Image coinPotionImage = coinPotionIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 			// 포션 객체 초기화
-			speedUpPotion = new SpeedUpPotion(speedUpPotionImage, "Speed Up Potion", 0, 0, 100, 100, 1);
+			speedUpPotion = new SpeedUpPotion(speedUpPotionImage, "Speed Up Potion", 0, 0, 100, 100,
+					main.getSpeedupPotionCount());
+			coinPotion = new CoinPotion(coinPotionImage, "Coin Potion", 0, 0, 100, 100, main.getCoinPotionCount());
 
 			// 스피드업 포션 버튼 설정
 			ImageIcon resizedPotionIcon = new ImageIcon(speedUpPotionImage);
@@ -248,15 +252,36 @@ public class GamePanel extends JPanel {
 					superFrame.getHeight() - buttonHeight - 40,
 					buttonWidth, buttonHeight);
 			speedUpPotionBtn.addMouseListener(new MouseAdapter() {
-				@Override
 				public void mouseClicked(MouseEvent e) {
 					speedUpPotion.use(GamePanel.this); // 포션 사용 시 GamePanel에 적용
+					main.useSpeedupPotion();
 					main.getPotions().remove(speedUpPotion);
 					GamePanel.this.remove(speedUpPotionBtn);
 					GamePanel.this.repaint();
 				}
 			});
-			this.add(speedUpPotionBtn);
+			if (main.getSpeedupPotionCount() > 0)
+				this.add(speedUpPotionBtn);
+
+			ImageIcon resizedPotionIcon1 = new ImageIcon(coinPotionImage);
+			coinPotionBtn = new JButton(resizedPotionIcon1);
+			coinPotionBtn.setName("coinPotionBtn");
+			int buttonWidth2 = coinPotionIcon.getIconWidth();
+			int buttonHeight2 = coinPotionIcon.getIconHeight();
+			coinPotionBtn.setBounds((superFrame.getWidth() - buttonWidth) / 2 + 100,
+					superFrame.getHeight() - buttonHeight - 40, buttonWidth, buttonHeight);
+			coinPotionBtn.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					coinPotion.use();
+					main.useCoinPotion();
+					main.getPotions().remove(coinPotion);
+					GamePanel.this.remove(coinPotionBtn);
+					GamePanel.this.repaint();
+				}
+			});
+			if (main.getCoinPotionCount() > 0)
+				this.add(coinPotionBtn);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error loading potion images.");
