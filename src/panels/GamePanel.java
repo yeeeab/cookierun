@@ -169,6 +169,14 @@ public class GamePanel extends JPanel {
 	CardLayout cl;
 	Main main;
 
+	// 스피드업 포션
+	private JButton speedUpPotionBtn;
+	private SpeedUpPotion speedUpPotion;
+
+	// 코인 증가 포션
+	private JButton coinPotionBtn;
+	private CoinPotion coinPotion;
+
 	// 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
 	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
 
@@ -186,7 +194,53 @@ public class GamePanel extends JPanel {
 				escKeyOn = false;
 			}
 		});
+		try {
+			// 포션 이미지 로드
+			ImageIcon speedUpPotionIcon = new ImageIcon("img/store/potion3.png");
+			Image speedUpPotionImage = speedUpPotionIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
+			// 포션 객체 초기화
+			speedUpPotion = new SpeedUpPotion(speedUpPotionImage, "Speed Up Potion", 0, 0, 100, 100, 1);
+
+			// 스피드업 포션 버튼 설정
+			ImageIcon resizedPotionIcon = new ImageIcon(speedUpPotionImage);
+			speedUpPotionBtn = new JButton(resizedPotionIcon);
+			speedUpPotionBtn.setName("SpeedUpPotionBtn");
+			int buttonWidth = resizedPotionIcon.getIconWidth();
+			int buttonHeight = resizedPotionIcon.getIconHeight();
+			speedUpPotionBtn.setBounds((superFrame.getWidth() - buttonWidth) / 2,
+					superFrame.getHeight() - buttonHeight - 40,
+					buttonWidth, buttonHeight);
+			speedUpPotionBtn.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					speedUpPotion.use(GamePanel.this); // 포션 사용 시 GamePanel에 적용
+					main.getPotions().remove(speedUpPotion);
+					GamePanel.this.remove(speedUpPotionBtn);
+					GamePanel.this.repaint();
+				}
+			});
+			this.add(speedUpPotionBtn);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Error loading potion images.");
+		}
+	}
+
+	// 스피드업 포션 속도 증가
+	public void increaseSpeedTemporarily(int amount, int durationMillis) {
+		new Thread(() -> {
+			int originalSpeed = this.gameSpeed;
+			this.gameSpeed += amount;
+
+			try {
+				Thread.sleep(durationMillis);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+			this.gameSpeed = originalSpeed;
+		}).start();
 	}
 
 	// 게임을 세팅한다
@@ -857,8 +911,9 @@ public class GamePanel extends JPanel {
 							}).start();
 
 						} else if (mapLength > mapLengthList.get(0) * 40 + 800
-								&& mapLength < mapLengthList.get(1) * 40 + 800
-								&& b11.getImage() != backIc2.getImage()) {
+								&& mapLength < mapLengthList.get(1) * 40 + 800 && b11.getImage() != backIc2.getImage())
+
+						{
 							fadeOn = true;
 
 							new Thread(new Runnable() {

@@ -3,6 +3,7 @@ package potion;
 import java.awt.Image;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import panels.GamePanel;
 
 import ingame.Coin;
 
@@ -16,12 +17,12 @@ public class CoinPotion extends Potion {
     // 타이머 객체
     private Timer timer;
 
-    public CoinPotion(Image image, int x, int y, int width, int height, int numOfPotion) {
-        super(image, x, y, width, height, numOfPotion);
+    public CoinPotion(Image image, String name, int x, int y, int width, int height, int numOfPotion) {
+        super(image, name, x, y, width, height, numOfPotion);
     }
 
     @Override
-    public void use() {
+    public void use(GamePanel gamePanel) {
         if (getNumOfPotion() > 0) {
             setNumOfPotion(getNumOfPotion() - 1);
             setIsPotionUsed(true);

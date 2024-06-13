@@ -10,6 +10,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.awt.CardLayout;
+import java.awt.Image;
 
 import ingame.CookieImg;
 import panels.EndPanel;
@@ -20,8 +22,6 @@ import panels.SpeedrunPanel;
 import panels.StorePanel;
 import main.listenAdapter;
 import potion.*;
-
-import java.awt.CardLayout;
 
 // windowBuilder 로 프레임만 제작하고 나머지는 입력
 
@@ -69,8 +69,29 @@ public class Main extends listenAdapter {
 		}
 	}
 
+	// 포션 목록에 추가하는 메서드
+	public void addPotion(Potion potion) {
+		this.potions.add(potion);
+	}
+
+	public List<Potion> getPotions() {
+		return potions;
+	}
+
 	public GamePanel getGamePanel() {
 		return gamePanel;
+	}
+
+	public HealthPotion getHealthPotion() {
+		return healthPotion;
+	}
+
+	public CoinPotion getCoinPotion() {
+		return coinPotion;
+	}
+
+	public SpeedUpPotion getSpeedUpPotion() {
+		return speedUpPotion;
 	}
 
 	public void setGamePanel(GamePanel gamePanel) {
@@ -102,6 +123,7 @@ public class Main extends listenAdapter {
 	}
 
 	public Main() {
+		potions = new ArrayList<>();
 		initialize();
 	}
 
@@ -117,13 +139,22 @@ public class Main extends listenAdapter {
 		introPanel.addMouseListener(this); // intro패널은 여기서 바로 넣는 방식으로 마우스리스너를 추가함.
 
 		storePanel = new StorePanel(this, frame, cl); // 상점
-
 		selectPanel = new SelectPanel(frame, cl, this); // Main의 리스너를 넣기위한 this
 		gamePanel = new GamePanel(frame, cl, this); // Main의 프레임 및 카드레이아웃을 이용하고 리스너를 넣기위한 this
 		endPanel = new EndPanel(this, this); // Main의 리스너를 넣기위한 this
 		speedrunPanel = new SpeedrunPanel(frame, cl, this); // 스피드런 모드 패널 추가
 
-		healthPotion = new HealthPotion();
+		// 포션 이미지 로드 및 초기화
+		Image healthPotionImage = new ImageIcon("img/store/potion1.png").getImage().getScaledInstance(100, 100,
+				java.awt.Image.SCALE_SMOOTH);
+		Image coinPotionImage = new ImageIcon("img/store/potion2.png").getImage().getScaledInstance(100, 100,
+				java.awt.Image.SCALE_SMOOTH);
+		Image speedUpPotionImage = new ImageIcon("img/store/potion3.png").getImage().getScaledInstance(100, 100,
+				java.awt.Image.SCALE_SMOOTH);
+
+		healthPotion = new HealthPotion(healthPotionImage, "Health Potion", 0, 0, 100, 100, 1);
+		coinPotion = new CoinPotion(coinPotionImage, "Coin Potion", 0, 0, 100, 100, 1);
+		speedUpPotion = new SpeedUpPotion(speedUpPotionImage, "Speed Up Potion", 0, 0, 100, 100, 1);
 
 		// 모든 패널의 레이아웃을 null로 변환
 		introPanel.setLayout(null);
@@ -187,9 +218,6 @@ public class Main extends listenAdapter {
 		} else if (e.getComponent().getName().equals("StoreBtn")) { // StoreBtn 을 눌렀다면
 			cl.show(frame.getContentPane(), "store");
 			storePanel.requestFocus();
-		} else if (e.getComponent().getName().equals("HealthPotionBtn")) {
-			cl.show(frame.getContentPane(), "healthpotion");
-			healthPotion.use(); // 추가 기능 구현 필요
 		}
 	}
 }

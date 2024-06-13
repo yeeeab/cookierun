@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import panels.GamePanel;
 
 @Data
 @NoArgsConstructor
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 
 public class Potion {
     private Image image; // 물약 이미지
+    private String name; // 포션 이름
 
     // 물약의 좌표와 크기
     private int x;
@@ -34,8 +36,9 @@ public class Potion {
     private int gameSpeed = 10;
 
     // 생성자
-    public Potion(Image image, int x, int y, int width, int height, int numOfPotion) {
+    public Potion(Image image, String name, int x, int y, int width, int height, int numOfPotion) {
         this.image = image;
+        this.name = name;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -43,7 +46,7 @@ public class Potion {
         this.numOfPotion = numOfPotion;
     }
 
-    public void use() {
+    public void use(GamePanel gamePanel) {
         if (numOfPotion > 0) {
             numOfPotion--;
             isPotionUsed = true;
