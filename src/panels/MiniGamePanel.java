@@ -35,7 +35,8 @@ public class MiniGamePanel extends JPanel {
     }
 
     private MiniGames getRandomMiniGame() {
-        MiniGames[] miniGames = { new NumberOrderGame(this), new RockScissorsPaper(this) };
+        // MiniGames[] miniGames = { new NumberOrderGame(this), new RockScissorsPaper(this), new BidirectionalKeysGame(this), new SpaceBarKeysGame(this) };
+        MiniGames[] miniGames = { new NumberOrderGame(this), new RockScissorsPaper(this), new SpaceBarKeysGame(this) };
         return miniGames[new java.util.Random().nextInt(miniGames.length)];
     }
 }

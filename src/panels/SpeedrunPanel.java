@@ -34,15 +34,17 @@ public class SpeedrunPanel extends GamePanel {
         elapsedTime = 0;
         timer = new Timer();
 
-        removeSpeedUpPotion();
+        removePotionBtn();
     }
 
-    private void removeSpeedUpPotion() {
-        if (speedUpPotionBtn != null) {
-            main.getPotions().remove(speedUpPotion);
-            super.remove(speedUpPotionBtn);
-            super.repaint();
-        }
+    private void removePotionBtn() {
+        main.getPotions().remove(speedUpPotion);
+        super.remove(speedUpPotionBtn);
+        super.repaint();
+
+        main.getPotions().remove(coinPotion);
+        super.remove(coinPotionBtn);
+        super.repaint();
     }
 
     public void gameStart() {

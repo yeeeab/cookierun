@@ -44,12 +44,12 @@ public abstract class MiniGames extends JPanel {
         parentPanel.gameFinished(isSuccess);
     }
 
-    protected void gameSuccess() {
+    public void gameSuccess() {
         isSuccess = true;
         endGame();
     }
 
-    protected void gameFailure() {
+    public void gameFailure() {
         isSuccess = false;
         endGame();
     }
@@ -57,7 +57,7 @@ public abstract class MiniGames extends JPanel {
     public static void startRandomGame(SpeedrunPanel parentPanel) {
         Random random = new Random();
         while (true) {
-            int gameIndex = random.nextInt(2);
+            int gameIndex = random.nextInt(4);
             MiniGames miniGame = null;
 
             switch (gameIndex) {
@@ -66,6 +66,12 @@ public abstract class MiniGames extends JPanel {
                     break;
                 case 1:
                     miniGame = new RockScissorsPaper(new MiniGamePanel(parentPanel));
+                    break;
+                case 2:
+                    // miniGame = new BidirectionalKeysGame(new MiniGamePanel(parentPanel));
+                    break;
+                case 3:
+                    miniGame = new SpaceBarKeysGame(new MiniGamePanel(parentPanel));
                     break;
             }
 

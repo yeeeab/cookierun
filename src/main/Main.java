@@ -48,7 +48,7 @@ public class Main extends listenAdapter {
 
 	private CardLayout cl; // 카드레이아웃 오브젝트
 
-	private int totalCoinScore = 1000; // 코인 점수
+	private int totalCoinScore = 3000; // 코인 점수
 
 	private int healthPotionCount = 1; // HealthPotion 갯수
 	private boolean healthPotionSelected = false; // HealthPotion 선택 여부
@@ -290,9 +290,9 @@ public class Main extends listenAdapter {
 
 			// 순위 업데이트
 			if (endPanel.isSpeedrunGame()) {
-				rankPanel.updateRanks(0, endPanel.getTime());
+				rankPanel.updateRanks(endPanel.getTime());
 			} else {
-				rankPanel.updateRanks(endPanel.getJellyScore(), "00:00:00");
+				rankPanel.updateRanks(endPanel.getJellyScore());
 			}
 
 			cl.show(frame.getContentPane(), "intro"); // 새 select패널을 카드레이아웃 최상단으로 이동 (화면에 보임)

@@ -210,8 +210,8 @@ public class GamePanel extends JPanel {
 	protected SpeedUpPotion speedUpPotion;
 
 	// 코인 증가 포션
-	private JButton coinPotionBtn;
-	private CoinPotion coinPotion;
+	protected JButton coinPotionBtn;
+	protected CoinPotion coinPotion;
 
 	// 게임패널 생성자 (상위 프레임과 카드레이아웃, 그리고 Main인스턴스를 받는다)
 	public GamePanel(JFrame superFrame, CardLayout cl, Object o) {
@@ -257,6 +257,7 @@ public class GamePanel extends JPanel {
 					main.useSpeedupPotion();
 					main.getPotions().remove(speedUpPotion);
 					GamePanel.this.remove(speedUpPotionBtn);
+					GamePanel.this.requestFocusInWindow();
 					GamePanel.this.repaint();
 				}
 			});
@@ -277,6 +278,7 @@ public class GamePanel extends JPanel {
 					main.useCoinPotion();
 					main.getPotions().remove(coinPotion);
 					GamePanel.this.remove(coinPotionBtn);
+					GamePanel.this.requestFocusInWindow();
 					GamePanel.this.repaint();
 				}
 			});

@@ -98,14 +98,22 @@ public class RankPanel extends JPanel {
         g2d.dispose();
     }
 
-    public void updateRanks(int jellyScore, String speedrunTime) {
+    public void updateRanks(int jellyScore) {
         System.out.println("Updating ranks..."); // Debug
         updateJellyScores(jellyScore);
-        updateSpeedrunTimes(speedrunTime);
 
         // Update labels
         for (int i = 0; i < MAX_RANKS; i++) {
             itemModeLabels[i].setText((i + 1) + ". " + jellyScores[i]);
+        }
+    }
+
+    public void updateRanks(String speedrunTime) {
+        System.out.println("Updating ranks..."); // Debug
+        updateSpeedrunTimes(speedrunTime);
+
+        // Update labels
+        for (int i = 0; i < MAX_RANKS; i++) {
             speedrunModeLabels[i].setText((i + 1) + ". " + speedrunTimes[i]);
             System.out.println("Speedrun time rank " + (i + 1) + ": " + speedrunTimes[i]); // Debug
         }
